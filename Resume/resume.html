@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutvik Chovatiya - Resume</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --left-bg: #151b29;
+            /* Exact match to the first design */
+            --right-bg: #ffffff;
+            --cyan: #00a8cc;
+            /* First design cyan */
+            --text-light: #ffffff;
+            --text-dark: #1f2937;
+            --text-gray-right: #4b5563;
+            --divider-left: rgba(255, 255, 255, 0.2);
+            --divider-right: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #525659;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .resume-container {
+            width: 794px;
+            /* A4 width */
+            height: 1123px;
+            /* A4 height */
+            background-color: var(--right-bg);
+            display: flex;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        /* ----- LEFT COLUMN ----- */
+        .left-col {
+            width: 35%;
+            background-color: var(--left-bg);
+            color: var(--text-light);
+            padding: 35px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Profile Ring */
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            margin-top: 5px;
+            position: relative;
+        }
+
+        .profile-ring {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 3px solid var(--cyan);
+            background-color: #2a354d;
+            box-shadow: 0 4px 15px rgba(0, 168, 204, 0.35);
+            display: block;
+        }
+
+        /* Floating Icons */
+        .float-icon {
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background-color: #0d121c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .float-icon img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .float-icon.adobe-icon {
+            background-color: transparent;
+            border: none;
+        }
+
+        .float-icon.adobe-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+
+        /* Adjust positions to match first design */
+        .icon-figma {
+            top: -2px;
+            left: -2px;
+            border-radius: 50%;
+        }
+
+        .icon-ps {
+            top: -2px;
+            right: -2px;
+            border-radius: 10px;
+        }
+
+        .icon-ai {
+            bottom: 5px;
+            left: -2px;
+            border-radius: 10px;
+        }
+
+        .icon-canva {
+            bottom: 5px;
+            right: -2px;
+            border-radius: 50%;
+        }
+
+        /* Left Sections */
+        .left-section {
+            margin-bottom: 20px;
+        }
+
+        .left-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+        }
+
+        .left-title i {
+            color: var(--cyan);
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .left-divider {
+            height: 1px;
+            background-color: var(--divider-left);
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        /* Contact List */
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 10px;
+            color: #d1d5db;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--cyan);
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            /* More square in first design */
+            background-color: #1a2233;
+            /* Darker than cyan */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan);
+            font-size: 11px;
+        }
+
+        /* Timeline (Education & Certificate) */
+        .timeline-item {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 12px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--cyan);
+        }
+
+        .timeline-title {
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 3px;
+            font-family: 'Montserrat', sans-serif;
+            color: #ffffff;
+        }
+
+        .timeline-sub {
+            font-size: 10px;
+            color: #9ca3af;
+            margin-bottom: 3px;
+            font-weight: 500;
+        }
+
+        .timeline-date {
+            color: var(--cyan);
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* Tools Grid */
+        .tools-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .tool-box {
+            width: 38px;
+            height: 38px;
+            background-color: transparent;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .tool-box img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            border-radius: 6px;
+            display: block;
+        }
+
+        .tool-box.adobe-box {
+            background-color: transparent;
+            border: none;
+        }
+
+        .tool-box.adobe-box img {
+            width: 38px;
+            height: 38px;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        /* Languages */
+        .lang-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .lang-badge {
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #d1d5db;
+        }
+
+
+        /* ----- RIGHT COLUMN ----- */
+        .right-col {
+            width: 65%;
+            padding: 40px 45px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header-section {
+            margin-bottom: 20px;
+        }
+
+        .name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 0.92;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .name-first {
+            color: #151b29;
+            margin-bottom: 2px;
+        }
+
+        .name-last {
+            color: var(--cyan);
+        }
+
+        .designation {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            color: #6b7280;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .right-divider-main {
+            height: 1px;
+            background-color: var(--divider-right);
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* Right Sections */
+        .right-section {
+            margin-bottom: 22px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            color: #151b29;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 35px;
+            height: 4px;
+            background-color: var(--cyan);
+        }
+
+        .profile-text {
+            font-size: 12px;
+            color: var(--text-gray-right);
+            line-height: 1.7;
+            text-align: justify;
+            font-weight: 500;
+        }
+
+        /* Expertise */
+        .expertise-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .exp-badge {
+            background-color: #f9fafb;
+            /* Light gray from first design */
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 8px 14px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #4b5563;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* Projects & Experience */
+        .project-item {
+            margin-bottom: 18px;
+        }
+
+        .proj-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .proj-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            color: #151b29;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .proj-title::before {
+            content: '◆';
+            color: var(--cyan);
+            font-size: 11px;
+        }
+
+        .proj-badge {
+            background-color: #e0f7fa;
+            /* First design badge bg */
+            color: #00838f;
+            /* First design badge text */
+            padding: 4px 8px;
+            font-size: 9px;
+            font-weight: 800;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .proj-subtitle {
+            font-size: 10px;
+            color: #9ca3af;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            padding-left: 20px;
+        }
+
+        .proj-desc {
+            font-size: 12px;
+            color: var(--text-gray-right);
+            line-height: 1.5;
+            padding-left: 20px;
+            font-weight: 500;
+        }
+
+        /* Portfolio Box */
+        .portfolio-box {
+            border: 1px dashed #d1d5db;
+            /* First design border */
+            border-radius: 10px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 10px;
+            background-color: #f9fafb;
+        }
+
+        .qr-placeholder {
+            width: 70px;
+            height: 70px;
+            flex-shrink: 0;
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .port-info h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            color: #151b29;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .port-info p {
+            font-size: 11px;
+            color: #6b7280;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        /* 🖨️ PDF Print & Save Button Settings */
+        .print-btn-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .print-btn {
+            background: linear-gradient(135deg, #00a8cc, #007799);
+            color: #ffffff;
+            border: none;
+            outline: none;
+            padding: 14px 26px;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 168, 204, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .print-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 168, 204, 0.6);
+            background: linear-gradient(135deg, #00bcd4, #008ba3);
+        }
+
+        .print-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .print-btn i {
+            font-size: 16px;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        @media print {
+            html, body {
+                width: 210mm !important;
+                height: 297mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background-color: #ffffff !important;
+                overflow: hidden !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .resume-container {
+                box-shadow: none !important;
+                margin: 0 auto !important;
+                width: 794px !important;
+                height: 1123px !important;
+                max-height: 1123px !important;
+                overflow: hidden !important;
+                zoom: 0.95 !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                page-break-after: avoid !important;
+            }
+
+            .portfolio-box, .project-item, .right-section, .left-section {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .print-btn-container {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Save as PDF Button -->
+    <div class="print-btn-container">
+        <button onclick="window.print()" class="print-btn" title="Save as PDF">
+            <i class="fa-solid fa-download"></i> Save as PDF
+        </button>
+    </div>
+
+    <div class="resume-container">
+
+        <!-- LEFT COLUMN -->
+        <div class="left-col">
+
+            <div class="profile-section">
+                <div class="profile-ring">
+                    <!-- Float Icons styled exactly like first design -->
+                    <div class="float-icon icon-figma"><img
+                            src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma"></div>
+                    <div class="float-icon icon-ps adobe-icon"><img
+                            src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg"
+                            alt="Ps"></div>
+                    <div class="float-icon icon-ai adobe-icon"><img
+                            src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg"
+                            alt="Ai"></div>
+                    <div class="float-icon icon-canva"><img src="download (1).png" alt="Canva"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"></div>
+                    <!-- Image -->
+                    <img src="file_0000000035a072089fd0e10f1dcc2e8f.png" alt="Profile" class="profile-img">
+                </div>
+            </div>
+
+            <!-- CONTACT -->
+            <div class="left-section">
+                <div class="left-title">
+                    <i class="fa-solid fa-address-card"></i> CONTACT
+                </div>
+                <div class="left-divider"></div>
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                        <span>+91 76984 28545</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <span>rutvikchovatiya269@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <span>Surat, Gujarat</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+                        <a href="https://www.linkedin.com/feed/foryou/" target="_blank"
+                            style="color: inherit; text-decoration: none;">Rutvik Chovatiya</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EDUCATION -->
+            <div class="left-section">
+                <div class="left-title">
+                    <i class="fa-solid fa-graduation-cap"></i> EDUCATION
+                </div>
+                <div class="left-divider"></div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">B.C.A</div>
+                    <div class="timeline-sub">Vidyabharti Trust College</div>
+                    <div class="timeline-date">2021 - 2024</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">HSC (12th Commerce)</div>
+                    <div class="timeline-date">2020 - 2021</div>
+                </div>
+            </div>
+
+            <!-- CERTIFICATE -->
+            <div class="left-section">
+                <div class="left-title">
+                    <i class="fa-solid fa-certificate"></i> CERTIFICATE
+                </div>
+                <div class="left-divider"></div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Graphic & UI-UX Design</div>
+                    <div class="timeline-sub">Red & White Skill Education</div>
+                    <div class="timeline-date">2026</div>
+                </div>
+            </div>
+
+            <!-- TOOLS -->
+            <div class="left-section" style="margin-bottom: 10px;">
+                <div class="tools-title">TOOLS</div>
+                <div class="left-divider" style="margin-top: 5px; margin-bottom: 15px;"></div>
+                <div class="tools-grid">
+                    <div class="tool-box adobe-box"><img
+                            src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg"
+                            alt="Ps"></div>
+                    <div class="tool-box adobe-box"><img
+                            src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg"
+                            alt="Ai"></div>
+                    <div class="tool-box adobe-box"><img
+                            src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg"
+                            alt="Ae"></div>
+                    <div class="tool-box adobe-box"><img
+                            src="https://upload.wikimedia.org/wikipedia/commons/4/48/Adobe_InDesign_CC_icon.svg"
+                            alt="Id"></div>
+                    <div class="tool-box"><img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg"
+                            alt="Figma"></div>
+                    <div class="tool-box" title="Canva">
+                        <img src="download (1).png" alt="Canva">
+                    </div>
+                    <div class="tool-box" title="CorelDRAW">
+                        <img src="download.png" alt="CorelDRAW">
+                    </div>
+                    <div class="tool-box" title="CapCut">
+                        <img src="capcut-icon.png" alt="CapCut">
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI TOOLS -->
+            <div class="left-section" style="margin-bottom: 15px;">
+                <div class="tools-title">AI TOOLS</div>
+                <div class="left-divider" style="margin-top: 5px; margin-bottom: 15px;"></div>
+                <div class="tools-grid">
+                    <!-- Gamma -->
+                    <div class="tool-box" style="background: transparent; border: none;">
+                        <div
+                            style="background: #ffffff; width: 38px; height: 38px; border-radius: 6px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.3);">
+                            <svg width="26" height="14" viewBox="0 0 65 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 1.5C3.9 1.5 1 4.4 1 8C1 11.6 3.9 14.5 7.5 14.5C10.2 14.5 12.5 12.8 13.4 10.5H8.5V8.5H15.5C15.6 9 15.6 9.5 15.6 10C15.6 14.7 12 18.5 7.5 18.5C1.7 18.5 -3 13.8 -3 8C-3 2.2 1.7 -2.5 7.5 -2.5C10.8 -2.5 13.8 -1 15.8 1.5L13.8 3.5C12.3 1.5 10 1.5 7.5 1.5Z"
+                                    fill="url(#gg)" />
+                                <text x="18" y="14" fill="#0f172a" font-family="system-ui, -apple-system, sans-serif"
+                                    font-weight="800" font-size="13px" letter-spacing="-0.3px">Gamma</text>
+                                <defs>
+                                    <linearGradient id="gg" x1="0" y1="0" x2="16" y2="16"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#EC4899" />
+                                        <stop offset="0.5" stop-color="#8B5CF6" />
+                                        <stop offset="1" stop-color="#3B82F6" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Gemini -->
+                    <div class="tool-box" title="Google Gemini">
+                        <img src="google-gemini-icon.png" alt="Gemini">
+                    </div>
+                    <!-- ChatGPT -->
+                    <div class="tool-box" title="ChatGPT">
+                        <img src="chatgpt-icon.png" alt="ChatGPT">
+                    </div>
+                    <!-- Pill / Capsule AI -->
+                    <div class="tool-box" style="background: linear-gradient(180deg, #090b10 40%, #163642 100%);">
+                        <div
+                            style="background: #ffffff; width: 20px; height: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 3px;">
+                            <div style="width: 2.5px; height: 2.5px; background: #000000; border-radius: 50%;"></div>
+                            <div style="width: 2.5px; height: 2.5px; background: #000000; border-radius: 50%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LANGUAGES -->
+            <div class="left-section">
+                <div class="left-title" style="margin-bottom: 10px;">
+                    <i class="fa-solid fa-language"></i> LANGUAGES
+                </div>
+                <div class="left-divider" style="margin-bottom: 15px;"></div>
+                <div class="lang-container">
+                    <div class="lang-badge">GUJARATI</div>
+                    <div class="lang-badge">HINDI</div>
+                    <div class="lang-badge">ENGLISH</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-col">
+
+            <div class="header-section">
+                <div class="name">
+                    <div class="name-first">RUTVIK</div>
+                    <div class="name-last">CHOVATIYA</div>
+                </div>
+                <div class="designation">UI/UX & GRAPHIC DESIGNER</div>
+                <div class="right-divider-main"></div>
+            </div>
+
+            <!-- PROFILE -->
+            <div class="right-section">
+                <h2 class="section-title">PROFILE</h2>
+                <p class="profile-text">
+                    Creative and detail-oriented UI/UX Designer with a strong passion for designing visually appealing
+                    and user-friendly digital experiences. Skilled in creating modern website and mobile app interfaces
+                    with a focus on usability, clarity, and conversion-driven design. Experienced in wireframing,
+                    prototyping, and building design systems using industry-standard tools.
+                </p>
+            </div>
+
+            <!-- EXPERTISE -->
+            <!-- <div class="right-section">
+                <h2 class="section-title">EXPERTISE</h2>
+                <div class="expertise-grid">
+                    <div class="exp-badge">UI/UX DESIGN</div>
+                    <div class="exp-badge">WIREFRAMING</div>
+                    <div class="exp-badge">PROTOTYPING</div>
+                    <div class="exp-badge">USER RESEARCH</div>
+                    <div class="exp-badge">BRANDING</div>
+                    <div class="exp-badge">TYPOGRAPHY</div>
+                </div>
+            </div> -->
+
+
+            <!-- KEY PROJECTS -->
+            <div class="right-section">
+                <h2 class="section-title">KEY PROJECTS</h2>
+
+                <div class="project-item">
+                    <div class="proj-header">
+                        <div class="proj-title">Parkly - Smart Parking App</div>
+                        <div class="proj-badge">UI/UX DESIGN</div>
+                    </div>
+                    <div class="proj-subtitle">MOBILE APPLICATION CASE STUDY</div>
+                    <p class="proj-desc">
+                        A comprehensive UI/UX case study focusing on intuitive user flow and solving real-world parking
+                        challenges through modern interfaces. Designed seamless booking and tracking screens.
+                    </p>
+                </div>
+
+                <div class="project-item">
+                    <div class="proj-header">
+                        <div class="proj-title">Code IT Solutions</div>
+                        <div class="proj-badge">BRANDING</div>
+                    </div>
+                    <div class="proj-subtitle">BRAND IDENTITY DESIGN</div>
+                    <p class="proj-desc">
+                        Developed a strong and modern brand identity for an IT solutions company. Created a refined
+                        logo, color palette, and corporate visual assets reflecting tech-forward aesthetics.
+                    </p>
+                </div>
+            </div>
+
+            <!-- EXPERIENCE -->
+            <div class="right-section">
+                <h2 class="section-title">EXPERIENCE</h2>
+
+                <div class="project-item">
+                    <div class="proj-header">
+                        <div class="proj-title">Graphics / UI UX Designer</div>
+                        <div class="proj-badge">PRESENT</div>
+                    </div>
+                    <div class="proj-subtitle">CUBIQ AGENCY | AUG 2026 - PRESENT</div>
+                    <p class="proj-desc">
+                        Creating visually engaging and brand-aligned designs to strengthen brand identity and visual
+                        communication. Applying strong design fundamentals and modern design tools for UI/UX and graphic
+                        design projects.
+                    </p>
+                </div>
+
+                <div class="project-item">
+                    <div class="proj-header">
+                        <div class="proj-title">Graphics Designer</div>
+                        <div class="proj-badge">3 MONTHS</div>
+                    </div>
+                    <div class="proj-subtitle">MADHAV SOLAR ENERGY LIMITED | JUN 2026 - AUG 2026</div>
+                    <p class="proj-desc">
+                        Designed social media creatives, web banners, and promotional materials. Maintained consistent
+                        brand identity across corporate communication assets and prepared print-ready artworks.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PORTFOLIO -->
+            <a href="https://rutvikportfolio-one.vercel.app" target="_blank"
+                style="text-decoration: none; color: inherit; display: block;">
+                <div class="portfolio-box" style="cursor: pointer;">
+                    <div class="qr-placeholder">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://rutvikportfolio-one.vercel.app"
+                            alt="Portfolio QR Code" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div class="port-info">
+                        <h4>VIEW DIGITAL PORTFOLIO</h4>
+                        <p>Scan or Click Here to see my latest case<br>studies and interactive prototypes.</p>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

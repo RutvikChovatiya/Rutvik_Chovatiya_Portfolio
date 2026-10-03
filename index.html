@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutvik Chovatiya | UI/UX & Graphic Designer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        html,
+        body {
+            overflow-x: hidden;
+            max-width: 100vw;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            position: relative;
+        }
+
+        /* --- 🌟 Creative Infinite Animations 🌟 --- */
+        .neon-text {
+            text-shadow: 0 0 3px rgba(0, 242, 254, 0.2);
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                text-shadow: 0 0 3px rgba(0, 242, 254, 0.2);
+            }
+
+            100% {
+                text-shadow: 0 0 5px rgba(0, 242, 254, 0.5), 0 0 5px rgba(79, 172, 254, 0.3);
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(270deg, #4facfe, #00f2fe, #7D2AE8, #4facfe);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: bg-pan 5s ease infinite;
+        }
+
+        @keyframes bg-pan {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            75% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Card Hover Animations */
+        .card {
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.2);
+            border-color: #00f2fe;
+        }
+
+        /* Moving Background Blob */
+        .moving-blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            animation: moveBlob 10s infinite alternate ease-in-out;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes moveBlob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            100% {
+                transform: translate(100px, -100px) scale(1.2);
+            }
+        }
+
+        .bg-grid {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* --- Custom Floating Animations for Hero Tools --- */
+        @keyframes float-1 {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        @keyframes float-2 {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(20px) rotate(-5deg);
+            }
+        }
+
+        @keyframes float-3 {
+
+            0%,
+            100% {
+                transform: translateX(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateX(-20px) rotate(10deg);
+            }
+        }
+
+        .animate-tool-1 {
+            animation: float-1 4s ease-in-out infinite;
+        }
+
+        .animate-tool-2 {
+            animation: float-2 5s ease-in-out infinite;
+        }
+
+        .animate-tool-3 {
+            animation: float-3 4.5s ease-in-out infinite;
+        }
+
+        .animate-tool-4 {
+            animation: float-1 5.5s ease-in-out infinite reverse;
+        }
+
+        .animate-tool-5 {
+            animation: float-2 6s ease-in-out infinite reverse;
+        }
+
+        .animate-tool-6 {
+            animation: float-3 5s ease-in-out infinite reverse;
+        }
+
+        /* Icon Box Style */
+        .tool-icon {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 30;
+            transition: all 0.4s;
+            padding: 4px;
+        }
+
+        .tool-icon:hover {
+            border-color: #00f2fe;
+            transform: scale(1.2) rotate(360deg) !important;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+        }
+
+        .tool-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Wave Effect for Grid Tools on Hover */
+        @keyframes hover-wave {
+            0% {
+                transform: translateY(-12px) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-12px) rotate(-8deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(8deg);
+            }
+
+            75% {
+                transform: translateY(-12px) rotate(-4deg);
+            }
+
+            100% {
+                transform: translateY(-12px) rotate(0deg);
+            }
+        }
+
+        .wave-hover:hover {
+            animation: hover-wave 0.8s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+
+        /* --- 🌊 Premium Button Wave Effect --- */
+        .btn-wave {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-wave::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            padding-top: 300%;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 1;
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        .btn-wave:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+        }
+
+        /* --- 🚀 High-Level Profile Animations 🚀 --- */
+        .profile-wrapper {
+            position: relative;
+            z-index: 20;
+            border-radius: 50%;
+            /* Smooth float animation */
+            animation: float-profile 6s ease-in-out infinite;
+        }
+
+        /* Inner background to block rings */
+        .profile-inner {
+            background-color: #0a0a0a;
+            border-radius: 50%;
+            padding: 6px;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+
+        /* Ring 1 - Cyan/Purple */
+        .profile-glow-ring-1 {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent 0%, #4facfe 25%, transparent 50%, #7D2AE8 75%, transparent 100%);
+            animation: spin 5s linear infinite;
+            z-index: -1;
+            filter: blur(4px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Ring 2 - Opposite rotation */
+        .profile-glow-ring-2 {
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: conic-gradient(from 180deg, transparent 0%, #00f2fe 25%, transparent 50%, #ff00ff 75%, transparent 100%);
+            animation: spin-reverse 3s linear infinite;
+            z-index: -2;
+            filter: blur(8px);
+            opacity: 0.6;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .profile-image {
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .profile-wrapper:hover .profile-image {
+            transform: scale(1.15) rotate(4deg);
+            /* Pops out and rotates */
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin-reverse {
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        @keyframes float-profile {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-cyan-500 selection:text-white bg-grid relative">
+
+    <!-- Infinite Background Glow -->
+    <div class="moving-blob top-1/4 left-1/4"></div>
+    <div class="moving-blob bottom-1/4 right-1/4"
+        style="background: radial-gradient(circle, rgba(125,42,232,0.15) 0%, rgba(0,0,0,0) 70%); animation-delay: -5s;">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full z-[60] bg-black/80 backdrop-blur-md border-b border-white/10 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300"
+        data-aos="fade-down" data-aos-duration="1000">
+        <a href="file:///C:/Rutvik/Portfolio/index.html" class="relative z-[60] flex-shrink-0">
+            <h1
+                class="text-xl sm:text-2xl md:text-3xl font-bold tracking-wider gradient-text hover:scale-105 transition-transform cursor-pointer whitespace-nowrap">
+                Rutvik Chovatiya
+            </h1>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex gap-8 text-sm font-medium">
+            <a href="#home"
+                class="nav-link hover:text-cyan-400 transition duration-300 transform hover:-translate-y-1">Home</a>
+            <a href="#about"
+                class="nav-link hover:text-cyan-400 transition duration-300 transform hover:-translate-y-1">About</a>
+            <a href="#skills"
+                class="nav-link hover:text-cyan-400 transition duration-300 transform hover:-translate-y-1">Skills</a>
+            <a href="#projects"
+                class="nav-link hover:text-cyan-400 transition duration-300 transform hover:-translate-y-1">Projects</a>
+            <a href="#contact"
+                class="nav-link hover:text-cyan-400 transition duration-300 transform hover:-translate-y-1">Contact</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn"
+            class="block md:hidden text-white focus:outline-none hover:text-cyan-400 transition-colors relative z-[60] flex-shrink-0 p-2 -mr-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                </path>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center gap-8 text-2xl font-medium backdrop-blur-lg transition-all duration-500 opacity-0 pointer-events-none pt-20">
+        <a href="#home"
+            class="nav-link mobile-link hover:text-cyan-400 transition duration-300 transform hover:scale-110">Home</a>
+        <a href="#about"
+            class="nav-link mobile-link hover:text-cyan-400 transition duration-300 transform hover:scale-110">About</a>
+        <a href="#skills"
+            class="nav-link mobile-link hover:text-cyan-400 transition duration-300 transform hover:scale-110">Skills</a>
+        <a href="#projects"
+            class="nav-link mobile-link hover:text-cyan-400 transition duration-300 transform hover:scale-110">Projects</a>
+        <a href="#contact"
+            class="nav-link mobile-link hover:text-cyan-400 transition duration-300 transform hover:scale-110">Contact</a>
+    </div>
+
+    <!-- 🌟 Hero Section -->
+    <section id="home"
+        class="min-h-screen flex flex-col md:flex-row justify-center items-center px-6 md:px-16 relative pt-24 max-w-[1400px] mx-auto overflow-hidden">
+
+        <!-- Left Side: Text -->
+        <div class="md:w-1/2 w-full text-center md:text-left z-10 flex flex-col items-center md:items-start"
+            data-aos="fade-right" data-aos-duration="1200">
+            <h2 class="text-xl md:text-2xl text-gray-400 mb-2 font-light" data-aos="fade-up" data-aos-delay="200">Hello!
+                I am</h2>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 neon-text tracking-tight leading-tight"
+                data-aos="zoom-in" data-aos-delay="400">Rutvik <br><span class="gradient-text">Chovatiya</span></h1>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-medium text-cyan-400 mb-6" data-aos="fade-up"
+                data-aos-delay="600">
+                <span id="typing-text"></span><span class="animate-pulse">|</span>
+            </h3>
+
+            <p class="max-w-xl text-gray-400 mb-10 leading-relaxed text-base sm:text-lg" data-aos="fade-up"
+                data-aos-delay="800">
+                Creative and detail-oriented UI/UX Designer with a strong passion for designing visually appealing and
+                user-friendly digital experiences. Skilled in creating modern interfaces with a focus on usability and
+                clarity.
+            </p>
+
+            <div class="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-5" data-aos="flip-up"
+                data-aos-delay="1000">
+                <a href="#contact"
+                    class="btn-wave px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:scale-110 text-white font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(0,242,254,0.4)]">Hire
+                    Me</a>
+                <a href="#projects"
+                    class="btn-wave px-6 sm:px-8 py-3 bg-transparent border border-cyan-500 hover:bg-cyan-500/20 text-cyan-400 font-semibold rounded-full transition-all duration-300 hover:scale-105">View
+                    Work</a>
+            </div>
+        </div>
+
+        <!-- Right Side: Profile Photo & Floating Tools -->
+        <div class="md:w-1/2 w-full mt-24 md:mt-0 flex justify-center items-center relative h-[350px] sm:h-[450px] md:h-[550px]"
+            data-aos="zoom-in" data-aos-duration="1500">
+            <!-- Profile Photo Container -->
+            <div class="profile-wrapper w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 cursor-pointer">
+                <!-- Dual Rotating Neon Rings -->
+                <div class="profile-glow-ring-1"></div>
+                <div class="profile-glow-ring-2"></div>
+
+                <!-- Inner Photo Area -->
+                <div class="profile-inner">
+                    <!-- 👇 Rutvik Profile Photo 👇 -->
+                    <img src="./Profile image.png" alt="Rutvik Profile"
+                        class="profile-image w-full h-full object-cover object-top rounded-full">
+                </div>
+            </div>
+
+            <!-- Pulsing Circle behind everything -->
+            <div
+                class="absolute w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-cyan-500/20 blur-[80px] rounded-full z-0 animate-pulse transition-all duration-700 pointer-events-none">
+            </div>
+
+            <!-- 🌟 Floating Tools Animation (JUSTIFIED ORBIT) 🌟 -->
+            <!-- 1. Top Center -->
+            <div class="wave-hover tool-icon animate-tool-1 top-[2%] left-[42%] md:top-[5%] md:left-[45%]"
+                title="Google Gemini">
+                <img src="Gemini.jpeg" alt="Gemini">
+            </div>
+            <!-- 2. Top Right High -->
+            <div class="tool-icon animate-tool-2 top-[12%] right-[12%] md:top-[15%] md:right-[20%]" title="Figma">
+                <img src="Figma.jpeg" alt="Figma">
+            </div>
+            <!-- 3. Mid Right High -->
+            <div class="tool-icon animate-tool-3 top-[35%] right-[2%] md:top-[35%] md:right-[10%]" title="Canva">
+                <img src="Canva.jpeg" alt="Canva">
+            </div>
+            <!-- 4. Mid Right Low -->
+            <div class="tool-icon animate-tool-4 bottom-[25%] right-[2%] md:bottom-[25%] md:right-[10%]"
+                title="ChatGPT">
+                <img src="Chatgpt.jpeg" alt="ChatGPT">
+            </div>
+            <!-- 5. Bottom Right -->
+            <div class="tool-icon animate-tool-5 bottom-[5%] right-[15%] md:bottom-[8%] md:right-[22%]" title="Stitch">
+                <img src="Stich.jpeg" alt="Stitch">
+            </div>
+            <!-- 6. Bottom Center -->
+            <div class="tool-icon animate-tool-6 bottom-[0%] left-[42%] md:bottom-[2%] md:left-[45%]" title="CorelDraw">
+                <img src="images-Photoroom (2) 1.svg" alt="CorelDraw">
+            </div>
+            <!-- 7. Bottom Left -->
+            <div class="tool-icon animate-tool-1 bottom-[5%] left-[15%] md:bottom-[8%] md:left-[22%]"
+                title="Illustrator">
+                <img src="Ai.jpeg" alt="Ai">
+            </div>
+            <!-- 8. Mid Left Low -->
+            <div class="tool-icon animate-tool-2 bottom-[25%] left-[2%] md:bottom-[25%] md:left-[10%]" title="Gamma">
+                <img src="Gamma.jpeg" alt="Gamma">
+            </div>
+            <!-- 9. Mid Left High -->
+            <div class="tool-icon animate-tool-3 top-[35%] left-[2%] md:top-[35%] md:left-[10%]" title="After Effects">
+                <img src="after-effects.png" alt="After Effects">
+            </div>
+            <!-- 10. Top Left High -->
+            <div class="tool-icon animate-tool-4 top-[12%] left-[12%] md:top-[15%] md:left-[20%]" title="Photoshop">
+                <img src="Photoshop.jpeg" alt="Photoshop">
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
+        <h2 class="text-4xl font-bold mb-16 text-center" data-aos="flip-up">Featured <span
+                class="gradient-text">Projects</span></h2>
+
+        <div class="flex flex-col gap-12">
+            <!-- Project 1: Parkly -->
+            <div class="bg-[#0f0f0f] border border-white/10 rounded-[2.5rem] overflow-hidden card flex flex-col md:flex-row group"
+                data-aos="zoom-in-up">
+                <div class="md:w-1/2 bg-black flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-cyan-500/5 group-hover:bg-cyan-500/20 transition-all duration-700">
+                    </div>
+                    <div
+                        class="absolute -right-20 -bottom-20 w-64 h-64 bg-cyan-500/20 blur-[100px] rounded-full group-hover:scale-150 transition-transform duration-1000">
+                    </div>
+                    <img src="ChatGPT Image Apr 16, 2026, 10_55_28 AM.png" alt="Parkly UI/UX Case Study"
+                        class="w-full aspect-video md:aspect-auto md:h-full object-cover rounded-2xl z-10 group-hover:scale-105 transition-transform duration-700 shadow-[0_0_25px_rgba(0,0,0,0.8)] relative">
+                </div>
+
+                <div class="md:w-1/2 p-6 sm:p-10 md:p-16 flex flex-col justify-center relative z-10">
+                    <span
+                        class="px-4 py-1.5 bg-cyan-500/10 text-cyan-400 rounded-full text-xs font-bold tracking-wider w-max mb-6 border border-cyan-500/20 animate-pulse">UI/UX
+                        DESIGN</span>
+                    <h3
+                        class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">
+                        Parkly - Smart Parking App</h3>
+                    <p class="text-sm text-cyan-400 mb-6 font-medium flex items-center gap-2"><i
+                            class="fa-brands fa-figma"></i> Tool: Figma</p>
+                    <p class="text-gray-400 mb-8 leading-relaxed text-base sm:text-lg">
+                        A comprehensive UI/UX case study for a smart parking application. Focuses on intuitive user
+                        flow, modern interfaces, and solving real-world parking challenges.
+                    </p>
+                    <a href="https://www.behance.net/gallery/247621569/Parkly-Smart-Parking-App-UXUI-Case-Study"
+                        target="_blank"
+                        class="text-white font-semibold hover:text-cyan-400 flex items-center gap-3 group/btn w-max">
+                        View Case Study
+                        <div
+                            class="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center group-hover/btn:bg-cyan-500 group-hover/btn:translate-x-3 transition-all duration-300">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 2: Code IT Solutions -->
+            <div class="bg-[#0f0f0f] border border-white/10 rounded-[2.5rem] overflow-hidden card flex flex-col md:flex-row-reverse group"
+                data-aos="zoom-in-up">
+                <div class="md:w-1/2 bg-black flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-cyan-500/5 group-hover:bg-cyan-500/20 transition-all duration-700">
+                    </div>
+                    <div
+                        class="absolute -left-20 -bottom-20 w-64 h-64 bg-cyan-500/20 blur-[100px] rounded-full group-hover:scale-150 transition-transform duration-1000">
+                    </div>
+                    <img src="Artboard 1@4x-100.jpg" alt="Code IT Brand Identity"
+                        class="w-full aspect-video md:aspect-auto md:h-full object-cover rounded-2xl z-10 group-hover:scale-105 transition-transform duration-700 shadow-[0_0_25px_rgba(0,0,0,0.8)] relative">
+                </div>
+
+                <div class="md:w-1/2 p-6 sm:p-10 md:p-16 flex flex-col justify-center relative z-10">
+                    <span
+                        class="px-4 py-1.5 bg-cyan-500/10 text-cyan-400 rounded-full text-xs font-bold tracking-wider w-max mb-6 border border-cyan-500/20 animate-pulse">BRANDING</span>
+                    <h3
+                        class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">
+                        Code IT Solutions Brand Identity</h3>
+                    <p class="text-sm text-cyan-400 mb-6 font-medium flex items-center gap-2"><i
+                            class="fa-solid fa-pen-nib"></i> Tool: Illustrator & Photoshop</p>
+                    <p class="text-gray-400 mb-8 leading-relaxed text-base sm:text-lg">
+                        Developed a strong and modern brand identity for an IT solutions company, reflecting
+                        tech-forward values through a refined logo, color palette, and visual assets.
+                    </p>
+                    <a href="https://www.behance.net/gallery/234206971/Code-IT-Solutions-Brand-Identity-Design"
+                        target="_blank"
+                        class="text-white font-semibold hover:text-cyan-400 flex items-center gap-3 group/btn w-max">
+                        View Project Details
+                        <div
+                            class="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center group-hover/btn:bg-cyan-500 group-hover/btn:translate-x-3 transition-all duration-300">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Tools Section -->
+    <section id="skills" class="py-24 px-6 md:px-12 bg-black/50 border-y border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center" data-aos="zoom-in">My <span class="gradient-text">Expertise
+                    & Tools</span></h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- UI/UX Design -->
+                <div class="bg-[#0f0f0f] p-8 rounded-3xl card" data-aos="fade-right">
+                    <div
+                        class="w-14 h-14 bg-cyan-500/10 rounded-2xl flex items-center justify-center mb-6 border border-cyan-500/20">
+                        <i class="fa-solid fa-pen-nib text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6 text-white">UI/UX Design</h3>
+                    <ul class="space-y-4 text-gray-400 font-medium">
+                        <li class="flex items-center" data-aos="fade-left" data-aos-delay="100"><i
+                                class="fa-solid fa-check-circle text-cyan-500 mr-3"></i> User Research & User Flow</li>
+                        <li class="flex items-center" data-aos="fade-left" data-aos-delay="200"><i
+                                class="fa-solid fa-check-circle text-cyan-500 mr-3"></i> Wireframing & Prototyping</li>
+                        <li class="flex items-center" data-aos="fade-left" data-aos-delay="300"><i
+                                class="fa-solid fa-check-circle text-cyan-500 mr-3"></i> Mobile App & Web UI Design</li>
+                        <li class="flex items-center" data-aos="fade-left" data-aos-delay="400"><i
+                                class="fa-solid fa-check-circle text-cyan-500 mr-3"></i> Design Systems & Info. Arch.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Graphic Design -->
+                <div class="bg-[#0f0f0f] p-8 rounded-3xl card" data-aos="fade-left">
+                    <div
+                        class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 border border-purple-500/20">
+                        <i class="fa-solid fa-palette text-2xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6 text-white">Graphic Design</h3>
+                    <ul class="space-y-4 text-gray-400 font-medium">
+                        <li class="flex items-center" data-aos="fade-right" data-aos-delay="100"><i
+                                class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Social Media Creatives</li>
+                        <li class="flex items-center" data-aos="fade-right" data-aos-delay="200"><i
+                                class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Branding & Visual Identity
+                        </li>
+                        <li class="flex items-center" data-aos="fade-right" data-aos-delay="300"><i
+                                class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Poster, Banner & Logo Design
+                        </li>
+                        <li class="flex items-center" data-aos="fade-right" data-aos-delay="400"><i
+                                class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Typography & Color Theory
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 🌟 ALL WORKING HD ICONS 🌟 -->
+            <div class="bg-[#0f0f0f] p-8 md:p-12 rounded-3xl card text-center" data-aos="zoom-in" data-aos-delay="200">
+                <h3 class="text-2xl font-bold mb-8 text-white">Design Software & AI Tools</h3>
+
+                <div class="flex flex-wrap justify-center gap-6">
+                    <!-- Standard UI/UX & AI Tools -->
+                    <div data-aos="zoom-in" data-aos-delay="100"
+                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(49,168,255,0.1)] hover:shadow-[0_0_25px_rgba(49,168,255,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#31A8FF] p-1"
+                        title="Photoshop">
+                        <img src="Photoshop.jpeg" alt="Ps" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="200"
+                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(242,78,30,0.1)] hover:shadow-[0_0_25px_rgba(242,78,30,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#F24E1E] p-1"
+                        title="Figma">
+                        <img src="Figma.jpeg" alt="Figma" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="300"
+                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(255,154,0,0.1)] hover:shadow-[0_0_25px_rgba(255,154,0,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#FF9A00] p-1"
+                        title="Illustrator">
+                        <img src="Ai.jpeg" alt="Ai" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="300"
+                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(255,154,0,0.1)] hover:shadow-[0_0_25px_rgba(30,160,110,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#FF9A00] p-1"
+                        title="CorelDraw">
+                        <img src="images-Photoroom (2) 1.svg" alt="CorelDraw"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="400"
+                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(0,196,204,0.1)] hover:shadow-[0_0_25px_rgba(0,196,204,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#00C4CC] p-1"
+                        title="Canva">
+                        <img src="Canva.jpeg" alt="Canva" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="600"
+                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(255,51,102,0.1)] hover:shadow-[0_0_25px_rgba(255,51,102,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#FF3366] p-1"
+                        title="Gamma">
+                        <img src="Gamma.jpeg" alt="Gamma" class="w-full h-full object-cover rounded-xl">
+                    </div>
+
+                    <div data-aos="zoom-in" data-aos-delay="700"
+                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(142,117,178,0.1)] hover:shadow-[0_0_25px_rgba(142,117,178,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#8E75B2] p-1"
+                        title="Google Gemini">
+                        <img src="Gemini.jpeg" alt="Gemini" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="800"
+                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(30,160,110,0.1)] hover:shadow-[0_0_25px_rgba(30,160,110,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#1EA06E] p-1"
+                        title="ChatGPT">
+                        <img src="Chatgpt.jpeg" alt="ChatGPT" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="900"
+                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(0,196,204,0.1)] hover:shadow-[0_0_25px_rgba(0,196,204,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#00C4CC] p-1"
+                        title="Stitch">
+                        <img src="Stich.jpeg" alt="Stitch" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Education Section -->
+    <section id="about" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5 relative z-10">
+        <h2 class="text-4xl font-bold mb-16 text-center" data-aos="zoom-in">About <span class="gradient-text">&
+                Education</span></h2>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="bg-white/[0.02] p-8 rounded-3xl card backdrop-blur-sm" data-aos="fade-up-right">
+                <h3 class="text-2xl font-semibold mb-8 flex items-center gap-3"><i
+                        class="fa-solid fa-graduation-cap text-cyan-400 text-3xl"></i> Education</h3>
+                <div class="mb-8 relative pl-8 border-l-2 border-cyan-500/50" data-aos="fade-left" data-aos-delay="200">
+                    <div class="absolute w-4 h-4 bg-cyan-400 rounded-full -left-[9px] top-16 shadow-[0_0_10px_#00f2fe]">
+                    </div>
+                    <h4 class="text-xl font-bold text-white tracking-wide">B.C.A</h4>
+                    <p class="text-cyan-400 font-medium mt-1">Vidyabharti Trust College</p>
+                    <p class="text-gray-500 text-sm mt-1"><i class="fa-regular fa-calendar mr-2"></i>2021 - 2024
+                        (Completed)</p>
+                </div>
+                <div class="relative pl-8 border-l-2 border-cyan-500/50" data-aos="fade-left" data-aos-delay="400">
+                    <div class="absolute w-4 h-4 bg-cyan-400 rounded-full -left-[9px] top-10 shadow-[0_0_10px_#00f2fe]">
+                    </div>
+                    <h4 class="text-xl font-bold text-white tracking-wide">HSC (12th Commerce)</h4>
+                    <p class="text-gray-500 text-sm mt-1"><i class="fa-regular fa-calendar mr-2"></i>2020 - 2021</p>
+                </div>
+            </div>
+
+            <div class="bg-white/[0.02] p-8 rounded-3xl card backdrop-blur-sm" data-aos="fade-up-left"
+                data-aos-delay="200">
+                <h3 class="text-2xl font-semibold mb-8 flex items-center gap-3"><i
+                        class="fa-solid fa-award text-cyan-400 text-3xl"></i> Certification</h3>
+                <div class="mb-10 relative pl-8 border-l-2 border-cyan-500/50" data-aos="fade-right"
+                    data-aos-delay="400">
+                    <div class="absolute w-4 h-4 bg-cyan-400 rounded-full -left-[9px] top-16 shadow-[0_0_10px_#00f2fe]">
+                    </div>
+                    <h4 class="text-xl font-bold text-white tracking-wide">Graphic & UI-UX Designing</h4>
+                    <p class="text-cyan-400 font-medium mt-1">Red & White Skill Education (Surat)</p>
+                    <p class="text-gray-500 text-sm mt-1"><i class="fa-regular fa-calendar mr-2"></i>2026 (Completed)
+                    </p>
+                </div>
+                <h3 class="text-xl font-semibold mb-5 flex items-center gap-3"><i
+                        class="fa-solid fa-language text-cyan-400"></i> Languages</h3>
+                <div class="flex flex-wrap gap-4" data-aos="zoom-in" data-aos-delay="600">
+                    <span
+                        class="px-5 py-2 bg-white/5 border border-white/10 rounded-xl text-gray-300 hover:-translate-y-2 hover:bg-cyan-500 hover:text-white transition-all duration-300 shadow-lg cursor-pointer">Gujarati</span>
+                    <span
+                        class="px-5 py-2 bg-white/5 border border-white/10 rounded-xl text-gray-300 hover:-translate-y-2 hover:bg-cyan-500 hover:text-white transition-all duration-300 shadow-lg cursor-pointer">Hindi</span>
+                    <span
+                        class="px-5 py-2 bg-white/5 border border-white/10 rounded-xl text-gray-300 hover:-translate-y-2 hover:bg-cyan-500 hover:text-white transition-all duration-300 shadow-lg cursor-pointer">English</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Resume Section -->
+    <section class="py-16 px-6 md:px-12 relative z-10 flex justify-center items-center max-w-7xl mx-auto">
+        <div class="bg-[#0f0f0f] border border-cyan-500/20 p-6 sm:p-10 md:p-14 rounded-[2.5rem] w-full text-center card relative overflow-hidden"
+            data-aos="zoom-in">
+            <!-- Decorative Glow -->
+            <div class="absolute top-0 left-1/4 w-64 h-64 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none">
+            </div>
+            <div
+                class="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-500/10 blur-[80px] rounded-full pointer-events-none">
+            </div>
+
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white relative z-10">Check Out My <span
+                    class="gradient-text">Detailed Resume</span></h2>
+            <p class="text-gray-400 mb-8 max-w-2xl mx-auto relative z-10 text-base sm:text-lg">Get a complete overview
+                of my skills,
+                education, and design journey. View my interactive resume to learn more about how I can bring value to
+                your team.</p>
+
+            <a href="./Resume/resume.html" target="_blank"
+                class="btn-wave relative z-10 inline-flex items-center justify-center gap-3 sm:gap-4 px-6 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:scale-110 text-white font-bold text-base sm:text-lg rounded-full transition-all duration-300 shadow-[0_0_25px_rgba(0,242,254,0.4)] w-full sm:w-auto">
+                <i class="fa-solid fa-arrow-up-right-from-square text-lg sm:text-xl animate-bounce"></i>
+                View Resume
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 md:px-12 bg-black/50 border-t border-white/5 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-down">
+                <h2 class="text-4xl font-bold mb-6">Let's Work <span class="gradient-text">Together</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-[#0f0f0f] border border-white/5 p-8 rounded-3xl flex flex-col items-center text-center card"
+                    data-aos="zoom-in" data-aos-delay="100">
+                    <div
+                        class="w-16 h-16 bg-cyan-500/10 text-cyan-400 flex items-center justify-center rounded-2xl text-2xl mb-5 hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <p class="font-medium text-white">+91 76984 28545</p>
+                </div>
+
+                <div class="bg-[#0f0f0f] border border-white/5 p-8 rounded-3xl flex flex-col items-center text-center card"
+                    data-aos="zoom-in" data-aos-delay="200">
+                    <div
+                        class="w-16 h-16 bg-cyan-500/10 text-cyan-400 flex items-center justify-center rounded-2xl text-2xl mb-5 hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <a href="mailto:rutvikchovatiya269@gmail.com"
+                        class="font-medium text-white text-sm hover:text-cyan-400">rutvikchovatiya269<br>@gmail.com</a>
+                </div>
+
+                <div class="bg-[#0f0f0f] border border-white/5 p-8 rounded-3xl flex flex-col items-center text-center card"
+                    data-aos="zoom-in" data-aos-delay="300">
+                    <div
+                        class="w-16 h-16 bg-cyan-500/10 text-cyan-400 flex items-center justify-center rounded-2xl text-2xl mb-5 hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <p class="font-medium text-white">Kamrej, Surat</p>
+                </div>
+
+                <div class="bg-[#0f0f0f] border border-white/5 p-8 rounded-3xl flex flex-col items-center text-center card justify-center"
+                    data-aos="zoom-in" data-aos-delay="400">
+                    <div class="flex gap-4">
+                        <a href="https://www.behance.net/rcgaming8" target="_blank"
+                            class="w-14 h-14 bg-white/5 hover:bg-cyan-500 hover:shadow-[0_0_20px_#00f2fe] hover:text-white flex items-center justify-center rounded-2xl text-2xl transition-all duration-300 hover:-translate-y-2"><i
+                                class="fa-brands fa-behance"></i></a>
+                        <a href="https://www.linkedin.com/in/rutvik-chovatiya-385b40280" target="_blank"
+                            class="w-14 h-14 bg-white/5 hover:bg-cyan-500 hover:shadow-[0_0_20px_#00f2fe] hover:text-white flex items-center justify-center rounded-2xl text-xl transition-all duration-300 hover:-translate-y-2"><i
+                                class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-600 text-sm border-t border-white/5 bg-black relative z-10">
+        <p>© 2026 Rutvik Chovatiya. Designed with precision.</p>
+    </footer>
+
+    <!-- Scripts for Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS animations with smooth custom easing
+        AOS.init({
+            duration: 1000,
+            once: false,
+            offset: 100,
+            easing: 'ease-in-out-cubic'
+        });
+
+        // Typing Effect
+        const textArray = ["UI/UX Designer", "Graphic Designer", "Product Designer"];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById("typing-text");
+
+        function typeEffect() {
+            const currentText = textArray[textIndex];
+
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000; // Pause at the end
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % textArray.length;
+                typeSpeed = 500; // Pause before typing next word
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // Start the typing effect
+        setTimeout(typeEffect, 1000);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileLinks = document.querySelectorAll(".mobile-link");
+
+        mobileMenuBtn.addEventListener("click", () => {
+            const isOpen = mobileMenu.classList.contains("opacity-100");
+            const svgPath = mobileMenuBtn.querySelector("path");
+
+            if (isOpen) {
+                // Close menu
+                mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
+                mobileMenu.classList.add("opacity-0", "pointer-events-none");
+                svgPath.setAttribute("d", "M4 6h16M4 12h16M4 18h16"); // Hamburger icon
+                document.body.style.overflow = "auto";
+            } else {
+                // Open menu
+                mobileMenu.classList.remove("opacity-0", "pointer-events-none");
+                mobileMenu.classList.add("opacity-100", "pointer-events-auto");
+                svgPath.setAttribute("d", "M6 18L18 6M6 6l12 12"); // X icon
+                document.body.style.overflow = "hidden"; // Prevent scrolling
+            }
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                const svgPath = mobileMenuBtn.querySelector("path");
+                mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
+                mobileMenu.classList.add("opacity-0", "pointer-events-none");
+                svgPath.setAttribute("d", "M4 6h16M4 12h16M4 18h16"); // Hamburger icon
+                document.body.style.overflow = "auto";
+            });
+        });
+
+        // Active Navigation Link Highlighting
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 300) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            // Check if user has scrolled to the bottom of the page
+            if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 200) {
+                current = sections[sections.length - 1].getAttribute("id");
+            }
+
+            navLinks.forEach((link) => {
+                link.classList.remove("text-cyan-400", "border-b-2", "border-cyan-400", "pb-1");
+
+                const href = link.getAttribute("href");
+                const isHome = (current === "home" || !current) && (href === "#home" || href === "#");
+                const isOther = href === `#${current}`;
+
+                if (isHome || isOther) {
+                    link.classList.add("text-cyan-400", "border-b-2", "border-cyan-400", "pb-1");
+                }
+            });
+        });
+
+        // Trigger once on load
+        window.dispatchEvent(new Event("scroll"));
+    </script>
+</body>
+
+</html>
