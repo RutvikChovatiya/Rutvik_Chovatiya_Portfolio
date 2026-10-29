@@ -13,6 +13,8 @@
         href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Three.js Library for 3D Interactive Graphics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         /* ═══════════════════════════════════════════════════════════
@@ -399,6 +401,48 @@
             position: relative;
             z-index: 10;
             text-align: center;
+            overflow: hidden;
+        }
+
+        /* 3D WebGL Hero Canvas Layer */
+        .hero-3d-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #hero-3d-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .hero-3d-glow {
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(6, 182, 212, 0.14) 40%, transparent 70%);
+            filter: blur(65px);
+            pointer-events: none;
+            z-index: 0;
+            animation: pulse3dGlow 9s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse3dGlow {
+            0% { transform: translate(-50%, -50%) scale(0.88); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(1.18); opacity: 0.95; }
         }
 
         .title-wrap {
@@ -1933,6 +1977,12 @@
        ═══════════════════════════════════════════════════════════ -->
         <section id="home" class="hero" aria-label="Introduction">
 
+            <!-- Interactive 3D WebGL Canvas Layer -->
+            <div class="hero-3d-wrap" id="hero3dWrap" aria-hidden="true">
+                <canvas id="hero-3d-canvas"></canvas>
+                <div class="hero-3d-glow"></div>
+            </div>
+
             <!-- Hero Status Badge (Centered & Fixed in place) -->
             <div class="hero-status-wrap">
                 <div class="badge-pill">
@@ -2944,6 +2994,261 @@
                 }
             });
         }
+
+        /* ─── 12. THREE.JS 3D INTERACTIVE HERO EXPERIENCE ─── */
+        (function init3DHero() {
+            var canvas = document.getElementById('hero-3d-canvas');
+            var container = document.getElementById('hero3dWrap');
+            if (!canvas || !container || typeof THREE === 'undefined') return;
+
+            var scene = new THREE.Scene();
+
+            var width = container.clientWidth || window.innerWidth;
+            var height = container.clientHeight || window.innerHeight;
+
+            var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+            camera.position.z = 52;
+
+            var renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                alpha: true,
+                antialias: true,
+                powerPreference: 'high-performance'
+            });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Main 3D Group
+            var mainGroup = new THREE.Group();
+            scene.add(mainGroup);
+
+            // 1. Central Complex 3D Torus Knot (Holographic Wireframe & Glass)
+            var knotGeo = new THREE.TorusKnotGeometry(10.5, 3.2, 160, 32, 2, 3);
+            
+            // Luminous Wireframe mesh
+            var wireMat = new THREE.MeshBasicMaterial({
+                color: 0xa855f7,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.32
+            });
+            var knotWire = new THREE.Mesh(knotGeo, wireMat);
+            mainGroup.add(knotWire);
+
+            // Shaded inner glass mesh with reflection
+            var shadedMat = new THREE.MeshPhysicalMaterial({
+                color: 0x141424,
+                emissive: 0x3b0764,
+                emissiveIntensity: 0.5,
+                metalness: 0.88,
+                roughness: 0.18,
+                clearcoat: 0.95,
+                clearcoatRoughness: 0.1,
+                wireframe: false,
+                transparent: true,
+                opacity: 0.75
+            });
+            var knotSolid = new THREE.Mesh(knotGeo, shadedMat);
+            knotSolid.scale.set(0.985, 0.985, 0.985);
+            mainGroup.add(knotSolid);
+
+            // 2. Surrounding Floating Polyhedra (Orbiting Design Satellite Shapes)
+            var satellites = [];
+            var satGeos = [
+                new THREE.OctahedronGeometry(2.4, 0),
+                new THREE.IcosahedronGeometry(2.2, 0),
+                new THREE.DodecahedronGeometry(2.1, 0),
+                new THREE.TetrahedronGeometry(2.5, 0),
+                new THREE.TorusGeometry(2.2, 0.6, 16, 40)
+            ];
+
+            var satColors = [0x06b6d4, 0xc084fc, 0x38bdf8, 0xa855f7, 0x34d399];
+
+            for (var i = 0; i < 7; i++) {
+                var g = satGeos[i % satGeos.length];
+                var mat = new THREE.MeshStandardMaterial({
+                    color: 0x12121f,
+                    emissive: satColors[i % satColors.length],
+                    emissiveIntensity: 0.6,
+                    metalness: 0.9,
+                    roughness: 0.2,
+                    wireframe: i % 2 === 0
+                });
+                var mesh = new THREE.Mesh(g, mat);
+                
+                var angle = (i / 7) * Math.PI * 2;
+                var radius = 22 + Math.random() * 8;
+                var yOffset = (Math.random() - 0.5) * 18;
+                
+                mesh.position.set(Math.cos(angle) * radius, yOffset, Math.sin(angle) * radius);
+                mesh.userData = {
+                    angle: angle,
+                    radius: radius,
+                    speed: 0.003 + Math.random() * 0.004,
+                    rotSpeedX: 0.01 + Math.random() * 0.015,
+                    rotSpeedY: 0.01 + Math.random() * 0.015,
+                    baseY: yOffset,
+                    floatOffset: Math.random() * Math.PI * 2
+                };
+                
+                mainGroup.add(mesh);
+                satellites.push(mesh);
+            }
+
+            // 3. 3D Particle Constellation Nebula
+            var particleCount = 1000;
+            var posArray = new Float32Array(particleCount * 3);
+            var colorArray = new Float32Array(particleCount * 3);
+
+            var c1 = new THREE.Color(0xa855f7); // Purple
+            var c2 = new THREE.Color(0x06b6d4); // Cyan
+            var c3 = new THREE.Color(0xf43f5e); // Coral
+
+            for (var p = 0; p < particleCount; p++) {
+                var pIdx = p * 3;
+                var rad = 15 + Math.random() * 45;
+                var theta = Math.random() * Math.PI * 2;
+                var phi = Math.acos((Math.random() * 2) - 1);
+
+                posArray[pIdx] = rad * Math.sin(phi) * Math.cos(theta);
+                posArray[pIdx + 1] = rad * Math.sin(phi) * Math.sin(theta);
+                posArray[pIdx + 2] = rad * Math.cos(phi);
+
+                // Gradient particle color mix
+                var mixedColor = c1.clone().lerp(c2, Math.random());
+                if (Math.random() > 0.8) mixedColor.lerp(c3, 0.5);
+
+                colorArray[pIdx] = mixedColor.r;
+                colorArray[pIdx + 1] = mixedColor.g;
+                colorArray[pIdx + 2] = mixedColor.b;
+            }
+
+            var particlesGeo = new THREE.BufferGeometry();
+            particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            particlesGeo.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+
+            var particlesMat = new THREE.PointsMaterial({
+                size: 0.65,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.65,
+                blending: THREE.AdditiveBlending
+            });
+
+            var particleSystem = new THREE.Points(particlesGeo, particlesMat);
+            scene.add(particleSystem);
+
+            // 4. Dynamic Lighting
+            var ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+            scene.add(ambientLight);
+
+            var purpleLight = new THREE.PointLight(0xa855f7, 3.2, 80);
+            purpleLight.position.set(-20, 15, 20);
+            scene.add(purpleLight);
+
+            var cyanLight = new THREE.PointLight(0x06b6d4, 3.2, 80);
+            cyanLight.position.set(20, -15, 20);
+            scene.add(cyanLight);
+
+            // Interactive cursor follower light
+            var mouseLight = new THREE.PointLight(0xffffff, 1.8, 50);
+            mouseLight.position.set(0, 0, 25);
+            scene.add(mouseLight);
+
+            // Mouse Interaction with Smooth Inertia
+            var mouseX = 0, mouseY = 0;
+            var targetRotationX = 0, targetRotationY = 0;
+
+            window.addEventListener('mousemove', function(e) {
+                var halfW = window.innerWidth / 2;
+                var halfH = window.innerHeight / 2;
+                mouseX = (e.clientX - halfW) / halfW;
+                mouseY = (e.clientY - halfH) / halfH;
+
+                targetRotationY = mouseX * 0.55;
+                targetRotationX = mouseY * 0.4;
+
+                // Move interactive 3D light
+                mouseLight.position.x = mouseX * 28;
+                mouseLight.position.y = -mouseY * 20;
+            }, { passive: true });
+
+            // Scroll Reaction (smoothly moves back/up on scroll)
+            var scrollY = 0;
+            window.addEventListener('scroll', function() {
+                scrollY = window.scrollY || window.pageYOffset;
+            }, { passive: true });
+
+            // Responsive scale adjustments
+            function updateSize() {
+                width = container.clientWidth || window.innerWidth;
+                height = container.clientHeight || window.innerHeight;
+                camera.aspect = width / height;
+                
+                // Adjust scale for smaller screens
+                if (width < 768) {
+                    mainGroup.scale.set(0.68, 0.68, 0.68);
+                    camera.position.z = 58;
+                } else if (width < 1200) {
+                    mainGroup.scale.set(0.85, 0.85, 0.85);
+                    camera.position.z = 54;
+                } else {
+                    mainGroup.scale.set(1.05, 1.05, 1.05);
+                    camera.position.z = 50;
+                }
+                
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+            }
+            window.addEventListener('resize', updateSize);
+            updateSize();
+
+            // Animation Loop
+            var clock = new THREE.Clock();
+            function animate() {
+                requestAnimationFrame(animate);
+                var elapsedTime = clock.getElapsedTime();
+
+                // Gentle constant rotation of Torus Knot
+                knotWire.rotation.x = elapsedTime * 0.18;
+                knotWire.rotation.y = elapsedTime * 0.22;
+                knotSolid.rotation.x = elapsedTime * 0.18;
+                knotSolid.rotation.y = elapsedTime * 0.22;
+
+                // Smooth mouse tracking with damping (Lerp)
+                mainGroup.rotation.y += (targetRotationY - mainGroup.rotation.y) * 0.045;
+                mainGroup.rotation.x += (targetRotationX - mainGroup.rotation.x) * 0.045;
+
+                // Floating sine wave position
+                mainGroup.position.y = Math.sin(elapsedTime * 0.9) * 1.5 - (scrollY * 0.02);
+
+                // Update orbiting satellites
+                satellites.forEach(function(sat) {
+                    sat.userData.angle += sat.userData.speed;
+                    sat.position.x = Math.cos(sat.userData.angle) * sat.userData.radius;
+                    sat.position.z = Math.sin(sat.userData.angle) * sat.userData.radius;
+                    sat.position.y = sat.userData.baseY + Math.sin(elapsedTime * 1.2 + sat.userData.floatOffset) * 2;
+
+                    sat.rotation.x += sat.userData.rotSpeedX;
+                    sat.rotation.y += sat.userData.rotSpeedY;
+                });
+
+                // Particle constellation wave & slow drift
+                particleSystem.rotation.y = elapsedTime * 0.04;
+                particleSystem.rotation.x = Math.sin(elapsedTime * 0.03) * 0.1;
+                particleSystem.position.y = - (scrollY * 0.035);
+
+                // Subtle orbit of lights
+                purpleLight.position.x = Math.sin(elapsedTime * 0.4) * 25;
+                purpleLight.position.z = Math.cos(elapsedTime * 0.4) * 25;
+
+                cyanLight.position.x = Math.cos(elapsedTime * 0.35) * 25;
+                cyanLight.position.z = Math.sin(elapsedTime * 0.35) * 25;
+
+                renderer.render(scene, camera);
+            }
+            animate();
+        })();
     </script>
 
     <style>
