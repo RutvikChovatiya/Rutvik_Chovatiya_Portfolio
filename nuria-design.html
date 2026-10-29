@@ -434,12 +434,27 @@
         }
 
         @keyframes pulse3dGlow {
-            0% { transform: translate(-50%, -50%) scale(0.88); opacity: 0.6; }
-            100% { transform: translate(-50%, -50%) scale(1.18); opacity: 0.95; }
+            0% {
+                transform: translate(-50%, -50%) scale(0.88);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1.18);
+                opacity: 0.95;
+            }
         }
 
         /* Ensure all text, cards, sections, headers are firmly layered ABOVE the 3D background */
-        nav, main, section, footer, .hero-status-wrap, .title-wrap, .hero-sub, .hero-bio, .hero-cta {
+        nav,
+        main,
+        section,
+        footer,
+        .hero-status-wrap,
+        .title-wrap,
+        .hero-sub,
+        .hero-bio,
+        .hero-cta {
             position: relative;
             z-index: 5;
         }
@@ -1078,16 +1093,7 @@
         .work-card:hover .work-btn-circle {
             transform: translateZ(32px) rotate(45deg);
         }
-            border-radius: 99px;
-            background: rgba(7, 7, 15, 0.78);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            color: #fff;
-            text-transform: uppercase;
-        }
+
 
         .work-tool-badge {
             position: absolute;
@@ -2815,7 +2821,7 @@
 
         <div class="footer-bottom">
             <p>&#169; 2026 Rutvik Chovatiya. All rights reserved.</p>
-            <p>Designed with inspiration from the <span style="color:#c084fc">Nuria</span> editorial aesthetic.</p>
+            <p>Designed by <span style="color:#c084fc">Rutvik Chovatiya</span> editorial aesthetic.</p>
         </div>
     </footer>
 
@@ -3348,28 +3354,147 @@
             contactGroup.add(contactRing2);
 
             // ═══════════════════════════════════════════════════════════════
-            // FULL-PAGE STAR CONSTELLATION PARTICLES (1,600 Particles)
+            // FLOATING & FLYING DESIGN ICONS (In place of square boxes)
             // ═══════════════════════════════════════════════════════════════
-            var particleCount = 1600;
+            var iconFiles = [
+                'Figma.jpeg',
+                'Canva.jpeg',
+                'Ai.jpeg',
+                'Photoshop.jpeg',
+                'after-effects.png',
+                'Chatgpt.jpeg',
+                'Gemini.jpeg',
+                'Stich.jpeg',
+                'Gamma.jpeg',
+                'images-Photoroom (2) 1.svg'
+            ];
+
+            var floatingIcons = [];
+            var iconGroup = new THREE.Group();
+            scene.add(iconGroup);
+
+            // Function to generate sleek rounded 3D badge textures
+            function createRoundedIconBadge(imgSrc, cb) {
+                var img = new Image();
+                img.onload = function () {
+                    var c = document.createElement('canvas');
+                    c.width = 128;
+                    c.height = 128;
+                    var ctx = c.getContext('2d');
+
+                    var r = 28; // iOS / Figma style rounded corners
+                    ctx.beginPath();
+                    ctx.moveTo(r, 0);
+                    ctx.lineTo(128 - r, 0);
+                    ctx.quadraticCurveTo(128, 0, 128, r);
+                    ctx.lineTo(128, 128 - r);
+                    ctx.quadraticCurveTo(128, 128, 128 - r, 128);
+                    ctx.lineTo(r, 128);
+                    ctx.quadraticCurveTo(0, 128, 0, 128 - r);
+                    ctx.lineTo(0, r);
+                    ctx.quadraticCurveTo(0, 0, r, 0);
+                    ctx.closePath();
+                    ctx.clip();
+
+                    ctx.fillStyle = '#10101c';
+                    ctx.fillRect(0, 0, 128, 128);
+                    ctx.drawImage(img, 0, 0, 128, 128);
+
+                    // Glowing glass border
+                    ctx.lineWidth = 6;
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+                    ctx.stroke();
+
+                    var texture = new THREE.CanvasTexture(c);
+                    cb(texture);
+                };
+                img.onerror = function () {
+                    var texture = new THREE.TextureLoader().load(imgSrc);
+                    cb(texture);
+                };
+                img.src = imgSrc;
+            }
+
+            // Distribute 20 flying design icons throughout all sections
+            for (var k = 0; k < 20; k++) {
+                (function (idx) {
+                    var file = iconFiles[idx % iconFiles.length];
+                    createRoundedIconBadge(file, function (tex) {
+                        var mat = new THREE.MeshStandardMaterial({
+                            map: tex,
+                            transparent: true,
+                            opacity: 0.82,
+                            metalness: 0.35,
+                            roughness: 0.3,
+                            side: THREE.DoubleSide,
+                            depthWrite: false
+                        });
+
+                        var size = 3.8 + (Math.random() * 1.8);
+                        var geo = new THREE.PlaneGeometry(size, size);
+                        var iconMesh = new THREE.Mesh(geo, mat);
+
+                        // Position on left and right flanks, descending down the portfolio
+                        var side = (idx % 2 === 0) ? 1 : -1;
+                        var posX = side * (24 + Math.random() * 22);
+                        var posY = 24 - (idx * 11) + ((Math.random() - 0.5) * 8);
+                        var posZ = -6 - (Math.random() * 20);
+
+                        iconMesh.position.set(posX, posY, posZ);
+                        iconMesh.userData = {
+                            baseX: posX,
+                            baseY: posY,
+                            baseZ: posZ,
+                            ampX: 2.5 + Math.random() * 3.5,
+                            ampY: 2.0 + Math.random() * 3.0,
+                            speed: 0.001 + Math.random() * 0.0015,
+                            rotSpeedX: 0.005 + Math.random() * 0.008,
+                            rotSpeedY: 0.006 + Math.random() * 0.009,
+                            offset: idx * 1.2
+                        };
+
+                        iconGroup.add(iconMesh);
+                        floatingIcons.push(iconMesh);
+                    });
+                })(k);
+            }
+
+            // ═══════════════════════════════════════════════════════════════
+            // SOFT CIRCULAR COSMIC DUST (No more square box particles!)
+            // ═══════════════════════════════════════════════════════════════
+            function createSoftCircleTex() {
+                var c = document.createElement('canvas');
+                c.width = 64;
+                c.height = 64;
+                var ctx = c.getContext('2d');
+                var g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+                g.addColorStop(0, 'rgba(255, 255, 255, 1)');
+                g.addColorStop(0.25, 'rgba(192, 132, 252, 0.75)');
+                g.addColorStop(0.6, 'rgba(6, 182, 212, 0.2)');
+                g.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                ctx.fillStyle = g;
+                ctx.beginPath();
+                ctx.arc(32, 32, 32, 0, Math.PI * 2);
+                ctx.fill();
+                return new THREE.CanvasTexture(c);
+            }
+
+            var particleCount = 450;
             var posArray = new Float32Array(particleCount * 3);
             var colorArray = new Float32Array(particleCount * 3);
-
             var cPurple = new THREE.Color(0xa855f7);
             var cCyan = new THREE.Color(0x06b6d4);
-            var cRose = new THREE.Color(0xf43f5e);
 
             for (var p = 0; p < particleCount; p++) {
-                var idx = p * 3;
-                posArray[idx] = (Math.random() - 0.5) * 120;
-                posArray[idx + 1] = 40 - (Math.random() * 260); // Spans all sections top to bottom
-                posArray[idx + 2] = (Math.random() - 0.5) * 80;
+                var pIdx = p * 3;
+                posArray[pIdx] = (Math.random() - 0.5) * 110;
+                posArray[pIdx + 1] = 35 - (Math.random() * 250);
+                posArray[pIdx + 2] = (Math.random() - 0.5) * 60;
 
                 var mixed = cPurple.clone().lerp(cCyan, Math.random());
-                if (Math.random() > 0.82) mixed.lerp(cRose, 0.45);
-
-                colorArray[idx] = mixed.r;
-                colorArray[idx + 1] = mixed.g;
-                colorArray[idx + 2] = mixed.b;
+                colorArray[pIdx] = mixed.r;
+                colorArray[pIdx + 1] = mixed.g;
+                colorArray[pIdx + 2] = mixed.b;
             }
 
             var particlesGeo = new THREE.BufferGeometry();
@@ -3377,10 +3502,11 @@
             particlesGeo.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
 
             var particlesMat = new THREE.PointsMaterial({
-                size: 0.7,
+                size: 1.8,
+                map: createSoftCircleTex(),
                 vertexColors: true,
                 transparent: true,
-                opacity: 0.42,
+                opacity: 0.35,
                 blending: THREE.AdditiveBlending,
                 depthWrite: false
             });
@@ -3390,8 +3516,8 @@
 
             // ═══════════════════════════════════════════════════════════════
             // LIGHTING & MOUSE INTERACTION
-            // ═══════════════════════════════════════════════════════════════
-            var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            // ═══════════════════════════════════════════════════════════
+            var ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
             scene.add(ambientLight);
 
             var purpleLight = new THREE.PointLight(0xa855f7, 2.6, 90);
@@ -3409,7 +3535,7 @@
             var mouseX = 0, mouseY = 0;
             var targetRotX = 0, targetRotY = 0;
 
-            window.addEventListener('mousemove', function(e) {
+            window.addEventListener('mousemove', function (e) {
                 var halfW = window.innerWidth / 2;
                 var halfH = window.innerHeight / 2;
                 mouseX = (e.clientX - halfW) / halfW;
@@ -3423,7 +3549,7 @@
             }, { passive: true });
 
             var scrollY = 0;
-            window.addEventListener('scroll', function() {
+            window.addEventListener('scroll', function () {
                 scrollY = window.scrollY || window.pageYOffset;
             }, { passive: true });
 
@@ -3453,7 +3579,7 @@
 
             // ═══════════════════════════════════════════════════════════════
             // RENDER & ANIMATION LOOP
-            // ═══════════════════════════════════════════════════════════
+            // ═══════════════════════════════════════════════════════════════
             var clock = new THREE.Clock();
             function animate() {
                 requestAnimationFrame(animate);
@@ -3467,7 +3593,7 @@
                 heroGroup.rotation.y += (targetRotY - heroGroup.rotation.y) * 0.05;
                 heroGroup.rotation.x += (targetRotX - heroGroup.rotation.x) * 0.05;
 
-                satellites.forEach(function(sat) {
+                satellites.forEach(function (sat) {
                     sat.rotation.x += sat.userData.rotSpeedX;
                     sat.rotation.y += sat.userData.rotSpeedY;
                     sat.position.y = sat.userData.baseY + Math.sin(t * 1.2 + sat.userData.offset) * 2.5;
@@ -3476,24 +3602,35 @@
                 // 2. Camera travels smoothly through all 3D sections based on scroll
                 camera.position.y = - (scrollY * 0.038);
 
-                // 3. Works Group
+                // 3. Floating & Flying Tool Icons (Figma, Canva, Photoshop, AI, etc.)
+                floatingIcons.forEach(function (icon) {
+                    var u = icon.userData;
+                    icon.position.x = u.baseX + Math.sin(t * 0.8 + u.offset) * u.ampX;
+                    icon.position.y = u.baseY + Math.cos(t * 0.9 + u.offset) * u.ampY;
+
+                    icon.rotation.x = Math.sin(t * 0.4 + u.offset) * 0.22;
+                    icon.rotation.y = Math.cos(t * 0.5 + u.offset) * 0.32;
+                    icon.rotation.z = Math.sin(t * 0.3 + u.offset) * 0.12;
+                });
+
+                // 4. Works Group
                 worksGroup.rotation.y = t * 0.12;
                 leftSculpture.rotation.x = t * 0.18;
                 leftSculpture.rotation.y = t * 0.22;
                 rightSculpture.rotation.x = t * 0.16;
                 rightSculpture.rotation.z = t * 0.2;
 
-                // 4. Services Crystals
+                // 5. Services Crystals
                 servicesGroup.rotation.y = Math.sin(t * 0.2) * 0.15;
-                serviceCrystals.forEach(function(c) {
+                serviceCrystals.forEach(function (c) {
                     c.rotation.x += c.userData.rotSpeedX;
                     c.rotation.y += c.userData.rotSpeedY;
                     c.position.y = c.userData.baseY + Math.sin(t * 1.4 + c.userData.offset) * 1.8;
                 });
 
-                // 5. Toolkit Ring & Cubes
+                // 6. Toolkit Ring & Cubes
                 toolRing.rotation.z = t * 0.15;
-                toolCubes.forEach(function(cube) {
+                toolCubes.forEach(function (cube) {
                     cube.userData.angle += cube.userData.speed;
                     cube.position.x = Math.cos(cube.userData.angle) * cube.userData.radius;
                     cube.position.z = Math.sin(cube.userData.angle) * 18;
@@ -3501,18 +3638,18 @@
                     cube.rotation.y += cube.userData.rotSpeed;
                 });
 
-                // 6. About Globe
+                // 7. About Globe
                 aboutGroup.rotation.y = t * 0.16;
                 aboutGroup.rotation.x = Math.sin(t * 0.12) * 0.15;
                 globeInner.rotation.y = - t * 0.25;
 
-                // 7. Contact Orb & Rings
+                // 8. Contact Orb & Rings
                 contactOrb.rotation.x = t * 0.15;
                 contactOrb.rotation.y = t * 0.18;
                 contactRing1.rotation.z = t * 0.22;
                 contactRing2.rotation.z = - t * 0.18;
 
-                // 8. Particle drift
+                // 9. Soft ambient particle drift
                 particleSystem.rotation.y = t * 0.02;
 
                 // Lights orbit
@@ -3529,10 +3666,10 @@
         /* ─── 13. FULL-SITE 3D CARD TILT & MULTI-LAYER DEPTH (All Sections) ─── */
         (function init3DCards() {
             var cards = document.querySelectorAll('.work-card, .service-item, .tool-bento-card, .testi-card, .stat-box, .edu-card, .resume-cta-box, .cta-wrapper');
-            cards.forEach(function(card) {
+            cards.forEach(function (card) {
                 card.style.transformStyle = 'preserve-3d';
 
-                card.addEventListener('mousemove', function(e) {
+                card.addEventListener('mousemove', function (e) {
                     var rect = card.getBoundingClientRect();
                     var x = e.clientX - rect.left;
                     var y = e.clientY - rect.top;
@@ -3544,7 +3681,7 @@
                     card.style.transform = 'perspective(1100px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-6px)';
                 });
 
-                card.addEventListener('mouseleave', function() {
+                card.addEventListener('mouseleave', function () {
                     card.style.transform = 'perspective(1100px) rotateX(0deg) rotateY(0deg) translateY(0px)';
                 });
             });
