@@ -399,50 +399,53 @@
             justify-content: center;
             padding: 120px 24px 60px;
             position: relative;
-            z-index: 10;
+            z-index: 5;
             text-align: center;
-            overflow: hidden;
+            overflow: visible;
         }
 
-        /* 3D WebGL Hero Canvas Layer */
-        .hero-3d-wrap {
-            position: absolute;
+        /* ═══════════════════════════════════════════════════════════
+           FULL-PAGE 3D WEBGL BACKGROUND (STAYS BEHIND ALL CONTENT)
+        ═══════════════════════════════════════════════════════════ */
+        #bg-3d-canvas {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        #hero-3d-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            z-index: 0;
             display: block;
         }
 
-        .hero-3d-glow {
-            position: absolute;
-            top: 48%;
+        .ambient-3d-glow {
+            position: fixed;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 700px;
-            height: 700px;
+            width: 800px;
+            height: 800px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(6, 182, 212, 0.14) 40%, transparent 70%);
-            filter: blur(65px);
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.16) 0%, rgba(6, 182, 212, 0.1) 40%, transparent 70%);
+            filter: blur(80px);
             pointer-events: none;
             z-index: 0;
-            animation: pulse3dGlow 9s ease-in-out infinite alternate;
+            animation: pulse3dGlow 10s ease-in-out infinite alternate;
         }
 
         @keyframes pulse3dGlow {
             0% { transform: translate(-50%, -50%) scale(0.88); opacity: 0.6; }
             100% { transform: translate(-50%, -50%) scale(1.18); opacity: 0.95; }
+        }
+
+        /* Ensure all text, cards, sections, headers are firmly layered ABOVE the 3D background */
+        nav, main, section, footer, .hero-status-wrap, .title-wrap, .hero-sub, .hero-bio, .hero-cta {
+            position: relative;
+            z-index: 5;
+        }
+
+        .title-wrap {
+            z-index: 10;
         }
 
         .title-wrap {
@@ -1932,6 +1935,10 @@
         <div class="aura-blob aura-blob-3"></div>
     </div>
 
+    <!-- FULL-PAGE 3D WEBGL AMBIENT EXPERIENCE (Layered in background, never covers text) -->
+    <canvas id="bg-3d-canvas" aria-hidden="true"></canvas>
+    <div class="ambient-3d-glow" aria-hidden="true"></div>
+
     <!-- NAVBAR -->
     <nav class="nav" id="mainNav" aria-label="Main Navigation">
         <a href="#home" class="nav-logo" id="logoLink">
@@ -1976,12 +1983,6 @@
        1. HERO SECTION (Nuria Animated Hero)
        ═══════════════════════════════════════════════════════════ -->
         <section id="home" class="hero" aria-label="Introduction">
-
-            <!-- Interactive 3D WebGL Canvas Layer -->
-            <div class="hero-3d-wrap" id="hero3dWrap" aria-hidden="true">
-                <canvas id="hero-3d-canvas"></canvas>
-                <div class="hero-3d-glow"></div>
-            </div>
 
             <!-- Hero Status Badge (Centered & Fixed in place) -->
             <div class="hero-status-wrap">
@@ -2995,19 +2996,18 @@
             });
         }
 
-        /* ─── 12. THREE.JS 3D INTERACTIVE HERO EXPERIENCE ─── */
-        (function init3DHero() {
-            var canvas = document.getElementById('hero-3d-canvas');
-            var container = document.getElementById('hero3dWrap');
-            if (!canvas || !container || typeof THREE === 'undefined') return;
+        /* ─── 12. FULL-PORTFOLIO 3D THREE.JS AMBIENT EXPERIENCE ─── */
+        (function initFullPortfolio3D() {
+            var canvas = document.getElementById('bg-3d-canvas');
+            if (!canvas || typeof THREE === 'undefined') return;
 
             var scene = new THREE.Scene();
 
-            var width = container.clientWidth || window.innerWidth;
-            var height = container.clientHeight || window.innerHeight;
+            var width = window.innerWidth;
+            var height = window.innerHeight;
 
             var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-            camera.position.z = 52;
+            camera.position.set(0, 0, 68);
 
             var renderer = new THREE.WebGLRenderer({
                 canvas: canvas,
@@ -3018,109 +3018,145 @@
             renderer.setSize(width, height);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            // Main 3D Group
-            var mainGroup = new THREE.Group();
-            scene.add(mainGroup);
+            // ─── 1. HERO 3D OBJECT (Floating Deep Behind Title, Never Obscuring Text) ───
+            var heroGroup = new THREE.Group();
+            scene.add(heroGroup);
 
-            // 1. Central Complex 3D Torus Knot (Holographic Wireframe & Glass)
-            var knotGeo = new THREE.TorusKnotGeometry(10.5, 3.2, 160, 32, 2, 3);
+            // Placed DEEP in Z and slightly higher, with translucent holographic wireframe
+            heroGroup.position.set(0, 5, -24);
+
+            var knotGeo = new THREE.TorusKnotGeometry(9.0, 2.6, 140, 28, 2, 3);
             
-            // Luminous Wireframe mesh
-            var wireMat = new THREE.MeshBasicMaterial({
-                color: 0xa855f7,
+            var knotWireMat = new THREE.MeshBasicMaterial({
+                color: 0x9333ea,
                 wireframe: true,
                 transparent: true,
-                opacity: 0.32
+                opacity: 0.16,
+                depthWrite: false
             });
-            var knotWire = new THREE.Mesh(knotGeo, wireMat);
-            mainGroup.add(knotWire);
+            var knotWire = new THREE.Mesh(knotGeo, knotWireMat);
+            heroGroup.add(knotWire);
 
-            // Shaded inner glass mesh with reflection
-            var shadedMat = new THREE.MeshPhysicalMaterial({
-                color: 0x141424,
+            var knotCoreMat = new THREE.MeshPhysicalMaterial({
+                color: 0x0f0f1c,
                 emissive: 0x3b0764,
-                emissiveIntensity: 0.5,
-                metalness: 0.88,
-                roughness: 0.18,
-                clearcoat: 0.95,
-                clearcoatRoughness: 0.1,
-                wireframe: false,
+                emissiveIntensity: 0.35,
+                metalness: 0.9,
+                roughness: 0.25,
+                clearcoat: 0.6,
                 transparent: true,
-                opacity: 0.75
+                opacity: 0.35,
+                depthWrite: false
             });
-            var knotSolid = new THREE.Mesh(knotGeo, shadedMat);
-            knotSolid.scale.set(0.985, 0.985, 0.985);
-            mainGroup.add(knotSolid);
+            var knotCore = new THREE.Mesh(knotGeo, knotCoreMat);
+            knotCore.scale.set(0.98, 0.98, 0.98);
+            heroGroup.add(knotCore);
 
-            // 2. Surrounding Floating Polyhedra (Orbiting Design Satellite Shapes)
+            // Orbiting Design Satellite Objects (Placed widely to the sides to frame content)
             var satellites = [];
             var satGeos = [
-                new THREE.OctahedronGeometry(2.4, 0),
-                new THREE.IcosahedronGeometry(2.2, 0),
-                new THREE.DodecahedronGeometry(2.1, 0),
-                new THREE.TetrahedronGeometry(2.5, 0),
-                new THREE.TorusGeometry(2.2, 0.6, 16, 40)
+                new THREE.OctahedronGeometry(2.8, 0),
+                new THREE.IcosahedronGeometry(2.6, 0),
+                new THREE.DodecahedronGeometry(2.4, 0),
+                new THREE.TetrahedronGeometry(3.0, 0),
+                new THREE.TorusGeometry(2.8, 0.7, 16, 40)
             ];
+            var satColors = [0x06b6d4, 0xc084fc, 0x38bdf8, 0xa855f7, 0x34d399, 0xf43f5e];
 
-            var satColors = [0x06b6d4, 0xc084fc, 0x38bdf8, 0xa855f7, 0x34d399];
-
-            for (var i = 0; i < 7; i++) {
+            for (var i = 0; i < 8; i++) {
                 var g = satGeos[i % satGeos.length];
-                var mat = new THREE.MeshStandardMaterial({
-                    color: 0x12121f,
+                var m = new THREE.MeshStandardMaterial({
+                    color: 0x0a0a14,
                     emissive: satColors[i % satColors.length],
-                    emissiveIntensity: 0.6,
-                    metalness: 0.9,
-                    roughness: 0.2,
-                    wireframe: i % 2 === 0
+                    emissiveIntensity: 0.5,
+                    metalness: 0.85,
+                    roughness: 0.3,
+                    wireframe: i % 2 === 0,
+                    transparent: true,
+                    opacity: 0.55,
+                    depthWrite: false
                 });
-                var mesh = new THREE.Mesh(g, mat);
+                var sat = new THREE.Mesh(g, m);
                 
-                var angle = (i / 7) * Math.PI * 2;
-                var radius = 22 + Math.random() * 8;
-                var yOffset = (Math.random() - 0.5) * 18;
-                
-                mesh.position.set(Math.cos(angle) * radius, yOffset, Math.sin(angle) * radius);
-                mesh.userData = {
-                    angle: angle,
-                    radius: radius,
-                    speed: 0.003 + Math.random() * 0.004,
-                    rotSpeedX: 0.01 + Math.random() * 0.015,
-                    rotSpeedY: 0.01 + Math.random() * 0.015,
-                    baseY: yOffset,
-                    floatOffset: Math.random() * Math.PI * 2
+                // Position widely to the flanks (x = -40 to -26 or 26 to 40)
+                var side = (i % 2 === 0) ? 1 : -1;
+                var posX = side * (30 + Math.random() * 15);
+                var posY = (Math.random() - 0.5) * 26;
+                var posZ = (Math.random() - 0.5) * 18;
+
+                sat.position.set(posX, posY, posZ);
+                sat.userData = {
+                    baseX: posX,
+                    baseY: posY,
+                    baseZ: posZ,
+                    rotSpeedX: 0.008 + Math.random() * 0.012,
+                    rotSpeedY: 0.008 + Math.random() * 0.012,
+                    floatSpeed: 0.0015 + Math.random() * 0.002,
+                    offset: Math.random() * Math.PI * 2
                 };
-                
-                mainGroup.add(mesh);
-                satellites.push(mesh);
+                heroGroup.add(sat);
+                satellites.push(sat);
             }
 
-            // 3. 3D Particle Constellation Nebula
-            var particleCount = 1000;
+            // ─── 2. WORKS / SERVICES 3D SHOWCASE GROUP (Scrolls into view) ───
+            var worksGroup = new THREE.Group();
+            worksGroup.position.set(0, -60, -10);
+            scene.add(worksGroup);
+
+            // Floating 3D Geometric Sculptures along the sides
+            var leftSculptureGeo = new THREE.IcosahedronGeometry(7, 1);
+            var leftSculptureMat = new THREE.MeshStandardMaterial({
+                color: 0x121226,
+                emissive: 0x06b6d4,
+                emissiveIntensity: 0.45,
+                metalness: 0.9,
+                roughness: 0.2,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.22,
+                depthWrite: false
+            });
+            var leftSculpture = new THREE.Mesh(leftSculptureGeo, leftSculptureMat);
+            leftSculpture.position.set(-36, 0, 0);
+            worksGroup.add(leftSculpture);
+
+            var rightSculptureGeo = new THREE.TorusGeometry(6.5, 1.8, 16, 50);
+            var rightSculptureMat = new THREE.MeshStandardMaterial({
+                color: 0x140e24,
+                emissive: 0xc084fc,
+                emissiveIntensity: 0.45,
+                metalness: 0.9,
+                roughness: 0.2,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.22,
+                depthWrite: false
+            });
+            var rightSculpture = new THREE.Mesh(rightSculptureGeo, rightSculptureMat);
+            rightSculpture.position.set(36, 0, 0);
+            worksGroup.add(rightSculpture);
+
+            // ─── 3. AMBIENT 3D PARTICLES SPANNING ENTIRE HEIGHT ───
+            var particleCount = 1200;
             var posArray = new Float32Array(particleCount * 3);
             var colorArray = new Float32Array(particleCount * 3);
 
-            var c1 = new THREE.Color(0xa855f7); // Purple
-            var c2 = new THREE.Color(0x06b6d4); // Cyan
-            var c3 = new THREE.Color(0xf43f5e); // Coral
+            var cPurple = new THREE.Color(0xa855f7);
+            var cCyan = new THREE.Color(0x06b6d4);
+            var cRose = new THREE.Color(0xf43f5e);
 
             for (var p = 0; p < particleCount; p++) {
-                var pIdx = p * 3;
-                var rad = 15 + Math.random() * 45;
-                var theta = Math.random() * Math.PI * 2;
-                var phi = Math.acos((Math.random() * 2) - 1);
+                var idx = p * 3;
+                posArray[idx] = (Math.random() - 0.5) * 110;
+                posArray[idx + 1] = (Math.random() - 0.5) * 160;
+                posArray[idx + 2] = (Math.random() - 0.5) * 80;
 
-                posArray[pIdx] = rad * Math.sin(phi) * Math.cos(theta);
-                posArray[pIdx + 1] = rad * Math.sin(phi) * Math.sin(theta);
-                posArray[pIdx + 2] = rad * Math.cos(phi);
+                var mixed = cPurple.clone().lerp(cCyan, Math.random());
+                if (Math.random() > 0.85) mixed.lerp(cRose, 0.4);
 
-                // Gradient particle color mix
-                var mixedColor = c1.clone().lerp(c2, Math.random());
-                if (Math.random() > 0.8) mixedColor.lerp(c3, 0.5);
-
-                colorArray[pIdx] = mixedColor.r;
-                colorArray[pIdx + 1] = mixedColor.g;
-                colorArray[pIdx + 2] = mixedColor.b;
+                colorArray[idx] = mixed.r;
+                colorArray[idx + 1] = mixed.g;
+                colorArray[idx + 2] = mixed.b;
             }
 
             var particlesGeo = new THREE.BufferGeometry();
@@ -3131,33 +3167,34 @@
                 size: 0.65,
                 vertexColors: true,
                 transparent: true,
-                opacity: 0.65,
-                blending: THREE.AdditiveBlending
+                opacity: 0.45,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
             });
 
             var particleSystem = new THREE.Points(particlesGeo, particlesMat);
             scene.add(particleSystem);
 
-            // 4. Dynamic Lighting
-            var ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+            // ─── 4. DYNAMIC 3D LIGHTS ───
+            var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
             scene.add(ambientLight);
 
-            var purpleLight = new THREE.PointLight(0xa855f7, 3.2, 80);
-            purpleLight.position.set(-20, 15, 20);
+            var purpleLight = new THREE.PointLight(0xa855f7, 2.5, 90);
+            purpleLight.position.set(-25, 20, 20);
             scene.add(purpleLight);
 
-            var cyanLight = new THREE.PointLight(0x06b6d4, 3.2, 80);
-            cyanLight.position.set(20, -15, 20);
+            var cyanLight = new THREE.PointLight(0x06b6d4, 2.5, 90);
+            cyanLight.position.set(25, -20, 20);
             scene.add(cyanLight);
 
-            // Interactive cursor follower light
-            var mouseLight = new THREE.PointLight(0xffffff, 1.8, 50);
-            mouseLight.position.set(0, 0, 25);
+            // Mouse follower light
+            var mouseLight = new THREE.PointLight(0xffffff, 1.2, 50);
+            mouseLight.position.set(0, 0, 30);
             scene.add(mouseLight);
 
-            // Mouse Interaction with Smooth Inertia
+            // ─── 5. MOUSE TRACKING & PARALLAX ───
             var mouseX = 0, mouseY = 0;
-            var targetRotationX = 0, targetRotationY = 0;
+            var targetRotX = 0, targetRotY = 0;
 
             window.addEventListener('mousemove', function(e) {
                 var halfW = window.innerWidth / 2;
@@ -3165,89 +3202,112 @@
                 mouseX = (e.clientX - halfW) / halfW;
                 mouseY = (e.clientY - halfH) / halfH;
 
-                targetRotationY = mouseX * 0.55;
-                targetRotationX = mouseY * 0.4;
+                targetRotY = mouseX * 0.35;
+                targetRotX = mouseY * 0.25;
 
-                // Move interactive 3D light
-                mouseLight.position.x = mouseX * 28;
-                mouseLight.position.y = -mouseY * 20;
+                mouseLight.position.x = mouseX * 35;
+                mouseLight.position.y = -mouseY * 25;
             }, { passive: true });
 
-            // Scroll Reaction (smoothly moves back/up on scroll)
+            // ─── 6. SCROLL INTERPOLATION (Travel through 3D world across all sections) ───
             var scrollY = 0;
             window.addEventListener('scroll', function() {
                 scrollY = window.scrollY || window.pageYOffset;
             }, { passive: true });
 
-            // Responsive scale adjustments
-            function updateSize() {
-                width = container.clientWidth || window.innerWidth;
-                height = container.clientHeight || window.innerHeight;
+            function onResize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
                 camera.aspect = width / height;
-                
-                // Adjust scale for smaller screens
+
                 if (width < 768) {
-                    mainGroup.scale.set(0.68, 0.68, 0.68);
-                    camera.position.z = 58;
+                    camera.position.z = 78;
+                    heroGroup.scale.set(0.65, 0.65, 0.65);
+                    leftSculpture.position.x = -24;
+                    rightSculpture.position.x = 24;
                 } else if (width < 1200) {
-                    mainGroup.scale.set(0.85, 0.85, 0.85);
-                    camera.position.z = 54;
+                    camera.position.z = 72;
+                    heroGroup.scale.set(0.85, 0.85, 0.85);
                 } else {
-                    mainGroup.scale.set(1.05, 1.05, 1.05);
-                    camera.position.z = 50;
+                    camera.position.z = 66;
+                    heroGroup.scale.set(1.0, 1.0, 1.0);
                 }
-                
                 camera.updateProjectionMatrix();
                 renderer.setSize(width, height);
             }
-            window.addEventListener('resize', updateSize);
-            updateSize();
+            window.addEventListener('resize', onResize);
+            onResize();
 
-            // Animation Loop
+            // ─── 7. ANIMATION LOOP ───
             var clock = new THREE.Clock();
             function animate() {
                 requestAnimationFrame(animate);
-                var elapsedTime = clock.getElapsedTime();
+                var t = clock.getElapsedTime();
 
-                // Gentle constant rotation of Torus Knot
-                knotWire.rotation.x = elapsedTime * 0.18;
-                knotWire.rotation.y = elapsedTime * 0.22;
-                knotSolid.rotation.x = elapsedTime * 0.18;
-                knotSolid.rotation.y = elapsedTime * 0.22;
+                // Hero Knot rotation (slow & majestic)
+                knotWire.rotation.x = t * 0.12;
+                knotWire.rotation.y = t * 0.16;
+                knotCore.rotation.x = t * 0.12;
+                knotCore.rotation.y = t * 0.16;
 
-                // Smooth mouse tracking with damping (Lerp)
-                mainGroup.rotation.y += (targetRotationY - mainGroup.rotation.y) * 0.045;
-                mainGroup.rotation.x += (targetRotationX - mainGroup.rotation.x) * 0.045;
+                // Mouse lerp inertia
+                heroGroup.rotation.y += (targetRotY - heroGroup.rotation.y) * 0.05;
+                heroGroup.rotation.x += (targetRotX - heroGroup.rotation.x) * 0.05;
 
-                // Floating sine wave position
-                mainGroup.position.y = Math.sin(elapsedTime * 0.9) * 1.5 - (scrollY * 0.02);
+                // Scroll reactive displacement
+                camera.position.y = - (scrollY * 0.028);
 
-                // Update orbiting satellites
+                // Works group floats into view
+                worksGroup.rotation.y = t * 0.15;
+                leftSculpture.rotation.x = t * 0.2;
+                leftSculpture.rotation.y = t * 0.25;
+                rightSculpture.rotation.x = t * 0.18;
+                rightSculpture.rotation.z = t * 0.22;
+
+                // Orbiting satellites
                 satellites.forEach(function(sat) {
-                    sat.userData.angle += sat.userData.speed;
-                    sat.position.x = Math.cos(sat.userData.angle) * sat.userData.radius;
-                    sat.position.z = Math.sin(sat.userData.angle) * sat.userData.radius;
-                    sat.position.y = sat.userData.baseY + Math.sin(elapsedTime * 1.2 + sat.userData.floatOffset) * 2;
-
                     sat.rotation.x += sat.userData.rotSpeedX;
                     sat.rotation.y += sat.userData.rotSpeedY;
+                    sat.position.y = sat.userData.baseY + Math.sin(t * 1.2 + sat.userData.offset) * 2.5;
                 });
 
-                // Particle constellation wave & slow drift
-                particleSystem.rotation.y = elapsedTime * 0.04;
-                particleSystem.rotation.x = Math.sin(elapsedTime * 0.03) * 0.1;
-                particleSystem.position.y = - (scrollY * 0.035);
+                // Particle slow drift & breathing
+                particleSystem.rotation.y = t * 0.025;
+                particleSystem.rotation.x = Math.sin(t * 0.02) * 0.08;
 
-                // Subtle orbit of lights
-                purpleLight.position.x = Math.sin(elapsedTime * 0.4) * 25;
-                purpleLight.position.z = Math.cos(elapsedTime * 0.4) * 25;
-
-                cyanLight.position.x = Math.cos(elapsedTime * 0.35) * 25;
-                cyanLight.position.z = Math.sin(elapsedTime * 0.35) * 25;
+                // Lights orbit
+                purpleLight.position.x = Math.sin(t * 0.3) * 30;
+                purpleLight.position.z = Math.cos(t * 0.3) * 30;
+                cyanLight.position.x = Math.cos(t * 0.25) * 30;
+                cyanLight.position.z = Math.sin(t * 0.25) * 30;
 
                 renderer.render(scene, camera);
             }
             animate();
+        })();
+
+        /* ─── 13. FULL-SITE 3D CARD TILT & DEPTH ─── */
+        (function init3DCards() {
+            var cards = document.querySelectorAll('.work-card, .service-item, .tool-bento-card, .testi-card');
+            cards.forEach(function(card) {
+                card.style.transformStyle = 'preserve-3d';
+
+                card.addEventListener('mousemove', function(e) {
+                    var rect = card.getBoundingClientRect();
+                    var x = e.clientX - rect.left;
+                    var y = e.clientY - rect.top;
+                    var cx = rect.width / 2;
+                    var cy = rect.height / 2;
+                    var rx = (y - cy) / cy * -8;
+                    var ry = (x - cx) / cx * 8;
+
+                    card.style.transform = 'perspective(1100px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-6px)';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    card.style.transform = 'perspective(1100px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                });
+            });
         })();
     </script>
 
