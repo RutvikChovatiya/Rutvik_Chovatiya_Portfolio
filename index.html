@@ -13,8 +13,10 @@
         href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Three.js Library for 3D Interactive Graphics -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Three.js 3D Library & Icons Data -->
+    <script src="three.min.js"></script>
+    <script>if (typeof THREE === 'undefined') document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');</script>
+    <script src="icons-data.js"></script>
 
     <style>
         /* ═══════════════════════════════════════════════════════════
@@ -29,7 +31,10 @@
         }
 
         html {
-            scroll-behavior: smooth
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
         }
 
         body {
@@ -37,6 +42,9 @@
             background: #07070f;
             color: #f0eeea;
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
             -webkit-font-smoothing: antialiased;
             cursor: none;
             line-height: 1.5;
@@ -49,7 +57,8 @@
 
         img {
             display: block;
-            max-width: 100%
+            max-width: 100%;
+            height: auto;
         }
 
         button {
@@ -354,13 +363,17 @@
             position: fixed;
             inset: 0;
             z-index: 490;
-            background: rgba(7, 7, 15, 0.98);
+            background: rgba(7, 7, 15, 0.96);
             backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 28px;
+            gap: clamp(14px, 3.2vh, 26px);
+            padding: 80px 24px 40px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
             opacity: 0;
             pointer-events: none;
             transition: opacity .35s;
@@ -372,7 +385,7 @@
         }
 
         .mob-menu a {
-            font-size: 32px;
+            font-size: clamp(22px, 5.2vw, 32px);
             font-weight: 700;
             letter-spacing: -0.02em;
             color: #fff;
@@ -1836,147 +1849,625 @@
         }
 
         /* ═══════════════════════════════════════════════════════════
-   14. RESPONSIVE BREAKPOINTS
+   14. COMPREHENSIVE RESPONSIVE DESIGN (All Screens & Devices)
    ═══════════════════════════════════════════════════════════ */
-        @media (max-width: 1100px) {
-            .works-grid {
-                grid-template-columns: 1fr;
-                gap: 28px
+
+        /* ── Touch & Pointer Devices: Clean native cursor & no stuck hovers ── */
+        @media (hover: none) and (pointer: coarse) {
+            body,
+            a,
+            button,
+            input,
+            select,
+            textarea {
+                cursor: auto !important;
+            }
+
+            .c-dot,
+            .c-ring {
+                display: none !important;
+            }
+
+            .work-card:hover {
+                transform: none !important;
+                box-shadow: none !important;
+                border-color: var(--border-subtle) !important;
+            }
+
+            .work-card:hover .work-card-media {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+
+            .work-card:hover .work-card-media img {
+                transform: none !important;
+            }
+
+            .service-item:hover {
+                transform: none !important;
+                padding-left: 20px !important;
+            }
+
+            .tool-bento-card:hover {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+
+            .tool-bento-card:hover .tool-img-wrap {
+                transform: none !important;
+            }
+
+            .philo-item:hover {
+                transform: none !important;
+            }
+
+            .testi-card:hover {
+                transform: none !important;
+            }
+        }
+
+        /* ── Breakpoint: 1200px (Laptops & Small Desktops) ── */
+        @media (max-width: 1200px) {
+            .n-section {
+                padding: 100px 28px;
             }
 
             .toolkit-grid {
-                grid-template-columns: repeat(3, 1fr)
+                grid-template-columns: repeat(4, 1fr);
+                gap: 18px;
+            }
+
+            .service-item {
+                grid-template-columns: 70px 1.2fr 1.8fr 80px;
+                gap: 24px;
+            }
+        }
+
+        /* ── Breakpoint: 1024px (Tablets Landscape & Medium Laptops) ── */
+        @media (max-width: 1024px) {
+            .n-section {
+                padding: 85px 24px;
+            }
+
+            .works-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
             }
 
             .about-layout {
                 grid-template-columns: 1fr;
-                gap: 48px
-            }
-
-            .service-item {
-                grid-template-columns: 60px 1.2fr 1.6fr
+                gap: 44px;
             }
 
             .testimonials-grid {
-                grid-template-columns: 1fr;
-                gap: 20px
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1.6fr 1fr 1fr 1fr;
+                gap: 36px;
+            }
+        }
+
+        /* ── Breakpoint: 860px (Tablets Portrait & Mobile Header Switch) ── */
+        @media (max-width: 860px) {
+            .nav {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .nav-links {
+                display: none !important;
+            }
+
+            .nav-cta {
+                display: none !important;
+            }
+
+            .nav-ham {
+                display: flex !important;
+                z-index: 505;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 105px 20px 50px;
+            }
+
+            .service-item {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                padding: 28px 18px;
+            }
+
+            .service-num {
+                font-size: 13px;
+                color: #c084fc;
+                background: rgba(168, 85, 247, 0.12);
+                padding: 3px 10px;
+                border-radius: 6px;
+            }
+
+            .service-title {
+                font-size: clamp(22px, 3.5vw, 28px);
+            }
+
+            .service-desc {
+                font-size: 15px;
+                max-width: 100%;
+                line-height: 1.6;
+            }
+
+            .service-tags {
+                display: none;
+            }
+
+            .toolkit-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 14px;
+            }
+
+            .cta-wrapper {
+                padding: 56px 24px;
+                border-radius: 28px;
             }
 
             .footer-top {
                 grid-template-columns: 1fr 1fr;
-                gap: 36px
-            }
-        }
-
-        @media (max-width: 860px) {
-            .nav {
-                padding: 0 24px
-            }
-
-            .nav-links {
-                display: none
-            }
-
-            .nav-cta {
-                display: none
-            }
-
-            .nav-ham {
-                display: flex
-            }
-
-            .service-item {
-                grid-template-columns: 1fr;
-                gap: 12px;
-                padding: 32px 16px
-            }
-
-            .service-num {
-                font-size: 13px
-            }
-
-            .toolkit-grid {
-                grid-template-columns: repeat(2, 1fr)
-            }
-
-            .cta-wrapper {
-                padding: 54px 24px
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr;
-                gap: 32px
+                gap: 36px;
             }
 
             .footer-bottom {
                 flex-direction: column;
-                gap: 16px;
-                text-align: center
+                gap: 14px;
+                text-align: center;
             }
         }
 
-        @media (max-width: 600px) {
-            .title-word {
-                font-size: clamp(56px, 17vw, 90px)
+        /* ── Breakpoint: 680px (Large Phones & Phablets) ── */
+        @media (max-width: 680px) {
+            .n-section {
+                padding: 68px 18px;
             }
 
-            .p-ring {
-                width: 88px;
-                height: 88px
+            .section-header {
+                margin-bottom: 40px;
             }
 
-            .f-profile {
-                left: 14%;
-                top: -10%
+            .section-title {
+                font-size: clamp(28px, 6.5vw, 42px);
+                line-height: 1.1;
             }
 
-            .hero-status-wrap {
-                margin-bottom: 20px;
+            .section-desc {
+                font-size: 15px;
             }
 
-            .badge-pill {
-                padding: 6px 14px;
-                font-size: 11px;
+            /* Responsive horizontal swipe chips for project filter */
+            .works-filter-nav {
+                display: flex;
+                gap: 8px;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 8px;
+                margin-bottom: 32px;
+                width: 100%;
+                scrollbar-width: none;
             }
 
-            .f-canva .a-icon {
-                width: 80px;
-                height: 80px;
-                border-radius: 18px
+            .works-filter-nav::-webkit-scrollbar {
+                display: none;
             }
 
-            .f-canva {
-                right: 6%;
-                top: -16%
-            }
-
-            .f-figma .a-icon {
-                width: 70px;
-                height: 70px;
-                border-radius: 16px
-            }
-
-            .f-figma {
-                right: 6%;
-                bottom: -20%
-            }
-
-            .c-svg {
-                width: 56px;
-                height: 56px
-            }
-
-            .f-cursor {
-                left: 10%;
-                bottom: -20%
-            }
-
-            .stats-card-grid {
-                grid-template-columns: 1fr
+            .filter-btn {
+                flex-shrink: 0;
+                white-space: nowrap;
+                padding: 7px 16px;
+                font-size: 12px;
             }
 
             .toolkit-grid {
-                grid-template-columns: 1fr
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* ── Breakpoint: 540px (Standard Mobile Screen Optimizations) ── */
+        @media (max-width: 540px) {
+            .title-word {
+                font-size: clamp(38px, 12vw, 64px);
+                line-height: 0.92;
+            }
+
+            .hero-sub {
+                font-size: clamp(19px, 5.2vw, 26px);
+                margin-bottom: 14px;
+            }
+
+            .hero-bio {
+                font-size: 14.5px;
+                line-height: 1.6;
+                margin-bottom: 28px;
+                padding: 0 4px;
+            }
+
+            /* Hero CTAs: full width & stacked for easy thumb tap */
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+                max-width: 290px;
+                margin: 0 auto;
+                gap: 12px;
+            }
+
+            .hero-cta .btn-p,
+            .hero-cta .btn-s {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+                padding: 13px 22px;
+                font-size: 14px;
+            }
+
+            /* Floating tool icons scaled down to not cover text */
+            .f-figma .a-icon {
+                width: 52px;
+                height: 52px;
+                border-radius: 14px;
+            }
+
+            .f-figma {
+                right: 4%;
+                bottom: -10%;
+            }
+
+            .c-svg {
+                width: 42px;
+                height: 42px;
+            }
+
+            .f-cursor {
+                left: 4%;
+                bottom: -10%;
+            }
+
+            .f-canva .a-icon {
+                width: 58px;
+                height: 58px;
+                border-radius: 14px;
+            }
+
+            .f-canva {
+                right: 4%;
+                top: -8%;
+            }
+
+            .p-ring {
+                width: 76px;
+                height: 76px;
+            }
+
+            .badge-pill {
+                padding: 5px 14px;
+                font-size: 11.5px;
+                gap: 7px;
+            }
+
+            /* Marquee */
+            .marquee-container {
+                padding: 18px 0;
+            }
+
+            .marquee-item {
+                gap: 24px;
+                font-size: 12px;
+                letter-spacing: 0.12em;
+            }
+
+            /* Project Card details */
+            .work-card {
+                padding: 16px;
+                border-radius: 22px;
+            }
+
+            .work-card-media {
+                border-radius: 16px;
+                margin-bottom: 16px;
+            }
+
+            .work-title {
+                font-size: clamp(18px, 5vw, 21px);
+            }
+
+            .work-btn-circle {
+                width: 38px;
+                height: 38px;
+                font-size: 13px;
+            }
+
+            .work-desc {
+                font-size: 13.5px;
+                line-height: 1.55;
+            }
+
+            /* About section adjustments */
+            .about-quote {
+                padding-left: 14px;
+                font-size: clamp(18px, 4.8vw, 23px);
+                line-height: 1.35;
+            }
+
+            .about-text {
+                font-size: 14.5px;
+                line-height: 1.65;
+            }
+
+            .philo-item {
+                padding: 18px 14px;
+                gap: 12px;
+                border-radius: 16px;
+            }
+
+            .stats-card-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .stat-box {
+                padding: 20px 14px;
+                border-radius: 16px;
+            }
+
+            .stat-val {
+                font-size: 36px;
+            }
+
+            .stat-label {
+                font-size: 12px;
+            }
+
+            .edu-card {
+                padding: 22px 16px;
+                border-radius: 20px;
+                gap: 16px;
+            }
+
+            .resume-cta-box {
+                padding: 26px 16px;
+                border-radius: 20px;
+            }
+
+            .resume-cta-box .btn-p {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 18px;
+                font-size: 13.5px;
+            }
+
+            /* CTA Section email box & buttons */
+            .cta-wrapper {
+                padding: 44px 18px;
+                border-radius: 24px;
+            }
+
+            .cta-title {
+                font-size: clamp(26px, 7.5vw, 38px);
+                line-height: 1.1;
+                margin-bottom: 16px;
+            }
+
+            .cta-desc {
+                font-size: 14px;
+                margin-bottom: 24px;
+            }
+
+            .cta-email-box {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                padding: 12px 20px;
+                font-size: clamp(12px, 3.5vw, 15px);
+                max-width: 100%;
+                word-break: break-all;
+                box-sizing: border-box;
+                margin-bottom: 22px;
+            }
+
+            .cta-secondary-row {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+                gap: 10px;
+            }
+
+            .cta-link-pill {
+                width: 100%;
+                justify-content: center;
+                padding: 11px 16px;
+                font-size: 13px;
+                box-sizing: border-box;
+            }
+        }
+
+        /* ── Breakpoint: 380px (Small Mobile: iPhone SE, Galaxy Z Flip, 360px) ── */
+        @media (max-width: 380px) {
+            .nav {
+                padding: 0 14px;
+                height: 56px;
+            }
+
+            .nav-logo {
+                font-size: 13.5px;
+                gap: 6px;
+            }
+
+            .nav-logo-badge {
+                font-size: 8px;
+                padding: 2px 5px;
+            }
+
+            .hero {
+                padding: 80px 14px 36px;
+            }
+
+            .title-word {
+                font-size: clamp(30px, 10.5vw, 42px);
+            }
+
+            .f-figma .a-icon {
+                width: 42px;
+                height: 42px;
+                border-radius: 10px;
+            }
+
+            .f-figma {
+                right: 2%;
+                bottom: -8%;
+            }
+
+            .c-svg {
+                width: 32px;
+                height: 32px;
+            }
+
+            .f-cursor {
+                left: 2%;
+                bottom: -8%;
+            }
+
+            .n-section {
+                padding: 48px 14px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .work-card {
+                padding: 12px;
+                border-radius: 18px;
+            }
+
+            .work-card-media {
+                border-radius: 12px;
+                margin-bottom: 12px;
+            }
+
+            .work-title {
+                font-size: 17px;
+            }
+
+            .work-btn-circle {
+                width: 34px;
+                height: 34px;
+                font-size: 11px;
+            }
+
+            .work-tags {
+                gap: 4px;
+            }
+
+            .work-tag {
+                font-size: 9.5px;
+                padding: 2px 6px;
+            }
+
+            .toolkit-grid {
+                gap: 8px;
+            }
+
+            .tool-bento-card {
+                padding: 14px 8px;
+                border-radius: 14px;
+            }
+
+            .tool-img-wrap {
+                width: 42px;
+                height: 42px;
+                border-radius: 10px;
+                margin-bottom: 8px;
+            }
+
+            .tool-name {
+                font-size: 12.5px;
+            }
+
+            .tool-role {
+                font-size: 10px;
+            }
+
+            .tool-level {
+                font-size: 8.5px;
+                padding: 1px 5px;
+                margin-top: 6px;
+            }
+
+            .stat-val {
+                font-size: 28px;
+            }
+
+            .stat-label {
+                font-size: 10.5px;
+            }
+
+            .cta-wrapper {
+                padding: 34px 12px;
+                border-radius: 18px;
+            }
+
+            .cta-email-box {
+                font-size: 11px;
+                padding: 10px 10px;
+                gap: 6px;
+                width: 100%;
+            }
+
+            .cta-link-pill {
+                font-size: 12px;
+                padding: 9px 12px;
+            }
+
+            .n-footer {
+                padding: 36px 14px 20px;
+            }
+        }
+
+        /* ── Mobile Landscape Orientation ── */
+        @media (max-height: 550px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 80px 20px 40px;
+            }
+
+            .title-word {
+                font-size: clamp(36px, 9vw, 56px);
+            }
+
+            .mob-menu {
+                justify-content: flex-start;
+                padding: 60px 20px 30px;
+                gap: 12px;
+                overflow-y: auto;
+            }
+
+            .mob-menu a {
+                font-size: 20px;
             }
         }
     </style>
@@ -2875,83 +3366,95 @@
             typeEffect();
         }, 2200);
 
-        /* ─── 3. CUSTOM MAGNETIC CURSOR ─── */
+        /* ─── 3. CUSTOM MAGNETIC CURSOR (Desktop only, clean native on touch) ─── */
         var dot = document.getElementById('cDot');
         var ring = document.getElementById('cRing');
-        var mx = 0, my = 0, rx = 0, ry = 0;
+        var isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-        document.addEventListener('mousemove', function (e) {
-            mx = e.clientX; my = e.clientY;
-            dot.style.left = mx + 'px';
-            dot.style.top = my + 'px';
-        });
+        if (isFinePointer && dot && ring) {
+            var mx = 0, my = 0, rx = 0, ry = 0;
 
-        (function cursorLoop() {
-            rx += (mx - rx) * 0.12;
-            ry += (my - ry) * 0.12;
-            ring.style.left = rx + 'px';
-            ring.style.top = ry + 'px';
-            requestAnimationFrame(cursorLoop);
-        })();
-
-        function attachCursorHover() {
-            document.querySelectorAll('a, button, .work-card, .service-item, .tool-bento-card, .testi-card, .a-icon, .p-ring, .badge-pill').forEach(function (el) {
-                el.addEventListener('mouseenter', function () {
-                    dot.classList.add('hovered');
-                    ring.classList.add('hovered');
-                });
-                el.addEventListener('mouseleave', function () {
-                    dot.classList.remove('hovered');
-                    ring.classList.remove('hovered');
-                });
+            document.addEventListener('mousemove', function (e) {
+                mx = e.clientX; my = e.clientY;
+                dot.style.left = mx + 'px';
+                dot.style.top = my + 'px';
             });
-        }
-        attachCursorHover();
 
-        /* ─── 4. MOUSE PARALLAX (Hero 3D Tilt + Floating Layers) ─── */
+            (function cursorLoop() {
+                rx += (mx - rx) * 0.12;
+                ry += (my - ry) * 0.12;
+                ring.style.left = rx + 'px';
+                ring.style.top = ry + 'px';
+                requestAnimationFrame(cursorLoop);
+            })();
+
+            function attachCursorHover() {
+                document.querySelectorAll('a, button, .work-card, .service-item, .tool-bento-card, .testi-card, .a-icon, .p-ring, .badge-pill').forEach(function (el) {
+                    el.addEventListener('mouseenter', function () {
+                        dot.classList.add('hovered');
+                        ring.classList.add('hovered');
+                    });
+                    el.addEventListener('mouseleave', function () {
+                        dot.classList.remove('hovered');
+                        ring.classList.remove('hovered');
+                    });
+                });
+            }
+            attachCursorHover();
+        } else {
+            if (dot) dot.style.display = 'none';
+            if (ring) ring.style.display = 'none';
+            document.body.style.cursor = 'auto';
+        }
+
+        /* ─── 4. MOUSE PARALLAX (Hero 3D Tilt + Floating Layers - Desktop Only) ─── */
         var titleWrap = document.getElementById('titleWrap');
         var floats = document.querySelectorAll('.flt');
         var depths = [0.6, 0.4, 1.0, 0.8, 0.5];
 
-        document.addEventListener('mousemove', function (e) {
-            var cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-            var dx = (e.clientX - cx) / cx, dy = (e.clientY - cy) / cy;
+        if (isFinePointer) {
+            document.addEventListener('mousemove', function (e) {
+                var cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+                var dx = (e.clientX - cx) / cx, dy = (e.clientY - cy) / cy;
 
-            if (titleWrap) {
-                titleWrap.style.transform = 'perspective(1400px) rotateY(' + (dx * 2.5) + 'deg) rotateX(' + (-dy * 2) + 'deg)';
-            }
+                if (titleWrap) {
+                    titleWrap.style.transform = 'perspective(1400px) rotateY(' + (dx * 2.5) + 'deg) rotateX(' + (-dy * 2) + 'deg)';
+                }
 
-            floats.forEach(function (el, i) {
-                var d = depths[i] || 0.6;
-                el.style.setProperty('--px', (dx * d * 22) + 'px');
-                el.style.setProperty('--py', (dy * d * 16) + 'px');
+                floats.forEach(function (el, i) {
+                    var d = depths[i] || 0.6;
+                    el.style.setProperty('--px', (dx * d * 22) + 'px');
+                    el.style.setProperty('--py', (dy * d * 16) + 'px');
+                });
             });
-        });
 
-        document.addEventListener('mouseleave', function () {
-            if (titleWrap) titleWrap.style.transform = '';
-            floats.forEach(function (el) {
-                el.style.setProperty('--px', '0px');
-                el.style.setProperty('--py', '0px');
+            document.addEventListener('mouseleave', function () {
+                if (titleWrap) titleWrap.style.transform = '';
+                floats.forEach(function (el) {
+                    el.style.setProperty('--px', '0px');
+                    el.style.setProperty('--py', '0px');
+                });
             });
-        });
+        }
 
-        /* ─── 5. 3D TILT ON HOVER FOR PROJECT CARDS ─── */
-        document.querySelectorAll('.work-card').forEach(function (card) {
-            card.addEventListener('mousemove', function (e) {
-                var rect = card.getBoundingClientRect();
-                var x = e.clientX - rect.left;
-                var y = e.clientY - rect.top;
-                var cx = rect.width / 2;
-                var cy = rect.height / 2;
-                var rx = (y - cy) / cy * -6; // max 6 deg tilt
-                var ry = (x - cx) / cx * 6;
-                card.style.transform = 'perspective(1000px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-8px)';
+        /* ─── 5. 3D TILT ON HOVER FOR PROJECT CARDS (Desktop Only) ─── */
+        if (isFinePointer) {
+            document.querySelectorAll('.work-card').forEach(function (card) {
+                card.addEventListener('mousemove', function (e) {
+                    var rect = card.getBoundingClientRect();
+                    var x = e.clientX - rect.left;
+                    var y = e.clientY - rect.top;
+                    var cx = rect.width / 2;
+                    var cy = rect.height / 2;
+                    var rx = (y - cy) / cy * -6; // max 6 deg tilt
+                    var ry = (x - cx) / cx * 6;
+                    card.style.transform = 'perspective(1000px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-8px)';
+                });
+                card.addEventListener('mouseleave', function () {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                });
             });
-            card.addEventListener('mouseleave', function () {
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-            });
-        });
+        }
 
         /* ─── 6. INTERACTIVE PROJECT FILTER TABS ─── */
         var filterBtns = document.querySelectorAll('.filter-btn');
@@ -3558,7 +4061,13 @@
                 height = window.innerHeight;
                 camera.aspect = width / height;
 
-                if (width < 768) {
+                if (width < 480) {
+                    camera.position.z = 86;
+                    heroGroup.scale.set(0.5, 0.5, 0.5);
+                    leftSculpture.position.x = -16;
+                    rightSculpture.position.x = 16;
+                    aboutGroup.position.set(0, -162, -20);
+                } else if (width < 768) {
                     camera.position.z = 80;
                     heroGroup.scale.set(0.65, 0.65, 0.65);
                     leftSculpture.position.x = -24;
@@ -3573,6 +4082,7 @@
                 }
                 camera.updateProjectionMatrix();
                 renderer.setSize(width, height);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, width < 768 ? 1.5 : 2));
             }
             window.addEventListener('resize', onResize);
             onResize();
@@ -3663,8 +4173,9 @@
             animate();
         })();
 
-        /* ─── 13. FULL-SITE 3D CARD TILT & MULTI-LAYER DEPTH (All Sections) ─── */
+        /* ─── 13. FULL-SITE 3D CARD TILT & MULTI-LAYER DEPTH (All Sections - Desktop Only) ─── */
         (function init3DCards() {
+            if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
             var cards = document.querySelectorAll('.work-card, .service-item, .tool-bento-card, .testi-card, .stat-box, .edu-card, .resume-cta-box, .cta-wrapper');
             cards.forEach(function (card) {
                 card.style.transformStyle = 'preserve-3d';
