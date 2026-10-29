@@ -1,944 +1,2960 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rutvik Chovatiya | UI/UX & Graphic Designer</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- AOS Animation CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <title>Rutvik Chovatiya · UI/UX & Product Designer</title>
+    <meta name="description"
+        content="Rutvik is an India-based UI/UX & Product Designer crafting digital products, brand identities and websites that feel as good as they look.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        html,
+        /* ═══════════════════════════════════════════════════════════
+   1. RESET & DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
         body {
+            font-family: 'Inter', sans-serif;
+            background: #07070f;
+            color: #f0eeea;
             overflow-x: hidden;
-            max-width: 100vw;
-            width: 100%;
+            -webkit-font-smoothing: antialiased;
+            cursor: none;
+            line-height: 1.5;
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #0a0a0a;
-            color: #ffffff;
-            position: relative;
+        a {
+            text-decoration: none;
+            color: inherit
         }
 
-        /* --- 🌟 Creative Infinite Animations 🌟 --- */
-        .neon-text {
-            text-shadow: 0 0 3px rgba(0, 242, 254, 0.2);
-            animation: pulse-glow 2s infinite alternate;
+        img {
+            display: block;
+            max-width: 100%
         }
 
-        @keyframes pulse-glow {
-            0% {
-                text-shadow: 0 0 3px rgba(0, 242, 254, 0.2);
-            }
-
-            100% {
-                text-shadow: 0 0 5px rgba(0, 242, 254, 0.5), 0 0 5px rgba(79, 172, 254, 0.3);
-            }
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none
         }
 
-        .gradient-text {
-            background: linear-gradient(270deg, #4facfe, #00f2fe, #7D2AE8, #4facfe);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: bg-pan 5s ease infinite;
+        :root {
+            --bg-deep: #07070f;
+            --bg-card: #0e0e14;
+            --bg-card-hover: #13131e;
+            --purple-glow: rgba(168, 85, 247, 0.4);
+            --purple-accent: #a855f7;
+            --purple-bright: #c084fc;
+            --purple-border: rgba(168, 85, 247, 0.35);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.16);
+            --text-muted: #9e9ea7;
+            --text-dim: #63636e;
+            --font-serif: 'Instrument Serif', Georgia, serif;
         }
 
-        @keyframes bg-pan {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            75% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Card Hover Animations */
-        .card {
-            transition: all 0.5s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.2);
-            border-color: #00f2fe;
-        }
-
-        /* Moving Background Blob */
-        .moving-blob {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
-            border-radius: 50%;
-            animation: moveBlob 10s infinite alternate ease-in-out;
-            z-index: -1;
+        /* ═══════════════════════════════════════════════════════════
+   2. PAGE-LOAD CURTAIN & NOISE & CUSTOM MAGNETIC CURSOR
+   ═══════════════════════════════════════════════════════════ */
+        #curtain {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: #07070f;
+            transform-origin: top;
+            animation: curtainLift 0.9s cubic-bezier(0.76, 0, 0.24, 1) 0.15s forwards;
             pointer-events: none;
         }
 
-        @keyframes moveBlob {
+        @keyframes curtainLift {
             0% {
-                transform: translate(0px, 0px) scale(1);
+                transform: scaleY(1)
             }
 
             100% {
-                transform: translate(100px, -100px) scale(1.2);
+                transform: scaleY(0)
             }
         }
 
-        .bg-grid {
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+        .c-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: width .15s, height .15s, background .2s;
         }
 
-        /* --- Custom Floating Animations for Hero Tools --- */
-        @keyframes float-1 {
-
-            0%,
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-20px) rotate(5deg);
-            }
+        .c-ring {
+            position: fixed;
+            width: 38px;
+            height: 38px;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width .25s, height .25s, border-color .25s;
         }
 
-        @keyframes float-2 {
-
-            0%,
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(20px) rotate(-5deg);
-            }
+        .c-dot.hovered {
+            width: 6px;
+            height: 6px;
+            background: #c084fc
         }
 
-        @keyframes float-3 {
-
-            0%,
-            100% {
-                transform: translateX(0px) rotate(0deg);
-            }
-
-            50% {
-                transform: translateX(-20px) rotate(10deg);
-            }
+        .c-ring.hovered {
+            width: 58px;
+            height: 58px;
+            border-color: rgba(192, 132, 252, 0.7);
+            background: rgba(168, 85, 247, 0.06)
         }
 
-        .animate-tool-1 {
-            animation: float-1 4s ease-in-out infinite;
+        /* Ambient Background Aura Blobs */
+        .bg-aura {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        .animate-tool-2 {
-            animation: float-2 5s ease-in-out infinite;
-        }
-
-        .animate-tool-3 {
-            animation: float-3 4.5s ease-in-out infinite;
-        }
-
-        .animate-tool-4 {
-            animation: float-1 5.5s ease-in-out infinite reverse;
-        }
-
-        .animate-tool-5 {
-            animation: float-2 6s ease-in-out infinite reverse;
-        }
-
-        .animate-tool-6 {
-            animation: float-3 5s ease-in-out infinite reverse;
-        }
-
-        /* Icon Box Style */
-        .tool-icon {
+        .aura-blob {
             position: absolute;
-            width: 55px;
-            height: 55px;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: blobBreath 10s ease-in-out infinite;
+        }
+
+        .aura-blob-1 {
+            width: 780px;
+            height: 680px;
+            top: 6%;
+            left: 10%;
+            background: radial-gradient(ellipse, rgba(147, 51, 234, 0.38) 0%, transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .aura-blob-2 {
+            width: 580px;
+            height: 580px;
+            top: 20%;
+            right: 4%;
+            background: radial-gradient(ellipse, rgba(91, 33, 182, 0.28) 0%, transparent 70%);
+            animation-delay: -4s;
+            animation-duration: 13s;
+        }
+
+        .aura-blob-3 {
+            width: 500px;
+            height: 500px;
+            bottom: 4%;
+            left: 32%;
+            background: radial-gradient(ellipse, rgba(168, 85, 247, 0.22) 0%, transparent 70%);
+            animation-delay: -7s;
+            animation-duration: 11s;
+        }
+
+        @keyframes blobBreath {
+
+            0%,
+            100% {
+                transform: scale(1) translate(0, 0);
+                opacity: 0.9
+            }
+
+            33% {
+                transform: scale(1.1) translate(26px, -18px);
+                opacity: 1
+            }
+
+            66% {
+                transform: scale(0.92) translate(-14px, 24px);
+                opacity: 0.75
+            }
+        }
+
+        .noise {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.038;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            background-size: 220px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   3. NAVBAR
+   ═══════════════════════════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 500;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            padding: 0 52px;
+            height: 70px;
+            background: rgba(7, 7, 15, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            animation: navReveal .7s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
+            transition: border-color .3s;
+        }
+
+        @keyframes navReveal {
+            to {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
+            }
+        }
+
+        .nav-logo {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo-badge {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 3px 8px;
+            border-radius: 99px;
+            background: rgba(168, 85, 247, 0.18);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a {
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color .2s;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a:hover {
+            color: #fff
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #c084fc;
+            transition: width .25s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%
+        }
+
+        .nav-cta {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 9px 20px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: #fff;
+            transition: all .25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-cta:hover {
+            background: #fff;
+            color: #07070f;
+            border-color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .nav-ham {
+            display: none;
+            width: 38px;
+            height: 38px;
+            flex-direction: column;
             justify-content: center;
-            border-radius: 14px;
-            background: rgba(15, 15, 15, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 30;
-            transition: all 0.4s;
-            padding: 4px;
+            align-items: center;
+            gap: 5px;
         }
 
-        .tool-icon:hover {
-            border-color: #00f2fe;
-            transform: scale(1.2) rotate(360deg) !important;
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+        .nav-ham span {
+            display: block;
+            width: 20px;
+            height: 1.5px;
+            background: #fff;
+            transition: transform .3s, opacity .3s;
         }
 
-        .tool-icon img {
+        .nav-ham.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg)
+        }
+
+        .nav-ham.open span:nth-child(2) {
+            opacity: 0
+        }
+
+        .nav-ham.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg)
+        }
+
+        /* MOBILE MENU */
+        .mob-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 490;
+            background: rgba(7, 7, 15, 0.98);
+            backdrop-filter: blur(30px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .35s;
+        }
+
+        .mob-menu.on {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        .mob-menu a {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #fff;
+            transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1), color .2s;
+            transform: translateY(20px);
+        }
+
+        .mob-menu.on a {
+            transform: translateY(0)
+        }
+
+        .mob-menu a:hover {
+            color: #c084fc
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   4. HERO SECTION (Nuria Floating Architecture)
+   ═══════════════════════════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 24px 60px;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .title-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 1420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            user-select: none;
+            margin-bottom: 20px;
+            transition: transform 0.12s ease-out;
+        }
+
+        .title-line {
+            display: block;
+            overflow: visible;
+            line-height: 0.83;
+        }
+
+        .title-word {
+            display: inline-block;
+            font-size: clamp(60px, 10.5vw, 240px);
+            font-weight: 900;
+            letter-spacing: -0.035em;
+            text-transform: uppercase;
+            color: #fff;
+            line-height: 0.88;
+            opacity: 0;
+            transform: translateY(115%);
+            transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .title-word.animate {
+            opacity: 1;
+            transform: translateY(0%)
+        }
+
+        .type-cursor {
+            display: inline-block;
+            opacity: 0;
+            color: #c084fc;
+            font-weight: 300;
+            margin-left: 2px;
+        }
+
+        .type-cursor.active {
+            animation: blink 0.9s infinite
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+
+        /* Floating items */
+        .flt {
+            position: absolute;
+            pointer-events: auto;
+            opacity: 0;
+            transform: scale(0.3) rotate(-10deg);
+            animation: popIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            translate: var(--px, 0px) var(--py, 0px);
+            transition: translate 0.1s ease-out;
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg)
+            }
+        }
+
+        /* Profile Behind Title */
+        .f-profile {
+            top: -14%;
+            left: 26%;
+            z-index: 5;
+            animation-delay: 1.1s;
+        }
+
+        .p-ring {
+            width: 124px;
+            height: 124px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2.5px solid rgba(255, 255, 255, 0.45);
+            box-shadow: 0 0 50px rgba(147, 51, 234, 0.45);
+            animation: floatSoft 7s ease-in-out infinite;
+            background: #141414;
+        }
+
+        .p-ring img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 10px;
+            object-position: top
         }
 
-        /* Wave Effect for Grid Tools on Hover */
-        @keyframes hover-wave {
-            0% {
-                transform: translateY(-12px) rotate(0deg);
-            }
-
-            25% {
-                transform: translateY(-12px) rotate(-8deg);
-            }
-
-            50% {
-                transform: translateY(-12px) rotate(8deg);
-            }
-
-            75% {
-                transform: translateY(-12px) rotate(-4deg);
-            }
-
-            100% {
-                transform: translateY(-12px) rotate(0deg);
-            }
-        }
-
-        .wave-hover:hover {
-            animation: hover-wave 0.8s ease-in-out infinite;
-            transform-origin: bottom center;
-        }
-
-        /* --- 🌊 Premium Button Wave Effect --- */
-        .btn-wave {
+        /* Available Badge - Centered & Fixed in place */
+        .hero-status-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
             position: relative;
-            overflow: hidden;
-        }
-
-        .btn-wave::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            padding-top: 300%;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 1;
-            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-            pointer-events: none;
-        }
-
-        .btn-wave:hover::after {
-            transform: translate(-50%, -50%) scale(1);
+            z-index: 25;
             opacity: 0;
-            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+            transform: translateY(-8px);
+            animation: badgeFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
         }
 
-        /* --- 🚀 High-Level Profile Animations 🚀 --- */
-        .profile-wrapper {
-            position: relative;
-            z-index: 20;
-            border-radius: 50%;
-            /* Smooth float animation */
-            animation: float-profile 6s ease-in-out infinite;
-        }
-
-        /* Inner background to block rings */
-        .profile-inner {
-            background-color: #0a0a0a;
-            border-radius: 50%;
-            padding: 6px;
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            height: 100%;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
-            overflow: hidden;
-        }
-
-        /* Ring 1 - Cyan/Purple */
-        .profile-glow-ring-1 {
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, transparent 0%, #4facfe 25%, transparent 50%, #7D2AE8 75%, transparent 100%);
-            animation: spin 5s linear infinite;
-            z-index: -1;
-            filter: blur(4px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Ring 2 - Opposite rotation */
-        .profile-glow-ring-2 {
-            position: absolute;
-            inset: -2px;
-            border-radius: 50%;
-            background: conic-gradient(from 180deg, transparent 0%, #00f2fe 25%, transparent 50%, #ff00ff 75%, transparent 100%);
-            animation: spin-reverse 3s linear infinite;
-            z-index: -2;
-            filter: blur(8px);
-            opacity: 0.6;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .profile-image {
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .profile-wrapper:hover .profile-image {
-            transform: scale(1.15) rotate(4deg);
-            /* Pops out and rotates */
-        }
-
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
+        @keyframes badgeFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        @keyframes spin-reverse {
-            100% {
-                transform: rotate(-360deg);
-            }
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 16px;
+            border-radius: 9999px;
+            background: rgba(18, 18, 24, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            font-size: 12.5px;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        @keyframes float-profile {
+        .badge-pill:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34, 197, 94, 0.35);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(34, 197, 94, 0.2);
+        }
+
+        .b-dot {
+            width: 7px;
+            height: 7px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+            flex-shrink: 0;
+            animation: dotPulse 2s infinite;
+        }
+
+        @keyframes dotPulse {
 
             0%,
             100% {
-                transform: translateY(0);
+                transform: scale(1);
+                opacity: 1
             }
 
             50% {
-                transform: translateY(-12px);
+                transform: scale(1.4);
+                opacity: 0.6
+            }
+        }
+
+        /* Tool: Canva */
+        .f-canva {
+            top: -14%;
+            right: 20%;
+            z-index: 25;
+            animation-delay: 1.35s;
+        }
+
+        .f-canva .a-icon {
+            width: 82px;
+            height: 82px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 196, 204, 0.25);
+            animation: floatSoft 8s ease-in-out infinite 1s;
+            background: #0e0e14;
+        }
+
+        .f-canva .a-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        /* Tool: Figma */
+        .f-figma {
+            bottom: -18%;
+            right: 18%;
+            z-index: 25;
+            animation-delay: 1.45s;
+        }
+
+        .f-figma .a-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(242, 78, 30, 0.22);
+            animation: floatHard 6.5s ease-in-out infinite 0.8s;
+            background: #0e0e14;
+        }
+
+        .f-figma .a-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        /* Pixel Cursor SVG */
+        .f-cursor {
+            bottom: -18%;
+            left: 22%;
+            z-index: 25;
+            animation-delay: 1.55s;
+        }
+
+        .c-svg {
+            width: 58px;
+            height: 58px;
+            animation: floatMed 7.5s ease-in-out infinite 1.2s;
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.7));
+        }
+
+        @keyframes floatSoft {
+
+            0%,
+            100% {
+                transform: translateY(0px)
+            }
+
+            50% {
+                transform: translateY(-12px)
+            }
+        }
+
+        @keyframes floatMed {
+
+            0%,
+            100% {
+                transform: translateY(0px)
+            }
+
+            50% {
+                transform: translateY(-18px)
+            }
+        }
+
+        @keyframes floatHard {
+
+            0%,
+            100% {
+                transform: translateY(0px)
+            }
+
+            50% {
+                transform: translateY(-22px)
+            }
+        }
+
+        /* Subtitle & Bio */
+        .hero-sub {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(22px, 3vw, 40px);
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 2px;
+            margin-bottom: 18px;
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp .8s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+        }
+
+        .hero-bio {
+            font-size: clamp(15px, 1.4vw, 18px);
+            color: var(--text-muted);
+            max-width: 580px;
+            margin: 0 auto 36px;
+            line-height: 1.65;
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp .8s cubic-bezier(0.16, 1, 0.3, 1) 1.65s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp .8s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .btn-p {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 99px;
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            color: #fff;
+            font-size: 14.5px;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.35);
+            transition: all .25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-p:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(168, 85, 247, 0.55)
+        }
+
+        .btn-s {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            font-size: 14.5px;
+            font-weight: 500;
+            transition: all .25s;
+        }
+
+        .btn-s:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .sarr {
+            transition: transform .2s
+        }
+
+        .btn-s:hover .sarr {
+            transform: translateX(4px)
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   5. INFINITE RUNNING MARQUEE TICKER (Dynamic Motion)
+   ═══════════════════════════════════════════════════════════ */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            user-select: none;
+            padding: 24px 0;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(7, 7, 15, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            gap: 40px;
+            animation: marqueeScroll 28s linear infinite;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 36px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .marquee-star {
+            color: #c084fc;
+            font-size: 12px
+        }
+
+        @keyframes marqueeScroll {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   6. GENERAL SECTION STYLING & HEADINGS
+   ═══════════════════════════════════════════════════════════ */
+        .n-section {
+            position: relative;
+            z-index: 10;
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 120px 32px;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 56px;
+        }
+
+        .section-tag {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #c084fc;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .section-tag::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #c084fc;
+            box-shadow: 0 0 10px #c084fc;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 5.5vw, 68px);
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            color: #fff;
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+
+        .section-title .serif {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            font-style: italic;
+            color: #d8b4fe;
+        }
+
+        .section-desc {
+            font-size: clamp(16px, 1.4vw, 19px);
+            color: var(--text-muted);
+            max-width: 620px;
+            line-height: 1.6;
+        }
+
+        /* Scroll reveal helper */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-item.in-view {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   7. SELECTED WORKS SECTION (TOP 6 BEHANCE PROJECTS)
+   ═══════════════════════════════════════════════════════════ */
+        /* Filter tabs */
+        .works-filter-nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all .25s ease;
+        }
+
+        .filter-btn:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2)
+        }
+
+        .filter-btn.active {
+            background: #fff;
+            color: #07070f;
+            border-color: #fff;
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .work-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 28px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1), border-color .3s, box-shadow .4s, opacity .35s;
+            transform-style: preserve-3d;
+        }
+
+        .work-card:hover {
+            border-color: var(--purple-border);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(168, 85, 247, 0.18);
+        }
+
+        .work-card-media {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #030307;
+            margin-bottom: 24px;
+        }
+
+        .work-card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-card:hover .work-card-media img {
+            transform: scale(1.06);
+        }
+
+        .work-pill {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            z-index: 2;
+            padding: 6px 14px;
+            border-radius: 99px;
+            background: rgba(7, 7, 15, 0.78);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .work-tool-badge {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            z-index: 2;
+            padding: 5px 12px;
+            border-radius: 99px;
+            background: rgba(7, 7, 15, 0.78);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 11px;
+            color: #c084fc;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .work-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .work-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .work-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #fff;
+            transition: color .2s;
+        }
+
+        .work-card:hover .work-title {
+            color: #c084fc
+        }
+
+        .work-btn-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            transition: all .3s ease;
+            flex-shrink: 0;
+        }
+
+        .work-card:hover .work-btn-circle {
+            background: #fff;
+            color: #07070f;
+            border-color: #fff;
+            transform: rotate(45deg);
+        }
+
+        .work-desc {
+            font-size: 14.5px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .work-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .work-tag {
+            font-size: 11.5px;
+            font-weight: 500;
+            color: var(--text-dim);
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .works-footer-cta {
+            display: flex;
+            justify-content: center;
+            margin-top: 54px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   8. SERVICES SECTION (05)
+   ═══════════════════════════════════════════════════════════ */
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .service-item {
+            display: grid;
+            grid-template-columns: 80px 1.2fr 2fr 100px;
+            align-items: center;
+            gap: 32px;
+            padding: 44px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            position: relative;
+            transition: background .3s, padding .3s;
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity .3s;
+            pointer-events: none;
+        }
+
+        .service-item:hover {
+            background: rgba(255, 255, 255, 0.015);
+            padding-left: 32px;
+        }
+
+        .service-item:hover::before {
+            opacity: 1
+        }
+
+        .service-num {
+            font-family: monospace;
+            font-size: 15px;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .service-title {
+            font-size: clamp(22px, 2.4vw, 32px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #fff;
+            transition: color .2s;
+        }
+
+        .service-item:hover .service-title {
+            color: #c084fc
+        }
+
+        .service-desc {
+            font-size: 15.5px;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        .service-tags {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .service-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: all .3s;
+        }
+
+        .service-item:hover .service-dot {
+            background: #a855f7;
+            box-shadow: 0 0 12px #a855f7;
+            transform: scale(1.4);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   9. DESIGN TOOLKIT & BENTO GRID
+   ═══════════════════════════════════════════════════════════ */
+        .toolkit-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .tool-bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 22px;
+            padding: 26px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .tool-bento-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--purple-border);
+            background: var(--bg-card-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(168, 85, 247, 0.18);
+        }
+
+        .tool-img-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: #14141d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .tool-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .tool-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px
+        }
+
+        .tool-role {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4
+        }
+
+        .tool-level {
+            margin-top: 14px;
+            font-size: 10.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #c084fc;
+            padding: 3px 9px;
+            border-radius: 99px;
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   10. ABOUT SECTION (Behind the Canvas)
+   ═══════════════════════════════════════════════════════════ */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .about-story {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .about-quote {
+            font-family: var(--font-serif);
+            font-size: clamp(26px, 3.2vw, 42px);
+            line-height: 1.25;
+            color: #fff;
+            font-style: italic;
+            border-left: 2px solid #a855f7;
+            padding-left: 24px;
+        }
+
+        .about-text {
+            font-size: 16.5px;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            margin-top: 12px;
+        }
+
+        .philo-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: border-color .25s, transform .25s;
+        }
+
+        .philo-item:hover {
+            border-color: var(--purple-border);
+            transform: translateX(6px);
+        }
+
+        .philo-num {
+            font-family: monospace;
+            font-size: 14px;
+            color: #c084fc;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: rgba(168, 85, 247, 0.12);
+        }
+
+        .philo-content h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px
+        }
+
+        .philo-content p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6
+        }
+
+        /* Right side: Stats & Resume Card */
+        .about-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .stats-card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: #fff;
+            background: linear-gradient(135deg, #fff, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500
+        }
+
+        .edu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .edu-header {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .edu-item {
+            position: relative;
+            padding-left: 22px;
+            border-left: 1.5px solid var(--border-subtle);
+        }
+
+        .edu-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 6px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #c084fc;
+            box-shadow: 0 0 10px #c084fc;
+        }
+
+        .edu-degree {
+            font-size: 15.5px;
+            font-weight: 600;
+            color: #fff
+        }
+
+        .edu-inst {
+            font-size: 13.5px;
+            color: #a855f7;
+            margin-top: 2px
+        }
+
+        .edu-year {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 2px
+        }
+
+        .resume-cta-box {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(124, 58, 237, 0.05));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 24px;
+            padding: 32px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .resume-cta-box h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff
+        }
+
+        .resume-cta-box p {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 320px
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   11. TESTIMONIALS (What People Say)
+   ═══════════════════════════════════════════════════════════ */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 36px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all .35s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testi-card:hover {
+            border-color: var(--purple-border);
+            transform: translateY(-6px);
+            background: var(--bg-card-hover);
+        }
+
+        .testi-quote-icon {
+            font-family: var(--font-serif);
+            font-size: 56px;
+            color: #a855f7;
+            opacity: 0.4;
+            line-height: 0.8;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .testi-text {
+            font-size: 15.5px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.65;
+            margin-bottom: 28px;
+            font-style: normal;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 20px;
+        }
+
+        .testi-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #1d1d2b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #c084fc;
+            font-size: 15px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .testi-meta h5 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff
+        }
+
+        .testi-meta p {
+            font-size: 12.5px;
+            color: var(--text-muted)
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   12. MASSIVE CTA / LET'S TALK SECTION
+   ═══════════════════════════════════════════════════════════ */
+        .cta-wrapper {
+            background: radial-gradient(ellipse at 50% 0%, rgba(147, 51, 234, 0.32) 0%, rgba(14, 14, 20, 0.92) 70%);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 36px;
+            padding: 84px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(147, 51, 234, 0.2);
+        }
+
+        .cta-title {
+            font-size: clamp(38px, 6vw, 76px);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: #fff;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .cta-title .serif {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 400;
+            color: #d8b4fe;
+        }
+
+        .cta-desc {
+            font-size: clamp(16px, 1.5vw, 20px);
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .cta-email-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 36px;
+            border-radius: 99px;
+            background: #fff;
+            color: #07070f;
+            font-size: clamp(15px, 1.6vw, 20px);
+            font-weight: 700;
+            box-shadow: 0 15px 45px rgba(255, 255, 255, 0.25);
+            transition: all .3s;
+            margin-bottom: 32px;
+        }
+
+        .cta-email-box:hover {
+            transform: scale(1.04);
+            box-shadow: 0 20px 55px rgba(255, 255, 255, 0.4);
+        }
+
+        .cta-secondary-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .cta-link-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 22px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all .25s;
+        }
+
+        .cta-link-pill:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Toast Notice */
+        #toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(40px);
+            padding: 12px 24px;
+            border-radius: 99px;
+            background: #181824;
+            color: #fff;
+            border: 1px solid #a855f7;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            pointer-events: none;
+            transition: all .3s;
+            z-index: 10000;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0)
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   13. FOOTER
+   ═══════════════════════════════════════════════════════════ */
+        .n-footer {
+            position: relative;
+            z-index: 10;
+            max-width: 1380px;
+            margin: 80px auto 0;
+            padding: 80px 32px 40px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 64px;
+        }
+
+        .footer-brand h4 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 12px
+        }
+
+        .footer-brand p {
+            font-size: 14.5px;
+            color: var(--text-muted);
+            max-width: 320px;
+            line-height: 1.6
+        }
+
+        .footer-col h5 {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .footer-col a {
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: color .2s;
+        }
+
+        .footer-col a:hover {
+            color: #fff
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #22c55e;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 32px;
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .footer-bottom a {
+            color: var(--text-muted)
+        }
+
+        .footer-bottom a:hover {
+            color: #fff
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   14. RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════════════════ */
+        @media (max-width: 1100px) {
+            .works-grid {
+                grid-template-columns: 1fr;
+                gap: 28px
+            }
+
+            .toolkit-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 48px
+            }
+
+            .service-item {
+                grid-template-columns: 60px 1.2fr 1.6fr
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 20px
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 36px
+            }
+        }
+
+        @media (max-width: 860px) {
+            .nav {
+                padding: 0 24px
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .nav-cta {
+                display: none
+            }
+
+            .nav-ham {
+                display: flex
+            }
+
+            .service-item {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 32px 16px
+            }
+
+            .service-num {
+                font-size: 13px
+            }
+
+            .toolkit-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .cta-wrapper {
+                padding: 54px 24px
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 32px
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center
+            }
+        }
+
+        @media (max-width: 600px) {
+            .title-word {
+                font-size: clamp(56px, 17vw, 90px)
+            }
+
+            .p-ring {
+                width: 88px;
+                height: 88px
+            }
+
+            .f-profile {
+                left: 14%;
+                top: -10%
+            }
+
+            .hero-status-wrap {
+                margin-bottom: 20px;
+            }
+
+            .badge-pill {
+                padding: 6px 14px;
+                font-size: 11px;
+            }
+
+            .f-canva .a-icon {
+                width: 80px;
+                height: 80px;
+                border-radius: 18px
+            }
+
+            .f-canva {
+                right: 6%;
+                top: -16%
+            }
+
+            .f-figma .a-icon {
+                width: 70px;
+                height: 70px;
+                border-radius: 16px
+            }
+
+            .f-figma {
+                right: 6%;
+                bottom: -20%
+            }
+
+            .c-svg {
+                width: 56px;
+                height: 56px
+            }
+
+            .f-cursor {
+                left: 10%;
+                bottom: -20%
+            }
+
+            .stats-card-grid {
+                grid-template-columns: 1fr
+            }
+
+            .toolkit-grid {
+                grid-template-columns: 1fr
             }
         }
     </style>
 </head>
 
-<body class="antialiased selection:bg-cyan-500 selection:text-white bg-grid relative">
+<body>
 
-    <!-- Infinite Background Glow -->
-    <div class="moving-blob top-1/4 left-1/4"></div>
-    <div class="moving-blob bottom-1/4 right-1/4"
-        style="background: radial-gradient(circle, rgba(125,42,232,0.15) 0%, rgba(0,0,0,0) 70%); animation-delay: -5s;">
+    <!-- PAGE CURTAIN -->
+    <div id="curtain" aria-hidden="true"></div>
+
+    <!-- CUSTOM MAGNETIC CURSOR -->
+    <div class="c-dot" id="cDot" aria-hidden="true"></div>
+    <div class="c-ring" id="cRing" aria-hidden="true"></div>
+
+    <!-- NOISE OVERLAY -->
+    <div class="noise" aria-hidden="true"></div>
+
+    <!-- BACKGROUND AURA BLOBS -->
+    <div class="bg-aura" aria-hidden="true">
+        <div class="aura-blob aura-blob-1"></div>
+        <div class="aura-blob aura-blob-2"></div>
+        <div class="aura-blob aura-blob-3"></div>
     </div>
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 w-full z-[60] bg-black/80 backdrop-blur-md border-b border-white/10 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300"
-        data-aos="fade-down" data-aos-duration="1000">
-        <a href="#home" class="relative z-[60] flex-shrink-0">
-            <h1
-                class="text-xl sm:text-2xl md:text-3xl font-bold tracking-wider gradient-text hover:scale-105 transition-transform cursor-pointer whitespace-nowrap">
-                Rutvik Chovatiya
-            </h1>
+    <!-- NAVBAR -->
+    <nav class="nav" id="mainNav" aria-label="Main Navigation">
+        <a href="#home" class="nav-logo" id="logoLink">
+            Rutvik Chovatiya
+            <span class="nav-logo-badge">Portfolio</span>
         </a>
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex gap-8 text-sm font-medium">
-            <a href="#home"
-                class="nav-link hover:text-cyan-400 transition duration-300 transform hover:-translate-y-1">Home</a>
-            <a href="#about"
-                class="nav-link hover:text-cyan-400 transition duration-300 transform hover:-translate-y-1">About</a>
-            <a href="#skills"
-                class="nav-link hover:text-cyan-400 transition duration-300 transform hover:-translate-y-1">Skills</a>
-            <a href="#projects"
-                class="nav-link hover:text-cyan-400 transition duration-300 transform hover:-translate-y-1">Projects</a>
-            <a href="#contact"
-                class="nav-link hover:text-cyan-400 transition duration-300 transform hover:-translate-y-1">Contact</a>
-        </div>
+        <ul class="nav-links">
+            <li><a href="#works" id="nl-works">Works</a></li>
+            <li><a href="#services" id="nl-services">Services</a></li>
+            <li><a href="#toolkit" id="nl-toolkit">Toolkit</a></li>
+            <li><a href="#about" id="nl-about">About</a></li>
+            <li><a href="#testimonials" id="nl-testimonials">Reviews</a></li>
+            <li><a href="#contact" id="nl-contact">Contact</a></li>
+        </ul>
 
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn"
-            class="block md:hidden text-white focus:outline-none hover:text-cyan-400 transition-colors relative z-[60] flex-shrink-0 p-2 -mr-2">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-                </path>
-            </svg>
+        <a href="https://www.behance.net/rcgaming8" target="_blank" rel="noopener noreferrer" class="nav-cta"
+            id="navCTA">
+            <i class="fa-brands fa-behance" style="color:#c084fc"></i> Behance Profile &#8599;
+        </a>
+
+        <button class="nav-ham" id="ham" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
         </button>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu"
-        class="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center gap-8 text-2xl font-medium backdrop-blur-lg transition-all duration-500 opacity-0 pointer-events-none pt-20">
-        <a href="#home"
-            class="nav-link mobile-link hover:text-cyan-400 transition duration-300 transform hover:scale-110">Home</a>
-        <a href="#about"
-            class="nav-link mobile-link hover:text-cyan-400 transition duration-300 transform hover:scale-110">About</a>
-        <a href="#skills"
-            class="nav-link mobile-link hover:text-cyan-400 transition duration-300 transform hover:scale-110">Skills</a>
-        <a href="#projects"
-            class="nav-link mobile-link hover:text-cyan-400 transition duration-300 transform hover:scale-110">Projects</a>
-        <a href="#contact"
-            class="nav-link mobile-link hover:text-cyan-400 transition duration-300 transform hover:scale-110">Contact</a>
+    <!-- MOBILE MENU -->
+    <div class="mob-menu" id="mobMenu" role="dialog" aria-modal="true">
+        <a href="#works" class="mob-link">Works</a>
+        <a href="#services" class="mob-link">Services</a>
+        <a href="#toolkit" class="mob-link">Toolkit</a>
+        <a href="#about" class="mob-link">About</a>
+        <a href="#testimonials" class="mob-link">Reviews</a>
+        <a href="#contact" class="mob-link">Contact</a>
+        <a href="https://www.behance.net/rcgaming8" target="_blank" class="mob-link"
+            style="color:#c084fc;font-size:22px">Behance &#8599;</a>
     </div>
 
-    <!-- 🌟 Hero Section -->
-    <section id="home"
-        class="min-h-screen flex flex-col md:flex-row justify-center items-center px-6 md:px-16 relative pt-24 max-w-[1400px] mx-auto overflow-hidden">
+    <main>
 
-        <!-- Left Side: Text -->
-        <div class="md:w-1/2 w-full text-center md:text-left z-10 flex flex-col items-center md:items-start"
-            data-aos="fade-right" data-aos-duration="1200">
-            <h2 class="text-xl md:text-2xl text-gray-400 mb-2 font-light" data-aos="fade-up" data-aos-delay="200">Hello!
-                I am</h2>
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 neon-text tracking-tight leading-tight"
-                data-aos="zoom-in" data-aos-delay="400">Rutvik <br><span class="gradient-text">Chovatiya</span></h1>
-            <h3 class="text-xl sm:text-2xl md:text-3xl font-medium text-cyan-400 mb-6" data-aos="fade-up"
-                data-aos-delay="600">
-                <span id="typing-text"></span><span class="animate-pulse">|</span>
-            </h3>
+        <!-- ═══════════════════════════════════════════════════════════
+       1. HERO SECTION (Nuria Animated Hero)
+       ═══════════════════════════════════════════════════════════ -->
+        <section id="home" class="hero" aria-label="Introduction">
 
-            <p class="max-w-xl text-gray-400 mb-10 leading-relaxed text-base sm:text-lg" data-aos="fade-up"
-                data-aos-delay="800">
-                Creative and detail-oriented UI/UX Designer with a strong passion for designing visually appealing and
-                user-friendly digital experiences. Skilled in creating modern interfaces with a focus on usability and
-                clarity.
+            <!-- Hero Status Badge (Centered & Fixed in place) -->
+            <div class="hero-status-wrap">
+                <div class="badge-pill">
+                    <span class="b-dot"></span>
+                    Available for work
+                </div>
+            </div>
+
+            <!-- MASSIVE TITLE (3D Parallax Tilt) -->
+            <div class="title-wrap" id="titleWrap">
+
+                <!-- Line 1 (typing effect) -->
+                <span class="title-line">
+                    <span class="title-word typed-word" data-delay="0.4"><span id="typing-text">UI/UX</span><span
+                            class="type-cursor" id="typeCursor">|</span></span>
+                </span>
+                <!-- Line 2 -->
+                <span class="title-line">
+                    <span class="title-word" data-delay="0.65">DESIGNER</span>
+                </span>
+
+                <!-- ── Floating Elements with organic floating animations ── -->
+                <!-- Profile (behind title text) -->
+                <!-- <div class="flt f-profile" aria-hidden="true">
+        <div class="p-ring">
+          <img src="./Profile image.png" alt="Rutvik Chovatiya">
+        </div>
+      </div> -->
+                <!-- Canva Tool -->
+                <!-- <div class="flt f-canva" aria-hidden="true">
+                    <div class="a-icon"><img src="./Canva.jpeg" alt="Canva"></div>
+                </div> -->
+                <!-- Figma Tool -->
+                <div class="flt f-figma" aria-hidden="true">
+                    <div class="a-icon"><img src="./Figma.jpeg" alt="Figma"></div>
+                </div>
+                <!-- Pixel Cursor SVG -->
+                <div class="flt f-cursor" aria-hidden="true">
+                    <svg class="c-svg" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#ds)">
+                            <path d="M9 5 L9 38 L17 30 L23 46 L30 43 L24 27 L36 27 Z" fill="white" stroke="#0d0d1a"
+                                stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+                        </g>
+                        <defs>
+                            <filter id="ds" x="-30%" y="-20%" width="160%" height="160%">
+                                <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.7" />
+                            </filter>
+                        </defs>
+                    </svg>
+                </div>
+
+            </div>
+
+            <!-- Subtitle -->
+            <p class="hero-sub" id="heroSub">with intention</p>
+
+            <!-- Bio -->
+            <p class="hero-bio" id="heroBio">
+                I&#8217;m Rutvik Chovatiya, a product &amp; UI/UX designer based in India.
+                I craft digital experiences, brand identities and interfaces that feel as good as they look.
             </p>
 
-            <div class="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-5" data-aos="flip-up"
-                data-aos-delay="1000">
-                <a href="#contact"
-                    class="btn-wave px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:scale-110 text-white font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(0,242,254,0.4)]">Hire
-                    Me</a>
-                <a href="#projects"
-                    class="btn-wave px-6 sm:px-8 py-3 bg-transparent border border-cyan-500 hover:bg-cyan-500/20 text-cyan-400 font-semibold rounded-full transition-all duration-300 hover:scale-105">View
-                    Work</a>
+            <!-- CTA Buttons -->
+            <div class="hero-cta" id="heroCTA">
+                <a href="#works" class="btn-p" id="btnWork">View my work</a>
+                <a href="#about" class="btn-s" id="btnAbout">
+                    About me <span class="sarr">&#8594;</span>
+                </a>
+            </div>
+
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════
+       2. CONTINUOUS RUNNING MARQUEE TICKER STRIP
+       ═══════════════════════════════════════════════════════════ -->
+        <div class="marquee-container" aria-hidden="true">
+            <div class="marquee-track">
+                <div class="marquee-item">
+                    <span>UI/UX Design</span> <span class="marquee-star">&#9733;</span>
+                    <span>Brand Identity</span> <span class="marquee-star">&#9733;</span>
+                    <span>Mobile App Prototyping</span> <span class="marquee-star">&#9733;</span>
+                    <span>Figma Design Systems</span> <span class="marquee-star">&#9733;</span>
+                    <span>Visual &amp; Graphic Design</span> <span class="marquee-star">&#9733;</span>
+                    <span>Micro-Interactions</span> <span class="marquee-star">&#9733;</span>
+                    <span>User Research</span> <span class="marquee-star">&#9733;</span>
+                    <span>Web Applications</span> <span class="marquee-star">&#9733;</span>
+                </div>
+                <div class="marquee-item">
+                    <span>UI/UX Design</span> <span class="marquee-star">&#9733;</span>
+                    <span>Brand Identity</span> <span class="marquee-star">&#9733;</span>
+                    <span>Mobile App Prototyping</span> <span class="marquee-star">&#9733;</span>
+                    <span>Figma Design Systems</span> <span class="marquee-star">&#9733;</span>
+                    <span>Visual &amp; Graphic Design</span> <span class="marquee-star">&#9733;</span>
+                    <span>Micro-Interactions</span> <span class="marquee-star">&#9733;</span>
+                    <span>User Research</span> <span class="marquee-star">&#9733;</span>
+                    <span>Web Applications</span> <span class="marquee-star">&#9733;</span>
+                </div>
             </div>
         </div>
 
-        <!-- Right Side: Profile Photo & Floating Tools -->
-        <div class="md:w-1/2 w-full mt-24 md:mt-0 flex justify-center items-center relative h-[350px] sm:h-[450px] md:h-[550px]"
-            data-aos="zoom-in" data-aos-duration="1500">
-            <!-- Profile Photo Container -->
-            <div class="profile-wrapper w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 cursor-pointer">
-                <!-- Dual Rotating Neon Rings -->
-                <div class="profile-glow-ring-1"></div>
-                <div class="profile-glow-ring-2"></div>
-
-                <!-- Inner Photo Area -->
-                <div class="profile-inner">
-                    <!-- 👇 Rutvik Profile Photo 👇 -->
-                    <img src="./Profile image.png" alt="Rutvik Profile"
-                        class="profile-image w-full h-full object-cover object-top rounded-full">
-                </div>
+        <!-- ═══════════════════════════════════════════════════════════
+       3. SELECTED WORKS SECTION (TOP 6 BEHANCE PROJECTS)
+       ═══════════════════════════════════════════════════════════ -->
+        <section id="works" class="n-section" aria-label="Selected Works">
+            <div class="section-header reveal-item">
+                <span class="section-tag">Selected Works (08)</span>
+                <h2 class="section-title">Best Behance projects crafted with <span class="serif">care &amp;
+                        precision</span></h2>
+                <p class="section-desc">A curated selection of featured case studies from my Behance portfolio across
+                    UI/UX, luxury product design, brand identity, and mobile apps.</p>
             </div>
 
-            <!-- Pulsing Circle behind everything -->
-            <div
-                class="absolute w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-cyan-500/20 blur-[80px] rounded-full z-0 animate-pulse transition-all duration-700 pointer-events-none">
+            <!-- Interactive Filter Tabs -->
+            <div class="works-filter-nav reveal-item">
+                <button class="filter-btn active" data-filter="all">All Projects (08)</button>
+                <button class="filter-btn" data-filter="uiux">UI/UX &amp; Mobile</button>
+                <button class="filter-btn" data-filter="branding">Brand &amp; Product</button>
+                <button class="filter-btn" data-filter="web">Web &amp; Systems</button>
             </div>
 
-            <!-- 🌟 Floating Tools Animation (JUSTIFIED ORBIT) 🌟 -->
-            <!-- 1. Top Center -->
-            <div class="wave-hover tool-icon animate-tool-1 top-[2%] left-[42%] md:top-[5%] md:left-[45%]"
-                title="Google Gemini">
-                <img src="Gemini.jpeg" alt="Gemini">
-            </div>
-            <!-- 2. Top Right High -->
-            <div class="tool-icon animate-tool-2 top-[12%] right-[12%] md:top-[15%] md:right-[20%]" title="Figma">
-                <img src="Figma.jpeg" alt="Figma">
-            </div>
-            <!-- 3. Mid Right High -->
-            <div class="tool-icon animate-tool-3 top-[35%] right-[2%] md:top-[35%] md:right-[10%]" title="Canva">
-                <img src="Canva.jpeg" alt="Canva">
-            </div>
-            <!-- 4. Mid Right Low -->
-            <div class="tool-icon animate-tool-4 bottom-[25%] right-[2%] md:bottom-[25%] md:right-[10%]"
-                title="ChatGPT">
-                <img src="Chatgpt.jpeg" alt="ChatGPT">
-            </div>
-            <!-- 5. Bottom Right -->
-            <div class="tool-icon animate-tool-5 bottom-[5%] right-[15%] md:bottom-[8%] md:right-[22%]" title="Stitch">
-                <img src="Stich.jpeg" alt="Stitch">
-            </div>
-            <!-- 6. Bottom Center -->
-            <div class="tool-icon animate-tool-6 bottom-[0%] left-[42%] md:bottom-[2%] md:left-[45%]" title="CorelDraw">
-                <img src="images-Photoroom (2) 1.svg" alt="CorelDraw">
-            </div>
-            <!-- 7. Bottom Left -->
-            <div class="tool-icon animate-tool-1 bottom-[5%] left-[15%] md:bottom-[8%] md:left-[22%]"
-                title="Illustrator">
-                <img src="Ai.jpeg" alt="Ai">
-            </div>
-            <!-- 8. Mid Left Low -->
-            <div class="tool-icon animate-tool-2 bottom-[25%] left-[2%] md:bottom-[25%] md:left-[10%]" title="Gamma">
-                <img src="Gamma.jpeg" alt="Gamma">
-            </div>
-            <!-- 9. Mid Left High -->
-            <div class="tool-icon animate-tool-3 top-[35%] left-[2%] md:top-[35%] md:left-[10%]" title="After Effects">
-                <img src="after-effects.png" alt="After Effects">
-            </div>
-            <!-- 10. Top Left High -->
-            <div class="tool-icon animate-tool-4 top-[12%] left-[12%] md:top-[15%] md:left-[20%]" title="Photoshop">
-                <img src="Photoshop.jpeg" alt="Photoshop">
-            </div>
-        </div>
-    </section>
+            <div class="works-grid">
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
-        <h2 class="text-4xl font-bold mb-16 text-center" data-aos="flip-up">Featured <span
-                class="gradient-text">Projects</span></h2>
-
-        <div class="flex flex-col gap-12">
-            <!-- Project 1: Parkly -->
-            <div class="bg-[#0f0f0f] border border-white/10 rounded-[2.5rem] overflow-hidden card flex flex-col md:flex-row group"
-                data-aos="zoom-in-up">
-                <div class="md:w-1/2 bg-black flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-cyan-500/5 group-hover:bg-cyan-500/20 transition-all duration-700">
+                <!-- PROJECT 1: Parkly - Smart Parking App (Behance Live Case Study) -->
+                <article class="work-card reveal-item" data-category="uiux" data-tilt>
+                    <div class="work-card-media">
+                        <span class="work-pill">UI/UX Case Study</span>
+                        <span class="work-tool-badge"><i class="fa-brands fa-figma"></i> Figma</span>
+                        <img src="behance_parkly_app_cover.jpg" alt="Parkly Smart Parking App UX/UI Case Study">
                     </div>
-                    <div
-                        class="absolute -right-20 -bottom-20 w-64 h-64 bg-cyan-500/20 blur-[100px] rounded-full group-hover:scale-150 transition-transform duration-1000">
-                    </div>
-                    <img src="ChatGPT Image Apr 16, 2026, 10_55_28 AM.png" alt="Parkly UI/UX Case Study"
-                        class="w-full aspect-video md:aspect-auto md:h-full object-cover rounded-2xl z-10 group-hover:scale-105 transition-transform duration-700 shadow-[0_0_25px_rgba(0,0,0,0.8)] relative">
-                </div>
-
-                <div class="md:w-1/2 p-6 sm:p-10 md:p-16 flex flex-col justify-center relative z-10">
-                    <span
-                        class="px-4 py-1.5 bg-cyan-500/10 text-cyan-400 rounded-full text-xs font-bold tracking-wider w-max mb-6 border border-cyan-500/20 animate-pulse">UI/UX
-                        DESIGN</span>
-                    <h3
-                        class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">
-                        Parkly - Smart Parking App</h3>
-                    <p class="text-sm text-cyan-400 mb-6 font-medium flex items-center gap-2"><i
-                            class="fa-brands fa-figma"></i> Tool: Figma</p>
-                    <p class="text-gray-400 mb-8 leading-relaxed text-base sm:text-lg">
-                        A comprehensive UI/UX case study for a smart parking application. Focuses on intuitive user
-                        flow, modern interfaces, and solving real-world parking challenges.
-                    </p>
-                    <a href="https://www.behance.net/gallery/247621569/Parkly-Smart-Parking-App-UXUI-Case-Study"
-                        target="_blank"
-                        class="text-white font-semibold hover:text-cyan-400 flex items-center gap-3 group/btn w-max">
-                        View Case Study
-                        <div
-                            class="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center group-hover/btn:bg-cyan-500 group-hover/btn:translate-x-3 transition-all duration-300">
-                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                    <div class="work-info">
+                        <div class="work-header-row">
+                            <h3 class="work-title">Parkly · Smart Parking App</h3>
+                            <a href="https://www.behance.net/gallery/247621569/Parkly-Smart-Parking-App-UXUI-Case-Study"
+                                target="_blank" rel="noopener noreferrer" class="work-btn-circle"
+                                aria-label="View Parkly Case Study on Behance">
+                                &#8599;
+                            </a>
                         </div>
+                        <p class="work-desc">An end-to-end mobile product design solving real-world parking stress with
+                            live spot reservation, predictive availability, smart payments, and frictionless navigation.
+                        </p>
+                        <div class="work-tags">
+                            <span class="work-tag">Mobile App</span>
+                            <span class="work-tag">User Flow</span>
+                            <span class="work-tag">Wireframing</span>
+                            <span class="work-tag">Behance Featured</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJECT 3: Parkly - Smart Parking Website Design (Behance Live Project) -->
+                <article class="work-card reveal-item" data-category="web" data-tilt>
+                    <div class="work-card-media">
+                        <span class="work-pill">Web Design &amp; SaaS</span>
+                        <span class="work-tool-badge"><i class="fa-brands fa-figma"></i> Figma</span>
+                        <img src="behance_parkly_web_cover.png" alt="Parkly Smart Parking Website Design">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-header-row">
+                            <h3 class="work-title">Parkly · Smart Parking Website</h3>
+                            <a href="https://www.behance.net/gallery/247681917/Parkly-Smart-Parking-Website-Design"
+                                target="_blank" rel="noopener noreferrer" class="work-btn-circle"
+                                aria-label="View Parkly Website Design on Behance">
+                                &#8599;
+                            </a>
+                        </div>
+                        <p class="work-desc">High-conversion marketing landing page and web platform for Parkly,
+                            featuring interactive parking zone locator, dynamic rate calculator, and driver onboarding.
+                        </p>
+                        <div class="work-tags">
+                            <span class="work-tag">Web Design</span>
+                            <span class="work-tag">Landing Page</span>
+                            <span class="work-tag">SaaS UI</span>
+                            <span class="work-tag">Behance Featured</span>
+                        </div>
+                    </div>
+                </article>
+
+
+                <!-- PROJECT 2: Hospital Appointment & Emergency App (Behance Live Case Study) -->
+                <article class="work-card reveal-item" data-category="uiux" data-tilt>
+                    <div class="work-card-media">
+                        <span class="work-pill">UI/UX Case Study</span>
+                        <span class="work-tool-badge"><i class="fa-brands fa-figma"></i> Figma</span>
+                        <img src="behance_hospital_cover.jpg"
+                            alt="Hospital Appointment &amp; Emergency App UX/UI Case Study">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-header-row">
+                            <h3 class="work-title">Hospital Appointment &amp; Emergency App</h3>
+                            <a href="https://www.behance.net/gallery/246589345/Hospital-Appointment-Emergency-App-UXUI-Case-Study"
+                                target="_blank" rel="noopener noreferrer" class="work-btn-circle"
+                                aria-label="View Hospital Appointment and Emergency App Case Study on Behance">
+                                &#8599;
+                            </a>
+                        </div>
+                        <p class="work-desc">A life-saving mobile healthcare platform featuring 1-tap SOS emergency
+                            response,
+                            live ambulance dispatch, real-time hospital triage queue tracking, and doctor appointment
+                            scheduling.</p>
+                        <div class="work-tags">
+                            <span class="work-tag">Mobile App</span>
+                            <span class="work-tag">Emergency UX</span>
+                            <span class="work-tag">Healthcare</span>
+                            <span class="work-tag">Behance Featured</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJECT 4: Tasty Journey - Food Delivery App (Behance Live Project) -->
+                <article class="work-card reveal-item" data-category="uiux" data-tilt>
+                    <div class="work-card-media">
+                        <span class="work-pill">UI/UX Case Study</span>
+                        <span class="work-tool-badge"><i class="fa-brands fa-figma"></i> Figma</span>
+                        <img src="behance_tasty_journey_cover.jpg" alt="Tasty Journey Food Delivery App">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-header-row">
+                            <h3 class="work-title">Tasty Journey · Food Delivery App</h3>
+                            <a href="https://www.behance.net/gallery/247700065/Tasty-Journey-Food-Delivery-App"
+                                target="_blank" rel="noopener noreferrer" class="work-btn-circle"
+                                aria-label="View Tasty Journey App on Behance">
+                                &#8599;
+                            </a>
+                        </div>
+                        <p class="work-desc">Vibrant mobile food delivery experience engineered for appetite-inducing
+                            discovery, lightning-fast reordering, live rider GPS tracking, and seamless checkout.</p>
+                        <div class="work-tags">
+                            <span class="work-tag">Mobile App</span>
+                            <span class="work-tag">Food Delivery</span>
+                            <span class="work-tag">E-Commerce</span>
+                            <span class="work-tag">Behance Featured</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJECT 5: Code IT Solutions (Behance Live Case Study) -->
+                <article class="work-card reveal-item" data-category="branding" data-tilt>
+                    <div class="work-card-media">
+                        <span class="work-pill">Brand Identity &amp; Web</span>
+                        <span class="work-tool-badge"><i class="fa-solid fa-bezier-curve"></i> Illustrator &amp;
+                            Ps</span>
+                        <img src="Artboard 1@4x-100.jpg" alt="Code IT Solutions Brand Identity">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-header-row">
+                            <h3 class="work-title">Code IT Solutions · Brand Identity</h3>
+                            <a href="https://www.behance.net/gallery/234206971/Code-IT-Solutions-Brand-Identity-Design"
+                                target="_blank" rel="noopener noreferrer" class="work-btn-circle"
+                                aria-label="View Code IT Brand Identity on Behance">
+                                &#8599;
+                            </a>
+                        </div>
+                        <p class="work-desc">Comprehensive brand architecture for an enterprise technology firm,
+                            featuring dynamic visual guidelines, custom logomarks, typography scale, and marketing
+                            collateral.</p>
+                        <div class="work-tags">
+                            <span class="work-tag">Identity Design</span>
+                            <span class="work-tag">Logo Suite</span>
+                            <span class="work-tag">Typography</span>
+                            <span class="work-tag">Behance Featured</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJECT 6: Traveling App - UX/UI Case Study (Behance Live Project) -->
+                <!-- <article class="work-card reveal-item" data-category="uiux" data-tilt>
+                    <div class="work-card-media">
+                        <span class="work-pill">UI/UX Case Study</span>
+                        <span class="work-tool-badge"><i class="fa-brands fa-figma"></i> Figma</span>
+                        <img src="behance_travel_app_cover.jpg" alt="Traveling App UX/UI Case Study">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-header-row">
+                            <h3 class="work-title">Travel Guide · Traveling App</h3>
+                            <a href="https://www.behance.net/gallery/244271353/my-latest-UIUX-Case-Study-Traveling-App"
+                                target="_blank" rel="noopener noreferrer" class="work-btn-circle"
+                                aria-label="View Traveling App Case Study on Behance">
+                                &#8599;
+                            </a>
+                        </div>
+                        <p class="work-desc">An immersive travel planning companion designed for wanderlust travelers,
+                            offering AI itinerary curation, local hidden gem guides, and offline booking tickets.</p>
+                        <div class="work-tags">
+                            <span class="work-tag">Travel UX</span>
+                            <span class="work-tag">Mobile UI</span>
+                            <span class="work-tag">Itinerary Design</span>
+                            <span class="work-tag">Behance Featured</span>
+                        </div>
+                    </div>
+                </article> -->
+
+                <!-- PROJECT 7: Overlap - Luxury Leather Handbag Design (Behance Live Project) -->
+                <article class="work-card reveal-item" data-category="branding" data-tilt>
+                    <div class="work-card-media">
+                        <span class="work-pill">Product &amp; Luxury Goods</span>
+                        <span class="work-tool-badge"><i class="fa-solid fa-bezier-curve"></i> Illustrator</span>
+                        <img src="behance_overlap_handbag_cover.jpg" alt="Overlap Luxury Leather Handbag Design">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-header-row">
+                            <h3 class="work-title">Overlap · Luxury Leather Handbag</h3>
+                            <a href="https://www.behance.net/gallery/233801863/Overlap-Luxury-Leather-Handbag-Design"
+                                target="_blank" rel="noopener noreferrer" class="work-btn-circle"
+                                aria-label="View Overlap Luxury Leather Handbag Design on Behance">
+                                &#8599;
+                            </a>
+                        </div>
+                        <p class="work-desc">An artisanal luxury handbag design featuring bespoke sculptural geometry,
+                            premium Italian leather texture, brass hardware accents, and minimalist silhouette.</p>
+                        <div class="work-tags">
+                            <span class="work-tag">Product Design</span>
+                            <span class="work-tag">Luxury Goods</span>
+                            <span class="work-tag">Leather Craft</span>
+                            <span class="work-tag">Behance Featured</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJECT 8: Fit Life Gym - Onboarding Screen Design (Behance Live Project) -->
+                <!-- <article class="work-card reveal-item" data-category="uiux" data-tilt>
+                    <div class="work-card-media">
+                        <span class="work-pill">UI/UX &amp; Fitness</span>
+                        <span class="work-tool-badge"><i class="fa-brands fa-figma"></i> Figma</span>
+                        <img src="behance_fitlife_gym_cover.jpg"
+                            alt="Fit Life Gym Onboarding Screen Design">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-header-row">
+                            <h3 class="work-title">Fit Life Gym · Onboarding Experience</h3>
+                            <a href="https://www.behance.net/gallery/247959213/Fit-Life-Gym-Onboarding-Screen-Design"
+                                target="_blank" rel="noopener noreferrer" class="work-btn-circle"
+                                aria-label="View Fit Life Gym Onboarding on Behance">
+                                &#8599;
+                            </a>
+                        </div>
+                        <p class="work-desc">High-energy fitness onboarding flow engineered to boost member retention through personalized goal setting, workout preference quizzes, and sleek dark-mode aesthetics.</p>
+                        <div class="work-tags">
+                            <span class="work-tag">Mobile App</span>
+                            <span class="work-tag">Onboarding UX</span>
+                            <span class="work-tag">Fitness</span>
+                            <span class="work-tag">Behance Featured</span>
+                        </div>
+                    </div>
+                </article> -->
+
+            </div>
+
+            <div class="works-footer-cta reveal-item">
+                <a href="https://www.behance.net/rcgaming8" target="_blank" rel="noopener noreferrer" class="btn-s">
+                    Explore full Behance profile (@rcgaming8) <span class="sarr">&#8594;</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════
+       4. SERVICES SECTION (05)
+       ═══════════════════════════════════════════════════════════ -->
+        <section id="services" class="n-section" aria-label="Services">
+            <div class="section-header reveal-item">
+                <span class="section-tag">Services (05)</span>
+                <h2 class="section-title">From first sketch to launch, <br><span class="serif">five ways I help founders
+                        grow</span></h2>
+                <p class="section-desc">Collaborating closely with startups and forward-thinking companies to design
+                    thoughtful digital experiences that scale.</p>
+            </div>
+
+            <div class="services-list reveal-item">
+
+                <!-- Service 01 -->
+                <div class="service-item">
+                    <span class="service-num">01</span>
+                    <h3 class="service-title">Product Design</h3>
+                    <p class="service-desc">Intuitive, user-centered digital products shaped from rapid wireframing and
+                        user journeys into high-conversion polished interfaces.</p>
+                    <div class="service-tags"><span class="service-dot"></span></div>
+                </div>
+
+                <!-- Service 02 -->
+                <div class="service-item">
+                    <span class="service-num">02</span>
+                    <h3 class="service-title">Brand Identity</h3>
+                    <p class="service-desc">Distinctive visual identities, logo suites, typography scale and brand
+                        guidelines that give your business a memorable voice.</p>
+                    <div class="service-tags"><span class="service-dot"></span></div>
+                </div>
+
+                <!-- Service 03 -->
+                <div class="service-item">
+                    <span class="service-num">03</span>
+                    <h3 class="service-title">Website &amp; Web App</h3>
+                    <p class="service-desc">Responsive, lightning-fast marketing websites and web applications built to
+                        captivate audiences and turn visitors into loyal clients.</p>
+                    <div class="service-tags"><span class="service-dot"></span></div>
+                </div>
+
+                <!-- Service 04 -->
+                <div class="service-item">
+                    <span class="service-num">04</span>
+                    <h3 class="service-title">Graphic &amp; Visual Design</h3>
+                    <p class="service-desc">High-impact marketing assets, social media campaigns, print collateral, and
+                        presentation decks that communicate with power.</p>
+                    <div class="service-tags"><span class="service-dot"></span></div>
+                </div>
+
+                <!-- Service 05 -->
+                <div class="service-item">
+                    <span class="service-num">05</span>
+                    <h3 class="service-title">Design Systems</h3>
+                    <p class="service-desc">Modular, scalable Figma component libraries, auto-layout tokens, and
+                        comprehensive developer handoff documentation.</p>
+                    <div class="service-tags"><span class="service-dot"></span></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════
+       5. DESIGN TOOLKIT & BENTO GRID
+       ═══════════════════════════════════════════════════════════ -->
+        <section id="toolkit" class="n-section" aria-label="Software & AI Toolkit">
+            <div class="section-header reveal-item">
+                <span class="section-tag">Toolkit &amp; Stack</span>
+                <h2 class="section-title">The tools behind every <span class="serif">considered pixel</span></h2>
+                <p class="section-desc">Harnessing industry-standard design suites combined with modern AI workflows to
+                    explore ideas quickly and ship with precision.</p>
+            </div>
+
+            <div class="toolkit-grid">
+
+                <!-- Figma -->
+                <div class="tool-bento-card reveal-item">
+                    <div class="tool-img-wrap"><img src="Figma.jpeg" alt="Figma"></div>
+                    <h4 class="tool-name">Figma</h4>
+                    <p class="tool-role">UI/UX &amp; Prototyping</p>
+                    <span class="tool-level">Primary Tool</span>
+                </div>
+
+                <!-- Adobe Illustrator -->
+                <div class="tool-bento-card reveal-item">
+                    <div class="tool-img-wrap"><img src="Ai.jpeg" alt="Adobe Illustrator"></div>
+                    <h4 class="tool-name">Illustrator</h4>
+                    <p class="tool-role">Vector &amp; Identity</p>
+                    <span class="tool-level">Advanced</span>
+                </div>
+
+                <!-- Adobe Photoshop -->
+                <div class="tool-bento-card reveal-item">
+                    <div class="tool-img-wrap"><img src="Photoshop.jpeg" alt="Adobe Photoshop"></div>
+                    <h4 class="tool-name">Photoshop</h4>
+                    <p class="tool-role">Raster &amp; Imagery</p>
+                    <span class="tool-level">Advanced</span>
+                </div>
+
+                <!-- Canva -->
+                <div class="tool-bento-card reveal-item">
+                    <div class="tool-img-wrap"><img src="Canva.jpeg" alt="Canva"></div>
+                    <h4 class="tool-name">Canva</h4>
+                    <p class="tool-role">Social &amp; Collateral</p>
+                    <span class="tool-level">Expert</span>
+                </div>
+
+                <!-- CorelDraw -->
+                <div class="tool-bento-card reveal-item">
+                    <div class="tool-img-wrap"><img src="images-Photoroom (2) 1.svg" alt="CorelDraw"></div>
+                    <h4 class="tool-name">CorelDraw</h4>
+                    <p class="tool-role">Print &amp; Vector Art</p>
+                    <span class="tool-level">Proficient</span>
+                </div>
+
+                <!-- After Effects -->
+                <div class="tool-bento-card reveal-item">
+                    <div class="tool-img-wrap"><img src="after-effects.png" alt="After Effects"></div>
+                    <h4 class="tool-name">After Effects</h4>
+                    <p class="tool-role">Motion &amp; Micro-fx</p>
+                    <span class="tool-level">Motion UI</span>
+                </div>
+
+                <!-- Gamma -->
+                <div class="tool-bento-card reveal-item">
+                    <div class="tool-img-wrap"><img src="Gamma.jpeg" alt="Gamma"></div>
+                    <h4 class="tool-name">Gamma</h4>
+                    <p class="tool-role">AI Decks &amp; Pitch</p>
+                    <span class="tool-level">Workflow</span>
+                </div>
+
+                <!-- ChatGPT -->
+                <div class="tool-bento-card reveal-item">
+                    <div class="tool-img-wrap"><img src="Chatgpt.jpeg" alt="ChatGPT"></div>
+                    <h4 class="tool-name">ChatGPT</h4>
+                    <p class="tool-role">UX Copy &amp; Research</p>
+                    <span class="tool-level">AI Assist</span>
+                </div>
+
+                <!-- Gemini -->
+                <div class="tool-bento-card reveal-item">
+                    <div class="tool-img-wrap"><img src="Gemini.jpeg" alt="Gemini"></div>
+                    <h4 class="tool-name">Gemini</h4>
+                    <p class="tool-role">Ideation &amp; Logic</p>
+                    <span class="tool-level">AI Assist</span>
+                </div>
+
+                <!-- Stitch -->
+                <div class="tool-bento-card reveal-item">
+                    <div class="tool-img-wrap"><img src="Stich.jpeg" alt="Stitch"></div>
+                    <h4 class="tool-name">Stitch</h4>
+                    <p class="tool-role">Visual Generation</p>
+                    <span class="tool-level">AI Art</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════
+       6. ABOUT SECTION (Behind the Canvas)
+       ═══════════════════════════════════════════════════════════ -->
+        <section id="about" class="n-section" aria-label="About Rutvik">
+            <div class="section-header reveal-item">
+                <span class="section-tag">Behind the canvas</span>
+                <h2 class="section-title">Design rooted in purpose, <br><span class="serif">crafted with empathy</span>
+                </h2>
+                <p class="section-desc">Hello, I’m Rutvik. I’m an India-based product &amp; visual designer helping
+                    brands and founders bring clarity to complex ideas.</p>
+            </div>
+
+            <div class="about-layout">
+
+                <!-- Left Column: Story & Philosophy -->
+                <div class="about-story reveal-item">
+                    <p class="about-quote">
+                        &#8220;Every unnecessary element removed is friction the user never has to face. Good design
+                        feels completely effortless.&#8221;
+                    </p>
+
+                    <p class="about-text">
+                        My design journey began with a curiosity for how people interact with digital products and
+                        visual communication. With a background in Computer Applications (B.C.A) and professional
+                        specialization in UI/UX and Graphic Design, I bridge the gap between creative visual aesthetics
+                        and structured design thinking.
+                    </p>
+
+                    <div class="philosophy-grid">
+                        <div class="philo-item">
+                            <span class="philo-num">01</span>
+                            <div class="philo-content">
+                                <h4>Clarity over complexity</h4>
+                                <p>Interfaces should guide users with zero confusion. I focus on high-contrast
+                                    hierarchy, intuitive user flows, and intentional typography.</p>
+                            </div>
+                        </div>
+
+                        <div class="philo-item">
+                            <span class="philo-num">02</span>
+                            <div class="philo-content">
+                                <h4>Emotion-driven aesthetics</h4>
+                                <p>Logic solves problems, but beauty creates connection. I inject subtle delight through
+                                    micro-interactions, atmospheric lighting, and polish.</p>
+                            </div>
+                        </div>
+
+                        <div class="philo-item">
+                            <span class="philo-num">03</span>
+                            <div class="philo-content">
+                                <h4>Scalable systems thinking</h4>
+                                <p>I design with modular components and atomic guidelines, ensuring designs transition
+                                    smoothly to production and scale gracefully.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Stats & Resume -->
+                <div class="about-sidebar reveal-item">
+
+                    <div class="stats-card-grid">
+                        <div class="stat-box">
+                            <span class="stat-val">1+</span>
+                            <span class="stat-label">Years of Experience</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-val">4+</span>
+                            <span class="stat-label">Projects Completed</span>
+                        </div>
+                    </div>
+
+                    <!-- Education Box -->
+                    <div class="edu-card">
+                        <div class="edu-header">
+                            <i class="fa-solid fa-graduation-cap" style="color:#c084fc"></i> Education &amp; Training
+                        </div>
+
+                        <div class="edu-item">
+                            <div class="edu-degree">B.C.A (Bachelor of Computer Applications)</div>
+                            <div class="edu-inst">Vidyabharti Trust College</div>
+                            <div class="edu-year">2021 – 2024 · Completed</div>
+                        </div>
+
+                        <div class="edu-item">
+                            <div class="edu-degree">Graphic &amp; UI/UX Designing Specialization</div>
+                            <div class="edu-inst">Red &amp; White Skill Education, Surat</div>
+                            <div class="edu-year">2026 · Certified</div>
+                        </div>
+                    </div>
+
+                    <!-- Resume Download CTA -->
+                    <div class="resume-cta-box">
+                        <i class="fa-solid fa-file-lines" style="font-size:32px;color:#c084fc"></i>
+                        <h3>Looking for my full background?</h3>
+                        <p>Get a comprehensive view of my skill breakdown, timeline, and project milestones.</p>
+                        <a href="./Resume/resume.html" target="_blank" rel="noopener noreferrer" class="btn-p">
+                            View Interactive Resume <span style="font-size:12px">&#8599;</span>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════
+       7. TESTIMONIALS (What People Say)
+       ═══════════════════════════════════════════════════════════ -->
+        <section id="testimonials" class="n-section" aria-label="Client Feedback">
+            <div class="section-header reveal-item">
+                <span class="section-tag">What People Say</span>
+                <h2 class="section-title">Kind words from teams <br><span class="serif">I’ve had the chance to work
+                        with</span></h2>
+                <p class="section-desc">Feedback from project stakeholders, collaborators, and clients who care about
+                    craft.</p>
+            </div>
+
+            <!-- <div class="testimonials-grid">
+
+                <div class="testi-card reveal-item">
+                    <div class="testi-quote-icon">&#8220;</div>
+                    <p class="testi-text">&#8220;Rutvik turned our complex user journey into something clean and
+                        delightful. His attention to mobile responsiveness and component architecture saved our
+                        development team weeks of back-and-forth.&#8221;</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">CL</div>
+                        <div class="testi-meta">
+                            <h5>Camille Laurent</h5>
+                            <p>Product Lead · Digital Mobility</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testi-card reveal-item">
+                    <div class="testi-quote-icon">&#8220;</div>
+                    <p class="testi-text">&#8220;Working with Rutvik felt like adding a dedicated product strategist and
+                        visual artist at once. Clear thinking, rapid prototyping, and zero ego. He truly understands
+                        modern aesthetics.&#8221;</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">TM</div>
+                        <div class="testi-meta">
+                            <h5>Thomas Mercier</h5>
+                            <p>Co-Founder &amp; CEO · Tech Studio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testi-card reveal-item">
+                    <div class="testi-quote-icon">&#8220;</div>
+                    <p class="testi-text">&#8220;Our rebrand and new app UI received immediate praise from our investors
+                        and initial beta testers. Rutvik cares about the tiny details that elevate an ordinary app into
+                        a premium brand.&#8221;</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">IB</div>
+                        <div class="testi-meta">
+                            <h5>Inès Bouchard</h5>
+                            <p>Creative Director · Brand Atelier</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> -->
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════
+       8. MASSIVE CTA / LET'S TALK SECTION
+       ═══════════════════════════════════════════════════════════ -->
+        <section id="contact" class="n-section" aria-label="Get in touch">
+            <div class="cta-wrapper reveal-item">
+
+                <span class="section-tag" style="justify-content:center;margin-bottom:18px">Start a conversation</span>
+                <h2 class="cta-title">Let’s build something <br><span class="serif">truly extraordinary</span></h2>
+                <p class="cta-desc">Have an upcoming project, need product design support, or just want to chat about
+                    design systems? Reach out anytime.</p>
+
+                <div>
+                    <a href="mailto:rutvikchovatiya269@gmail.com" class="cta-email-box" id="copyEmailBtn"
+                        title="Click to email or copy">
+                        <i class="fa-regular fa-envelope" style="color:#a855f7"></i>
+                        <span>rutvikchovatiya269@gmail.com</span>
+                        <span style="font-size:12px;color:#a855f7;font-weight:600">&#8599;</span>
                     </a>
                 </div>
-            </div>
 
-            <!-- Project 2: Code IT Solutions -->
-            <div class="bg-[#0f0f0f] border border-white/10 rounded-[2.5rem] overflow-hidden card flex flex-col md:flex-row-reverse group"
-                data-aos="zoom-in-up">
-                <div class="md:w-1/2 bg-black flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-cyan-500/5 group-hover:bg-cyan-500/20 transition-all duration-700">
-                    </div>
-                    <div
-                        class="absolute -left-20 -bottom-20 w-64 h-64 bg-cyan-500/20 blur-[100px] rounded-full group-hover:scale-150 transition-transform duration-1000">
-                    </div>
-                    <img src="Artboard 1@4x-100.jpg" alt="Code IT Brand Identity"
-                        class="w-full aspect-video md:aspect-auto md:h-full object-cover rounded-2xl z-10 group-hover:scale-105 transition-transform duration-700 shadow-[0_0_25px_rgba(0,0,0,0.8)] relative">
-                </div>
-
-                <div class="md:w-1/2 p-6 sm:p-10 md:p-16 flex flex-col justify-center relative z-10">
-                    <span
-                        class="px-4 py-1.5 bg-cyan-500/10 text-cyan-400 rounded-full text-xs font-bold tracking-wider w-max mb-6 border border-cyan-500/20 animate-pulse">BRANDING</span>
-                    <h3
-                        class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">
-                        Code IT Solutions Brand Identity</h3>
-                    <p class="text-sm text-cyan-400 mb-6 font-medium flex items-center gap-2"><i
-                            class="fa-solid fa-pen-nib"></i> Tool: Illustrator & Photoshop</p>
-                    <p class="text-gray-400 mb-8 leading-relaxed text-base sm:text-lg">
-                        Developed a strong and modern brand identity for an IT solutions company, reflecting
-                        tech-forward values through a refined logo, color palette, and visual assets.
-                    </p>
-                    <a href="https://www.behance.net/gallery/234206971/Code-IT-Solutions-Brand-Identity-Design"
-                        target="_blank"
-                        class="text-white font-semibold hover:text-cyan-400 flex items-center gap-3 group/btn w-max">
-                        View Project Details
-                        <div
-                            class="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center group-hover/btn:bg-cyan-500 group-hover/btn:translate-x-3 transition-all duration-300">
-                            <i class="fa-solid fa-arrow-right text-sm"></i>
-                        </div>
+                <div class="cta-secondary-row">
+                    <a href="tel:+917698428545" class="cta-link-pill">
+                        <i class="fa-solid fa-phone" style="color:#22c55e"></i> +91 76984 28545
                     </a>
+                    <a href="https://wa.me/917698428545" target="_blank" rel="noopener noreferrer"
+                        class="cta-link-pill">
+                        <i class="fa-brands fa-whatsapp" style="color:#22c55e"></i> WhatsApp
+                    </a>
+                    <span class="cta-link-pill" style="cursor:default">
+                        <i class="fa-solid fa-location-dot" style="color:#a855f7"></i> Surat, Gujarat, India
+                    </span>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- TOAST MESSAGE -->
+    <div id="toast" role="status" aria-live="polite">Email copied to clipboard!</div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     9. FOOTER
+     ═══════════════════════════════════════════════════════════ -->
+    <footer class="n-footer" aria-label="Site Footer">
+        <div class="footer-top">
+
+            <div class="footer-brand">
+                <h4>Rutvik Chovatiya</h4>
+                <p>Crafting digital products, brand identities and websites with intention and meticulous attention to
+                    detail.</p>
+                <div class="footer-status">
+                    <span class="b-dot"></span> Available for freelance &amp; full-time projects
                 </div>
             </div>
+
+            <div class="footer-col">
+                <h5>Navigation</h5>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#works">Selected Works</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#toolkit">Design Toolkit</a></li>
+                    <li><a href="#about">About &amp; Resume</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Social</h5>
+                <ul>
+                    <li><a href="https://www.behance.net/rcgaming8" target="_blank" rel="noopener noreferrer"><i
+                                class="fa-brands fa-behance"></i> Behance</a></li>
+                    <li><a href="https://www.linkedin.com/in/rutvik-chovatiya-385b40280" target="_blank"
+                            rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="mailto:rutvikchovatiya269@gmail.com"><i class="fa-regular fa-envelope"></i> Email</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Location &amp; Info</h5>
+                <ul>
+                    <li style="color:var(--text-muted);font-size:14px">Surat, Gujarat, India</li>
+                    <li style="color:var(--text-dim);font-size:13px">Timezone: IST (UTC+5:30)</li>
+                    <li><a href="./Resume/resume.html" target="_blank" rel="noopener noreferrer">Interactive Resume
+                            &#8599;</a></li>
+                </ul>
+            </div>
+
         </div>
-    </section>
 
-    <!-- Skills & Tools Section -->
-    <section id="skills" class="py-24 px-6 md:px-12 bg-black/50 border-y border-white/5 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl font-bold mb-16 text-center" data-aos="zoom-in">My <span class="gradient-text">Expertise
-                    & Tools</span></h2>
-
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <!-- UI/UX Design -->
-                <div class="bg-[#0f0f0f] p-8 rounded-3xl card" data-aos="fade-right">
-                    <div
-                        class="w-14 h-14 bg-cyan-500/10 rounded-2xl flex items-center justify-center mb-6 border border-cyan-500/20">
-                        <i class="fa-solid fa-pen-nib text-2xl text-cyan-400"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-6 text-white">UI/UX Design</h3>
-                    <ul class="space-y-4 text-gray-400 font-medium">
-                        <li class="flex items-center" data-aos="fade-left" data-aos-delay="100"><i
-                                class="fa-solid fa-check-circle text-cyan-500 mr-3"></i> User Research & User Flow</li>
-                        <li class="flex items-center" data-aos="fade-left" data-aos-delay="200"><i
-                                class="fa-solid fa-check-circle text-cyan-500 mr-3"></i> Wireframing & Prototyping</li>
-                        <li class="flex items-center" data-aos="fade-left" data-aos-delay="300"><i
-                                class="fa-solid fa-check-circle text-cyan-500 mr-3"></i> Mobile App & Web UI Design</li>
-                        <li class="flex items-center" data-aos="fade-left" data-aos-delay="400"><i
-                                class="fa-solid fa-check-circle text-cyan-500 mr-3"></i> Design Systems & Info. Arch.
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Graphic Design -->
-                <div class="bg-[#0f0f0f] p-8 rounded-3xl card" data-aos="fade-left">
-                    <div
-                        class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 border border-purple-500/20">
-                        <i class="fa-solid fa-palette text-2xl text-purple-400"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-6 text-white">Graphic Design</h3>
-                    <ul class="space-y-4 text-gray-400 font-medium">
-                        <li class="flex items-center" data-aos="fade-right" data-aos-delay="100"><i
-                                class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Social Media Creatives</li>
-                        <li class="flex items-center" data-aos="fade-right" data-aos-delay="200"><i
-                                class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Branding & Visual Identity
-                        </li>
-                        <li class="flex items-center" data-aos="fade-right" data-aos-delay="300"><i
-                                class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Poster, Banner & Logo Design
-                        </li>
-                        <li class="flex items-center" data-aos="fade-right" data-aos-delay="400"><i
-                                class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Typography & Color Theory
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 🌟 ALL WORKING HD ICONS 🌟 -->
-            <div class="bg-[#0f0f0f] p-8 md:p-12 rounded-3xl card text-center" data-aos="zoom-in" data-aos-delay="200">
-                <h3 class="text-2xl font-bold mb-8 text-white">Design Software & AI Tools</h3>
-
-                <div class="flex flex-wrap justify-center gap-6">
-                    <!-- Standard UI/UX & AI Tools -->
-                    <div data-aos="zoom-in" data-aos-delay="100"
-                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(49,168,255,0.1)] hover:shadow-[0_0_25px_rgba(49,168,255,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#31A8FF] p-1"
-                        title="Photoshop">
-                        <img src="Photoshop.jpeg" alt="Ps" class="w-full h-full object-cover rounded-xl">
-                    </div>
-                    <div data-aos="zoom-in" data-aos-delay="200"
-                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(242,78,30,0.1)] hover:shadow-[0_0_25px_rgba(242,78,30,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#F24E1E] p-1"
-                        title="Figma">
-                        <img src="Figma.jpeg" alt="Figma" class="w-full h-full object-cover rounded-xl">
-                    </div>
-                    <div data-aos="zoom-in" data-aos-delay="300"
-                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(255,154,0,0.1)] hover:shadow-[0_0_25px_rgba(255,154,0,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#FF9A00] p-1"
-                        title="Illustrator">
-                        <img src="Ai.jpeg" alt="Ai" class="w-full h-full object-cover rounded-xl">
-                    </div>
-                    <div data-aos="zoom-in" data-aos-delay="300"
-                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(255,154,0,0.1)] hover:shadow-[0_0_25px_rgba(30,160,110,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#FF9A00] p-1"
-                        title="CorelDraw">
-                        <img src="images-Photoroom (2) 1.svg" alt="CorelDraw"
-                            class="w-full h-full object-cover rounded-xl">
-                    </div>
-                    <div data-aos="zoom-in" data-aos-delay="400"
-                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(0,196,204,0.1)] hover:shadow-[0_0_25px_rgba(0,196,204,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#00C4CC] p-1"
-                        title="Canva">
-                        <img src="Canva.jpeg" alt="Canva" class="w-full h-full object-cover rounded-xl">
-                    </div>
-                    <div data-aos="zoom-in" data-aos-delay="600"
-                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(255,51,102,0.1)] hover:shadow-[0_0_25px_rgba(255,51,102,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#FF3366] p-1"
-                        title="Gamma">
-                        <img src="Gamma.jpeg" alt="Gamma" class="w-full h-full object-cover rounded-xl">
-                    </div>
-
-                    <div data-aos="zoom-in" data-aos-delay="700"
-                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(142,117,178,0.1)] hover:shadow-[0_0_25px_rgba(142,117,178,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#8E75B2] p-1"
-                        title="Google Gemini">
-                        <img src="Gemini.jpeg" alt="Gemini" class="w-full h-full object-cover rounded-xl">
-                    </div>
-                    <div data-aos="zoom-in" data-aos-delay="800"
-                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(30,160,110,0.1)] hover:shadow-[0_0_25px_rgba(30,160,110,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#1EA06E] p-1"
-                        title="ChatGPT">
-                        <img src="Chatgpt.jpeg" alt="ChatGPT" class="w-full h-full object-cover rounded-xl">
-                    </div>
-                    <div data-aos="zoom-in" data-aos-delay="900"
-                        class="wave-hover w-16 h-16 flex items-center justify-center bg-[#151515] rounded-2xl shadow-[0_0_15px_rgba(0,196,204,0.1)] hover:shadow-[0_0_25px_rgba(0,196,204,0.6)] hover:-translate-y-3 transition-all cursor-pointer border border-white/10 hover:border-[#00C4CC] p-1"
-                        title="Stitch">
-                        <img src="Stich.jpeg" alt="Stitch" class="w-full h-full object-cover rounded-xl">
-                    </div>
-                </div>
-            </div>
+        <div class="footer-bottom">
+            <p>&#169; 2026 Rutvik Chovatiya. All rights reserved.</p>
+            <p>Designed with inspiration from the <span style="color:#c084fc">Nuria</span> editorial aesthetic.</p>
         </div>
-    </section>
-
-    <!-- About & Education Section -->
-    <section id="about" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5 relative z-10">
-        <h2 class="text-4xl font-bold mb-16 text-center" data-aos="zoom-in">About <span class="gradient-text">&
-                Education</span></h2>
-
-        <div class="grid md:grid-cols-2 gap-10">
-            <div class="bg-white/[0.02] p-8 rounded-3xl card backdrop-blur-sm" data-aos="fade-up-right">
-                <h3 class="text-2xl font-semibold mb-8 flex items-center gap-3"><i
-                        class="fa-solid fa-graduation-cap text-cyan-400 text-3xl"></i> Education</h3>
-                <div class="mb-8 relative pl-8 border-l-2 border-cyan-500/50" data-aos="fade-left" data-aos-delay="200">
-                    <div class="absolute w-4 h-4 bg-cyan-400 rounded-full -left-[9px] top-16 shadow-[0_0_10px_#00f2fe]">
-                    </div>
-                    <h4 class="text-xl font-bold text-white tracking-wide">B.C.A</h4>
-                    <p class="text-cyan-400 font-medium mt-1">Vidyabharti Trust College</p>
-                    <p class="text-gray-500 text-sm mt-1"><i class="fa-regular fa-calendar mr-2"></i>2021 - 2024
-                        (Completed)</p>
-                </div>
-                <div class="relative pl-8 border-l-2 border-cyan-500/50" data-aos="fade-left" data-aos-delay="400">
-                    <div class="absolute w-4 h-4 bg-cyan-400 rounded-full -left-[9px] top-10 shadow-[0_0_10px_#00f2fe]">
-                    </div>
-                    <h4 class="text-xl font-bold text-white tracking-wide">HSC (12th Commerce)</h4>
-                    <p class="text-gray-500 text-sm mt-1"><i class="fa-regular fa-calendar mr-2"></i>2020 - 2021</p>
-                </div>
-            </div>
-
-            <div class="bg-white/[0.02] p-8 rounded-3xl card backdrop-blur-sm" data-aos="fade-up-left"
-                data-aos-delay="200">
-                <h3 class="text-2xl font-semibold mb-8 flex items-center gap-3"><i
-                        class="fa-solid fa-award text-cyan-400 text-3xl"></i> Certification</h3>
-                <div class="mb-10 relative pl-8 border-l-2 border-cyan-500/50" data-aos="fade-right"
-                    data-aos-delay="400">
-                    <div class="absolute w-4 h-4 bg-cyan-400 rounded-full -left-[9px] top-16 shadow-[0_0_10px_#00f2fe]">
-                    </div>
-                    <h4 class="text-xl font-bold text-white tracking-wide">Graphic & UI-UX Designing</h4>
-                    <p class="text-cyan-400 font-medium mt-1">Red & White Skill Education (Surat)</p>
-                    <p class="text-gray-500 text-sm mt-1"><i class="fa-regular fa-calendar mr-2"></i>2026 (Completed)
-                    </p>
-                </div>
-                <h3 class="text-xl font-semibold mb-5 flex items-center gap-3"><i
-                        class="fa-solid fa-language text-cyan-400"></i> Languages</h3>
-                <div class="flex flex-wrap gap-4" data-aos="zoom-in" data-aos-delay="600">
-                    <span
-                        class="px-5 py-2 bg-white/5 border border-white/10 rounded-xl text-gray-300 hover:-translate-y-2 hover:bg-cyan-500 hover:text-white transition-all duration-300 shadow-lg cursor-pointer">Gujarati</span>
-                    <span
-                        class="px-5 py-2 bg-white/5 border border-white/10 rounded-xl text-gray-300 hover:-translate-y-2 hover:bg-cyan-500 hover:text-white transition-all duration-300 shadow-lg cursor-pointer">Hindi</span>
-                    <span
-                        class="px-5 py-2 bg-white/5 border border-white/10 rounded-xl text-gray-300 hover:-translate-y-2 hover:bg-cyan-500 hover:text-white transition-all duration-300 shadow-lg cursor-pointer">English</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Download Resume Section -->
-    <section class="py-16 px-6 md:px-12 relative z-10 flex justify-center items-center max-w-7xl mx-auto">
-        <div class="bg-[#0f0f0f] border border-cyan-500/20 p-6 sm:p-10 md:p-14 rounded-[2.5rem] w-full text-center card relative overflow-hidden"
-            data-aos="zoom-in">
-            <!-- Decorative Glow -->
-            <div class="absolute top-0 left-1/4 w-64 h-64 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none">
-            </div>
-            <div
-                class="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-500/10 blur-[80px] rounded-full pointer-events-none">
-            </div>
-
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white relative z-10">Check Out My <span
-                    class="gradient-text">Detailed Resume</span></h2>
-            <p class="text-gray-400 mb-8 max-w-2xl mx-auto relative z-10 text-base sm:text-lg">Get a complete overview
-                of my skills,
-                education, and design journey. View my interactive resume to learn more about how I can bring value to
-                your team.</p>
-
-            <a href="./Resume/resume.html" target="_blank"
-                class="btn-wave relative z-10 inline-flex items-center justify-center gap-3 sm:gap-4 px-6 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:scale-110 text-white font-bold text-base sm:text-lg rounded-full transition-all duration-300 shadow-[0_0_25px_rgba(0,242,254,0.4)] w-full sm:w-auto">
-                <i class="fa-solid fa-arrow-up-right-from-square text-lg sm:text-xl animate-bounce"></i>
-                View Resume
-            </a>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 px-6 md:px-12 bg-black/50 border-t border-white/5 relative z-10">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-down">
-                <h2 class="text-4xl font-bold mb-6">Let's Work <span class="gradient-text">Together</span></h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-[#0f0f0f] border border-white/5 p-8 rounded-3xl flex flex-col items-center text-center card"
-                    data-aos="zoom-in" data-aos-delay="100">
-                    <div
-                        class="w-16 h-16 bg-cyan-500/10 text-cyan-400 flex items-center justify-center rounded-2xl text-2xl mb-5 hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]">
-                        <i class="fa-solid fa-phone"></i>
-                    </div>
-                    <p class="font-medium text-white">+91 76984 28545</p>
-                </div>
-
-                <div class="bg-[#0f0f0f] border border-white/5 p-8 rounded-3xl flex flex-col items-center text-center card"
-                    data-aos="zoom-in" data-aos-delay="200">
-                    <div
-                        class="w-16 h-16 bg-cyan-500/10 text-cyan-400 flex items-center justify-center rounded-2xl text-2xl mb-5 hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]">
-                        <i class="fa-solid fa-envelope"></i>
-                    </div>
-                    <a href="mailto:rutvikchovatiya269@gmail.com"
-                        class="font-medium text-white text-sm hover:text-cyan-400">rutvikchovatiya269<br>@gmail.com</a>
-                </div>
-
-                <div class="bg-[#0f0f0f] border border-white/5 p-8 rounded-3xl flex flex-col items-center text-center card"
-                    data-aos="zoom-in" data-aos-delay="300">
-                    <div
-                        class="w-16 h-16 bg-cyan-500/10 text-cyan-400 flex items-center justify-center rounded-2xl text-2xl mb-5 hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </div>
-                    <p class="font-medium text-white">Kamrej, Surat</p>
-                </div>
-
-                <div class="bg-[#0f0f0f] border border-white/5 p-8 rounded-3xl flex flex-col items-center text-center card justify-center"
-                    data-aos="zoom-in" data-aos-delay="400">
-                    <div class="flex gap-4">
-                        <a href="https://www.behance.net/rcgaming8" target="_blank"
-                            class="w-14 h-14 bg-white/5 hover:bg-cyan-500 hover:shadow-[0_0_20px_#00f2fe] hover:text-white flex items-center justify-center rounded-2xl text-2xl transition-all duration-300 hover:-translate-y-2"><i
-                                class="fa-brands fa-behance"></i></a>
-                        <a href="https://www.linkedin.com/in/rutvik-chovatiya-385b40280" target="_blank"
-                            class="w-14 h-14 bg-white/5 hover:bg-cyan-500 hover:shadow-[0_0_20px_#00f2fe] hover:text-white flex items-center justify-center rounded-2xl text-xl transition-all duration-300 hover:-translate-y-2"><i
-                                class="fa-brands fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-8 text-center text-gray-600 text-sm border-t border-white/5 bg-black relative z-10">
-        <p>© 2026 Rutvik Chovatiya. Designed with precision.</p>
     </footer>
 
-    <!-- Scripts for Animation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- ═══════════════════════════════════════════════════════════
+     10. JAVASCRIPT LOGIC & ADVANCED ANIMATIONS
+     ═══════════════════════════════════════════════════════════ -->
     <script>
-        // Initialize AOS animations with smooth custom easing
-        AOS.init({
-            duration: 1000,
-            once: false,
-            offset: 100,
-            easing: 'ease-in-out-cubic'
+        /* ─── 1. HERO WORD REVEAL ─── */
+        document.querySelectorAll('.title-word').forEach(function (w) {
+            var d = parseFloat(w.dataset.delay) || 0.4;
+            w.style.animationDelay = d + 's';
+            w.classList.add('animate');
         });
 
-        // Typing Effect
-        const textArray = ["UI/UX Designer", "Graphic Designer", "Product Designer"];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingElement = document.getElementById("typing-text");
+        /* ─── 2. TYPING EFFECT (UI/UX -> GRAPHIC -> PRODUCT -> BRANDING) ─── */
+        var textArray = ['UI/UX', 'GRAPHIC', 'PRODUCT', 'BRANDING'];
+        var textIndex = 0;
+        var charIndex = 0;
+        var isDeleting = false;
+        var typingEl = document.getElementById('typing-text');
+        var typeCursor = document.getElementById('typeCursor');
 
         function typeEffect() {
-            const currentText = textArray[textIndex];
+            var current = textArray[textIndex];
 
             if (isDeleting) {
-                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                typingEl.textContent = current.substring(0, charIndex - 1);
                 charIndex--;
             } else {
-                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                typingEl.textContent = current.substring(0, charIndex + 1);
                 charIndex++;
             }
 
-            let typeSpeed = isDeleting ? 50 : 100;
+            var speed = isDeleting ? 55 : 115;
 
-            if (!isDeleting && charIndex === currentText.length) {
-                typeSpeed = 2000; // Pause at the end
+            if (!isDeleting && charIndex === current.length) {
+                speed = 2200; // Pause at end
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 textIndex = (textIndex + 1) % textArray.length;
-                typeSpeed = 500; // Pause before typing next word
+                speed = 500; // Pause before next word
             }
 
-            setTimeout(typeEffect, typeSpeed);
+            setTimeout(typeEffect, speed);
         }
 
-        // Start the typing effect
-        setTimeout(typeEffect, 1000);
+        // Start typing after entrance animation (2.2s)
+        setTimeout(function () {
+            if (typeCursor) typeCursor.classList.add('active');
+            typeEffect();
+        }, 2200);
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const mobileLinks = document.querySelectorAll(".mobile-link");
+        /* ─── 3. CUSTOM MAGNETIC CURSOR ─── */
+        var dot = document.getElementById('cDot');
+        var ring = document.getElementById('cRing');
+        var mx = 0, my = 0, rx = 0, ry = 0;
 
-        mobileMenuBtn.addEventListener("click", () => {
-            const isOpen = mobileMenu.classList.contains("opacity-100");
-            const svgPath = mobileMenuBtn.querySelector("path");
-
-            if (isOpen) {
-                // Close menu
-                mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
-                mobileMenu.classList.add("opacity-0", "pointer-events-none");
-                svgPath.setAttribute("d", "M4 6h16M4 12h16M4 18h16"); // Hamburger icon
-                document.body.style.overflow = "auto";
-            } else {
-                // Open menu
-                mobileMenu.classList.remove("opacity-0", "pointer-events-none");
-                mobileMenu.classList.add("opacity-100", "pointer-events-auto");
-                svgPath.setAttribute("d", "M6 18L18 6M6 6l12 12"); // X icon
-                document.body.style.overflow = "hidden"; // Prevent scrolling
-            }
+        document.addEventListener('mousemove', function (e) {
+            mx = e.clientX; my = e.clientY;
+            dot.style.left = mx + 'px';
+            dot.style.top = my + 'px';
         });
 
-        // Close mobile menu when a link is clicked
-        mobileLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                const svgPath = mobileMenuBtn.querySelector("path");
-                mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
-                mobileMenu.classList.add("opacity-0", "pointer-events-none");
-                svgPath.setAttribute("d", "M4 6h16M4 12h16M4 18h16"); // Hamburger icon
-                document.body.style.overflow = "auto";
+        (function cursorLoop() {
+            rx += (mx - rx) * 0.12;
+            ry += (my - ry) * 0.12;
+            ring.style.left = rx + 'px';
+            ring.style.top = ry + 'px';
+            requestAnimationFrame(cursorLoop);
+        })();
+
+        function attachCursorHover() {
+            document.querySelectorAll('a, button, .work-card, .service-item, .tool-bento-card, .testi-card, .a-icon, .p-ring, .badge-pill').forEach(function (el) {
+                el.addEventListener('mouseenter', function () {
+                    dot.classList.add('hovered');
+                    ring.classList.add('hovered');
+                });
+                el.addEventListener('mouseleave', function () {
+                    dot.classList.remove('hovered');
+                    ring.classList.remove('hovered');
+                });
             });
-        });
+        }
+        attachCursorHover();
 
-        // Active Navigation Link Highlighting
-        const sections = document.querySelectorAll("section[id]");
-        const navLinks = document.querySelectorAll(".nav-link");
+        /* ─── 4. MOUSE PARALLAX (Hero 3D Tilt + Floating Layers) ─── */
+        var titleWrap = document.getElementById('titleWrap');
+        var floats = document.querySelectorAll('.flt');
+        var depths = [0.6, 0.4, 1.0, 0.8, 0.5];
 
-        window.addEventListener("scroll", () => {
-            let current = "";
-            sections.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= sectionTop - 300) {
-                    current = section.getAttribute("id");
-                }
-            });
+        document.addEventListener('mousemove', function (e) {
+            var cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+            var dx = (e.clientX - cx) / cx, dy = (e.clientY - cy) / cy;
 
-            // Check if user has scrolled to the bottom of the page
-            if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 200) {
-                current = sections[sections.length - 1].getAttribute("id");
+            if (titleWrap) {
+                titleWrap.style.transform = 'perspective(1400px) rotateY(' + (dx * 2.5) + 'deg) rotateX(' + (-dy * 2) + 'deg)';
             }
 
-            navLinks.forEach((link) => {
-                link.classList.remove("text-cyan-400", "border-b-2", "border-cyan-400", "pb-1");
-
-                const href = link.getAttribute("href");
-                const isHome = (current === "home" || !current) && (href === "#home" || href === "#");
-                const isOther = href === `#${current}`;
-
-                if (isHome || isOther) {
-                    link.classList.add("text-cyan-400", "border-b-2", "border-cyan-400", "pb-1");
-                }
+            floats.forEach(function (el, i) {
+                var d = depths[i] || 0.6;
+                el.style.setProperty('--px', (dx * d * 22) + 'px');
+                el.style.setProperty('--py', (dy * d * 16) + 'px');
             });
         });
 
-        // Trigger once on load
-        window.dispatchEvent(new Event("scroll"));
+        document.addEventListener('mouseleave', function () {
+            if (titleWrap) titleWrap.style.transform = '';
+            floats.forEach(function (el) {
+                el.style.setProperty('--px', '0px');
+                el.style.setProperty('--py', '0px');
+            });
+        });
+
+        /* ─── 5. 3D TILT ON HOVER FOR PROJECT CARDS ─── */
+        document.querySelectorAll('.work-card').forEach(function (card) {
+            card.addEventListener('mousemove', function (e) {
+                var rect = card.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var y = e.clientY - rect.top;
+                var cx = rect.width / 2;
+                var cy = rect.height / 2;
+                var rx = (y - cy) / cy * -6; // max 6 deg tilt
+                var ry = (x - cx) / cx * 6;
+                card.style.transform = 'perspective(1000px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-8px)';
+            });
+            card.addEventListener('mouseleave', function () {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+
+        /* ─── 6. INTERACTIVE PROJECT FILTER TABS ─── */
+        var filterBtns = document.querySelectorAll('.filter-btn');
+        var workCards = document.querySelectorAll('.work-card');
+
+        filterBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                filterBtns.forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                var filter = btn.dataset.filter;
+
+                workCards.forEach(function (card) {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'flex';
+                        setTimeout(function () {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 30);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(function () {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        /* ─── 7. SCROLL REVEAL OBSERVER ─── */
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.reveal-item').forEach(function (el) {
+            observer.observe(el);
+        });
+
+        /* ─── 8. BUTTON RIPPLE EFFECT ─── */
+        document.querySelectorAll('.btn-p, .btn-s, .work-btn-circle').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                var r = document.createElement('span');
+                r.style.position = 'absolute';
+                r.style.borderRadius = '50%';
+                r.style.background = 'rgba(255,255,255,0.4)';
+                r.style.transform = 'scale(0)';
+                r.style.animation = 'rippleAnim 0.6s linear';
+                r.style.pointerEvents = 'none';
+
+                var rect = btn.getBoundingClientRect();
+                var size = Math.max(rect.width, rect.height);
+                r.style.width = r.style.height = size + 'px';
+                r.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                r.style.top = (e.clientY - rect.top - size / 2) + 'px';
+
+                btn.appendChild(r);
+                setTimeout(function () { r.remove(); }, 600);
+            });
+        });
+
+        /* ─── 9. MOBILE HAMBURGER MENU ─── */
+        var ham = document.getElementById('ham');
+        var mob = document.getElementById('mobMenu');
+
+        function toggleMob(open) {
+            var on = (open !== undefined) ? open : !mob.classList.contains('on');
+            mob.classList.toggle('on', on);
+            ham.classList.toggle('open', on);
+            ham.setAttribute('aria-expanded', String(on));
+            document.body.style.overflow = on ? 'hidden' : '';
+        }
+
+        ham.addEventListener('click', function () { toggleMob(); });
+        mob.querySelectorAll('a').forEach(function (l) {
+            l.addEventListener('click', function () { toggleMob(false); });
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') toggleMob(false);
+        });
+
+        /* ─── 10. NAVBAR BORDER ON SCROLL ─── */
+        window.addEventListener('scroll', function () {
+            var nav = document.getElementById('mainNav');
+            if (nav) {
+                nav.style.borderBottomColor = window.scrollY > 40 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.06)';
+            }
+        }, { passive: true });
+
+        /* ─── 11. COPY EMAIL TOAST ─── */
+        var copyBtn = document.getElementById('copyEmailBtn');
+        var toast = document.getElementById('toast');
+
+        if (copyBtn) {
+            copyBtn.addEventListener('click', function (e) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText('rutvikchovatiya269@gmail.com');
+                    toast.classList.add('show');
+                    setTimeout(function () { toast.classList.remove('show'); }, 2600);
+                }
+            });
+        }
     </script>
+
+    <style>
+        @keyframes rippleAnim {
+            to {
+                transform: scale(3);
+                opacity: 0
+            }
+        }
+    </style>
+
 </body>
 
 </html>
