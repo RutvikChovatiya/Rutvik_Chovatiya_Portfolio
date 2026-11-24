@@ -38,9 +38,23 @@
             background-color: #525659;
             display: flex;
             justify-content: center;
-            padding: 20px;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px 0;
             font-family: 'Inter', sans-serif;
             -webkit-print-color-adjust: exact;
+            overflow-x: hidden;
+        }
+
+        .resume-scale-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 794px;
+            height: 1123px;
+            margin: 0 auto;
+            position: relative;
+            flex-shrink: 0;
         }
 
         .resume-container {
@@ -52,6 +66,8 @@
             display: flex;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
             overflow: hidden;
+            flex-shrink: 0;
+            transform-origin: top center;
         }
 
         /* ----- LEFT COLUMN ----- */
@@ -199,6 +215,12 @@
             color: #d1d5db;
             font-family: 'Inter', sans-serif;
             font-weight: 500;
+        }
+
+        .contact-item span,
+        .contact-item a {
+            word-break: break-word;
+            overflow-wrap: anywhere;
         }
 
         .contact-item a {
@@ -444,6 +466,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 4px;
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
         .proj-title {
@@ -575,18 +599,46 @@
             font-size: 16px;
         }
 
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 10px 0;
+            }
+
+            .print-btn-container {
+                bottom: 18px;
+                right: 18px;
+            }
+
+            .print-btn {
+                padding: 10px 18px;
+                font-size: 12px;
+                box-shadow: 0 6px 18px rgba(0, 168, 204, 0.4);
+            }
+        }
+
         @page {
             size: A4 portrait;
             margin: 0;
         }
 
         @media print {
-            html, body {
+
+            html,
+            body {
                 margin: 0 !important;
                 padding: 0 !important;
                 background-color: #ffffff !important;
+                display: block !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+            }
+
+            .resume-scale-wrapper {
+                width: 794px !important;
+                height: 1123px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
             }
 
             .resume-container {
@@ -595,6 +647,7 @@
                 width: 794px !important;
                 height: 1123px !important;
                 overflow: hidden !important;
+                transform: none !important;
                 zoom: 0.94 !important;
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
@@ -617,7 +670,8 @@
         </button>
     </div>
 
-    <div class="resume-container">
+    <div class="resume-scale-wrapper">
+        <div class="resume-container">
 
         <!-- LEFT COLUMN -->
         <div class="left-col">
@@ -865,9 +919,9 @@
                 <div class="project-item">
                     <div class="proj-header">
                         <div class="proj-title">Graphics / UI UX Designer</div>
-                        <div class="proj-badge">PRESENT</div>
+                        <div class="proj-badge">2 MONTHS</div>
                     </div>
-                    <div class="proj-subtitle">CUBIQ AGENCY | AUG 2026 - PRESENT</div>
+                    <div class="proj-subtitle">CUBIQ AGENCY | AUG 2026 - OCT 2026</div>
                     <p class="proj-desc">
                         Creating visually engaging and brand-aligned designs to strengthen brand identity and visual
                         communication. Applying strong design fundamentals and modern design tools for UI/UX and graphic
@@ -878,9 +932,9 @@
                 <div class="project-item">
                     <div class="proj-header">
                         <div class="proj-title">Graphics Designer</div>
-                        <div class="proj-badge">3 MONTHS</div>
+                        <div class="proj-badge">4 MONTHS</div>
                     </div>
-                    <div class="proj-subtitle">MADHAV SOLAR ENERGY LIMITED | JUN 2026 - AUG 2026</div>
+                    <div class="proj-subtitle">MADHAV SOLAR ENERGY LIMITED | MAY 2026 - AUG 2026</div>
                     <p class="proj-desc">
                         Designed social media creatives, web banners, and promotional materials. Maintained consistent
                         brand identity across corporate communication assets and prepared print-ready artworks.
@@ -905,7 +959,37 @@
 
         </div>
     </div>
+    </div>
 
+    <script>
+        function scaleResume() {
+            const wrapper = document.querySelector('.resume-scale-wrapper');
+            const container = document.querySelector('.resume-container');
+            if (!wrapper || !container) return;
+
+            const targetWidth = 794;
+            const targetHeight = 1123;
+            const margin = window.innerWidth <= 480 ? 16 : (window.innerWidth <= 850 ? 24 : 40);
+            const availableWidth = window.innerWidth - margin;
+
+            if (availableWidth < targetWidth) {
+                const scale = availableWidth / targetWidth;
+                container.style.transform = 'scale(' + scale + ')';
+                container.style.transformOrigin = 'top center';
+                wrapper.style.width = (targetWidth * scale) + 'px';
+                wrapper.style.height = (targetHeight * scale) + 'px';
+            } else {
+                container.style.transform = 'none';
+                wrapper.style.width = targetWidth + 'px';
+                wrapper.style.height = targetHeight + 'px';
+            }
+        }
+
+        window.addEventListener('resize', scaleResume);
+        window.addEventListener('orientationchange', scaleResume);
+        document.addEventListener('DOMContentLoaded', scaleResume);
+        scaleResume();
+    </script>
 </body>
 
 </html>
